@@ -9,4 +9,5 @@ Mobile application requires the bakcned server to be running, cd into backendAPI
 
 # Dependencies
 Before starting Cordova and Ionic have to installed a global dependencies`sudo npm install -g cordova ionic`
+
 Mobile app and server app require npm depencies to be installed fisrt before running from the the package.json, cd into each and type `npm install`
