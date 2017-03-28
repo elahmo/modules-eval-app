@@ -3,12 +3,15 @@ Mobile Application for indepented university module ranking, using open data sou
 
 #Mobile App
 To preview and test the application in the browser, cd into MobileApp and type
-'ionic serve
+
+`ionic serve`
 
 #API
 Mobile application requires the bakcned server to be running, cd into backendAPI and type
-'npm run
+
+`npm start`
 
 #Dependencies
 Both mobile app and server app require npm depencies to be installed firt before running from the the package.json
-'npm install
+
+`npm install`
