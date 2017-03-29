@@ -1,28 +1,32 @@
-var express = require('express');
-var router  = express.Router();
-var Module  = require('../models/module');
+const express = require('express');
+const router  = express.Router();
+const Module  = require('../models/module');
 
 // get modules listing
 // ----------------------------------------------------
 router.route('/modules')
 
-	// create a bear (accessed at POST http://localhost:8080/bears)
-	.post(function(req, res) {
+	// create a module (accessed at POST http://localhost:8080/modules)
+	.post((req, res) => {
 
-		var module = new Module();		// create a new instance of the Bear model
-		module.name = req.body.name;  // set the bears name (comes from the request)
+		const module = new Module();		// create a new instance of the module model
+
+		try { // try to the necessary info, if not present, return an arror, doest seem to work for now
+		module.name = req.body.name;
+		} catch (er) {
+				res.send(er);
+		}
 
 		module.save(function(err) {
 			if (err)
 				res.send(err);
-
-			res.json({ message: 'Module Created!' });
+			res.json({ message: 'Module Created!', req_body: req.body });
 		});
 
 	})
 
 	// get all the modules (accessed at GET http://localhost:8080/api/modules)
-	.get(function(req, res) {
+	.get((req, res) => {
 		Module.find(function(err, modules) {
 			if (err)
 				res.send(err);
@@ -35,8 +39,8 @@ router.route('/modules')
 // ----------------------------------------------------
 router.route('/modules/:module_id')
 
-	// get the bear with that id
-	.get(function(req, res) {
+	// get the module with that id
+	.get((req, res) => {
 		Module.findById(req.params.module_id, function(err, module) {
 			if (err)
 				res.send(err);
@@ -44,15 +48,22 @@ router.route('/modules/:module_id')
 		});
 	})
 
-	// update the bear with this id
-	.put(function(req, res) {
-		Module.findById(req.params.module_id, function(err, module) {
+	// update the module with this id
+	.put((req, res) => {
+		Module.findById(req.params.module_id, (err, module) => {
 
 			if (err)
 				res.send(err);
-      console.log(req)
-			module.name = req.body.name;
-			module.save(function(err) {
+
+			try { // try to the necessary info, if not present, return an arror
+			const body = req.body;
+			module.name = body.name;
+			} catch (er) {
+				//res.send(er);
+				res.send("error")
+			}
+
+			module.save((err) => {
 				if (err)
 					res.send(err);
 
@@ -62,11 +73,11 @@ router.route('/modules/:module_id')
 		});
 	})
 
-	// delete the bear with this id
-	.delete(function(req, res) {
+	// delete the module with this id
+	.delete((req, res) => {
 		Module.remove({
 			_id: req.params.module_id
-		}, function(err, module) {
+		}, (err) => {
 			if (err)
 				res.send(err);
 
