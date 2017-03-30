@@ -18,13 +18,13 @@ Add a new origin in .git/configure
 Login into heroku
 > heroku login
 
-Push the backedAPI subtree of backend branch
-> git subtree push --prefix backendAPI heroku backend
+Push the backedAPI subtree of backend branch to the heroku master branch. Pushing to a non master branch will not init the build.
+> git push origin `git subtree split --prefix dist master`:production --force
 
 ## Database
+Database can be accessed via admin GUI via https://modules-eval-app.herokuapp.com/mongo_admin
 Database instance is accessible via
 > mongodb://admin:admin@ds145220.mlab.com:45220/modules-eval-app
-Database can be accessed via admin GUI via /mongo_admin path
 
 JSON Import collection
 > mongoimport -h ds145220.mlab.com:45220 -d modules-eval-app -c modules -u <user> -p <password> --file <input file>
