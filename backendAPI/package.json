@@ -7,18 +7,22 @@
     "node": ">=6.10.1"
   },
   "scripts": {
-    "start": "nodemon app.js --exec 'gulp lint && node'",
+    "start": "nodemon web.js --exec 'gulp lint && node'",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^1.0.2",
     "body-parser": "^1.17.1",
     "express": "^4.15.2",
+    "jwt-simple": "^0.5.1",
     "mongo-express": "^0.39.1",
     "mongoose": "^4.9.2",
     "morgan": "^1.8.1",
-    "nodemon": "^1.11.0"
+    "nodemon": "^1.11.0",
+    "passport": "^0.3.2",
+    "passport-jwt": "^2.2.1"
   },
   "devDependencies": {
     "eslint-plugin-node": "^4.2.2",
