@@ -1,8 +1,8 @@
 # Node+Express API
 
 ## Deployment
-## Backend API is automatically deployed to heroku once a revision is pushed to the github backend branch
-## Api is accecible via https://git.heroku.com/modules-eval-app.git
+#### Backend API is automatically deployed to heroku once a revision is pushed to the github backend branch
+#### Api is accecible via https://git.heroku.com/modules-eval-app.git
 
 ## Database
 Database instance is accessible via
