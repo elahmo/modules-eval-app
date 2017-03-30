@@ -10,16 +10,14 @@ Install heroku CLI
 
 Add a new origin in .git/configure
 >[remote "heroku"]
-
 >   url = https://git.heroku.com/modules-eval-app.git
-
 >   fetch = +refs/heads/*:refs/remotes/heroku/*
 
 Login into heroku
 > heroku login
 
 Push the backedAPI subtree of backend branch to the heroku master branch. Pushing to a non master branch will not init the build.
-> git push origin `git subtree split --prefix dist master`:production --force
+> git push origin \`git subtree split --prefix dist master\`:production --force
 
 ## Database
 Database can be accessed via admin GUI via https://modules-eval-app.herokuapp.com/mongo_admin
@@ -38,3 +36,11 @@ CSV Import collection
 
 CSV Export collection
 > mongoexport -h ds145220.mlab.com:45220 -d modules-eval-app -c modules -u <user> -p <password> -o modules.csv --csv -f <comma-separated list of field names>
+
+
+
+
+
+
+
+
