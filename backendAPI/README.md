@@ -25,7 +25,7 @@ Push the backedAPI subtree of backend branch to the heroku master branch. Pushin
 Database can be accessed via admin GUI via https://modules-eval-app.herokuapp.com/mongo_admin
 
 Database instance is accessible via
-> mongodb://admin:\admin@ds145220.mlab.com:45220/modules-eval-app
+> mongodb://admin:admin@ds145220.mlab.com:45220/modules-eval-app
 
 JSON Import collection
 > mongoimport -h ds145220.mlab.com:45220 -d modules-eval-app -c modules -u <user> -p <password> --file <input file>
