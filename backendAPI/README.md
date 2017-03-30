@@ -10,7 +10,9 @@ Install heroku CLI
 
 Add a new origin in .git/configure
 >[remote "heroku"]
+
 >   url = https://git.heroku.com/modules-eval-app.git
+
 >   fetch = +refs/heads/*:refs/remotes/heroku/*
 
 Login into heroku
