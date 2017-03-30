@@ -4,14 +4,20 @@ API is accecible via https://modules-eval-app.herokuapp.com/api
 ## Deployment
 Register on heroku and let me know of your registration email so that I can add you as collaborator
 [Heroku Sing Up](https://signup.heroku.com/)
+
 Install heroku CLI
 [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli)
+
 Add a new origin in .git/configure
 >[remote "heroku"]
+
 >   url = https://git.heroku.com/modules-eval-app.git
+
 >   fetch = +refs/heads/*:refs/remotes/heroku/*
+
 Login into heroku
 > heroku login
+
 Push the backedAPI subtree of backend branch
 > git subtree push --prefix backendAPI heroku backend
 
