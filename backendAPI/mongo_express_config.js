@@ -1,8 +1,22 @@
 'use strict';
-
-let mongo;
 const url = require('url');
+process.env.MONGODB_CONNECTION = 'mongodb://admin:admin@ds145220.mlab.com:45220/modules-eval-app'
+//process.env.MONGODB_CONNECTION = 'mongodb://127.0.0.1:27017/test' //connect locally
+//configure db
+ //connect to the instance
+const mongoConnection = url.parse(process.env.MONGODB_CONNECTION);
+const mongo = {
+    db:       mongoConnection.path ? mongoConnection.path.slice(1) : '',
+    host:     mongoConnection.hostname || '',
+    username: mongoConnection.auth ? mongoConnection.auth.split(":")[0] : '',
+    password: mongoConnection.auth ? mongoConnection.auth.split(":")[1] : '',
+    port:     mongoConnection.port,
+    ssl:      false,
+    url:      mongoConnection.protocol + '://' + mongoConnection.host,
+};
 
+
+/*
 if (typeof process.env.MONGODB_PORT === 'string') {
   const mongoConnection = url.parse(process.env.MONGODB_PORT);
   process.env.ME_CONFIG_MONGODB_SERVER  = mongoConnection.hostname;
@@ -27,6 +41,8 @@ if (process.env.VCAP_SERVICES) {
     username: '',
   };
 }
+*/
+
 
 const meConfigMongodbServer = process.env.ME_CONFIG_MONGODB_SERVER ? process.env.ME_CONFIG_MONGODB_SERVER.split(',') : false;
 

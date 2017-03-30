@@ -21,12 +21,10 @@ app.use(morgan('dev')); // log requests to the console
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+//set the port
 const port     = process.env.PORT || 8080; // set our port
-//configure db
-//connect local
-mongoose.connect('mongodb://127.0.0.1:27017/test'); // connect to our database
-//conect to remote
-//mongoose.connect('mongodb://node:node@novus.modulusmongo.net:27017/Iganiq8o'); // connect to our database
+//connect to the db
+mongoose.connect(process.env.MONGODB_CONNECTION);
 
 // Set up main route
 // =============================================================================
