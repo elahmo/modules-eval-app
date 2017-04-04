@@ -28,7 +28,7 @@ Database instance is accessible via
 > mongodb://admin:admin@ds145220.mlab.com:45220/modules-eval-app
 
 JSON Import collection
-> mongoimport -h ds145220.mlab.com:45220 -d modules-eval-app -c modules -u \<user\> -p \<password\> --file <input file>
+> mongoimport -h ds145220.mlab.com:45220 -d modules-eval-app -c modules -u \<user\> -p \<password\> --file \<input file\>
 
 Import example with JSON file
 >mongoimport -h ds145220.mlab.com:45220 -d modules-eval-app -c modules-test -u admin -p admin --file /home/user/Downloads/mod-test.json
@@ -37,13 +37,13 @@ Import example with JSON array(use this option if db server rejects your typical
 >mongoimport -h ds145220.mlab.com:45220 -d modules-eval-app -c modules-test -u admin -p admin --jsonArray /home/user/Downloads/mod-test.json
 
 JSON Export collection
-> mongoexport -h ds145220.mlab.com:45220 -d modules-eval-app -c modules -u <user> -p <password> -o modules.json
+> mongoexport -h ds145220.mlab.com:45220 -d modules-eval-app -c modules -u \<user\> -p \<password\> -o modules.json
 
 CSV Import collection
-> mongoimport -h ds145220.mlab.com:45220 -d modules-eval-app -c modules -u <user> -p <password> --file <input .csv file> --type csv --headerline
+> mongoimport -h ds145220.mlab.com:45220 -d modules-eval-app -c modules -u \<user\> -p \<password\> --file \<input .csv fil\e> --type csv --headerline
 
 CSV Export collection
-> mongoexport -h ds145220.mlab.com:45220 -d modules-eval-app -c modules -u <user> -p <password> -o modules.csv --csv -f <comma-separated list of field names>
+> mongoexport -h ds145220.mlab.com:45220 -d modules-eval-app -c modules -u \<user\> -p \<password\> -o modules.csv --csv -f \<comma-separated list of field names\>
 
 
 
