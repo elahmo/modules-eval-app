@@ -28,7 +28,7 @@ Database instance is accessible via
 > mongodb://admin:admin@ds145220.mlab.com:45220/modules-eval-app
 
 JSON Import collection
-> mongoimport -h ds145220.mlab.com:45220 -d modules-eval-app -c modules -u <user> -p <password> --file <input file>
+> mongoimport -h ds145220.mlab.com:45220 -d modules-eval-app -c modules -u \<user\> -p \<password\> --file <input file>
 
 Import example with JSON file
 >mongoimport -h ds145220.mlab.com:45220 -d modules-eval-app -c modules-test -u admin -p admin --file /home/user/Downloads/mod-test.json
