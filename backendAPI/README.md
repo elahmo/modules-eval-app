@@ -30,6 +30,12 @@ Database instance is accessible via
 JSON Import collection
 > mongoimport -h ds145220.mlab.com:45220 -d modules-eval-app -c modules -u <user> -p <password> --file <input file>
 
+Import example with JSON file
+>mongoimport -h ds145220.mlab.com:45220 -d modules-eval-app -c modules-test -u admin -p admin --file /home/user/Downloads/mod-test.json
+
+Import example with JSON array(use this option if db server rejects your typical json file)
+>mongoimport -h ds145220.mlab.com:45220 -d modules-eval-app -c modules-test -u admin -p admin --jsonArray /home/user/Downloads/mod-test.json
+
 JSON Export collection
 > mongoexport -h ds145220.mlab.com:45220 -d modules-eval-app -c modules -u <user> -p <password> -o modules.json
 
