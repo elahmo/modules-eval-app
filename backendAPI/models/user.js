@@ -1,7 +1,7 @@
 const mongoose     = require('mongoose');
 const Schema       = mongoose.Schema;
 const bcrypt 			 = require('bcrypt');
-
+const Module 			= require('./module');
 //define schemas
 const UserSchema   = new Schema({
 	username: {
@@ -12,7 +12,11 @@ const UserSchema   = new Schema({
 	password: {
 		type: String,
 		required: true
-	}
+	},
+	modules : [{
+    _id : String,
+    rating : Number
+     }]
 });
 
 //define mongo hooks
@@ -44,6 +48,20 @@ UserSchema.methods.comparePassword = function (passw, cb) {
 	}
 	cb(null, isMatch);
 	});
+}
+
+//prepopulate module array with objects
+UserSchema.methods.getModules = function (cb) {
+		const modules_arr = []
+		console.log("this modules is");
+		console.log(this.modules);
+		this.modules.forEach((mod) => {
+			Module.findById ({ _id: mod._id }, (err, m) => {
+				if (err) return cb(err)
+				modules_arr.push({module:m, your_rating:mod.rating})
+				if (this.modules.length === modules_arr.length) cb(null, modules_arr);
+			})
+		});
 }
 
 module.exports = mongoose.model('User', UserSchema);

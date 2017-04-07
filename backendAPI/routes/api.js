@@ -2,16 +2,59 @@ const express = require('express');
 const router  = express.Router();
 const Module  = require('../models/module');
 const User = require('../models/user');
+const passport	= require('passport');
+require('../config/passport_config')(passport);
+const jwt   = require('jwt-simple');
+
+
+//----------------------------------------------------
+// authentication helper functions
+// ----------------------------------------------------
+
+function requiresAuth(req, res, next) {
+		const token = getToken(req.headers);
+			if (token) {
+				const decoded = jwt.decode(token, process.env.SECRET_OR_KEY);
+				User.findById ({ _id: decoded._id }, (err, user) => {
+					if (err)  return next(err);
+						if (!user) {
+							return res.status(403).send({success: false, message: 'Authentication failed. User not found.'});
+						} else {
+							req.user = user;
+							next();
+						}
+				});
+			} else {
+				return res.status(403).send({success: false, message: 'No token provided.'});
+			}
+}
+
+
+function getToken(headers) {
+	if (headers && headers.authorization) {
+		const parted = headers.authorization.split(' ');
+		if (parted.length === 2) {
+			return parted[1];
+		} else {
+			return null;
+		}
+	} else {
+		return null;
+  }
+}
 
 //----------------------------------------------------
 // user signup/auth API
 // ----------------------------------------------------
 // create a new user account (POST http://localhost:8080/api/signup)
 router.post('/signup', (req, res, next) => {
-	if (!req.body.username || !req.body.password) return res.status(422).json({success: false, message: 'Please pass name and password.'});
+	if (!req.body.username || !req.body.password) return res.status(422).json({success: false, message: 'Please pass username and password.'});
 	let newUser = new User({
 		username: req.body.username,
-		password: req.body.password
+		password: req.body.password,
+		//this is hardcoded for now for development purposes
+		modules: [{_id:"58e51e0475770423fccb1997", rating:2.5},
+							{_id:"58e51e0475770423fccb1998", rating:4.0}]
 	});
 	//lookup for user
 	User.findOne({username: req.body.username}, (err, user) => {
@@ -20,14 +63,77 @@ router.post('/signup', (req, res, next) => {
 		if (!user) {
 			newUser.save((err) => {
 				if (err)  return next(err);
-				res.status(201).json({success: true, message: 'New user crated.'});
+				const token = jwt.encode({username: newUser.username, _id: newUser._id}, process.env.SECRET_OR_KEY);
+				newUser.getModules((err, modules_arr) => {
+					if (err)  return next(err);
+					res.status(200).json({
+							"success": true,
+							"token": 'JWT ' + token,
+							"user": {
+									"_id": newUser._id,
+									"username":newUser.username,
+									"modules": modules_arr
+							}
+					});
+				})
 			})
 			//if user exists send error
 		} else {
-			res.status(409).send({success: false, message:'UserName is taken.'});
+			res.status(409).send({success: false, message:'Username is taken.'});
 		}
 	})
 })
+// create a new user account (POST http://localhost:8080/api/auth)
+router.post('/auth', (req, res, next) => {
+	if (!req.body.username || !req.body.password) return res.status(422).json({success: false, message: 'Please pass username and password.'});
+  User.findOne({  username: req.body.username }, function(err, user) {
+    if (err)  return next(err);
+
+    if (!user) {
+      res.status(404).json({success: false, message: 'Username not found.'});
+    } else {
+      // check if password matches
+      user.comparePassword(req.body.password, (err, isMatch) => {
+        if (isMatch && !err) {
+					const token = jwt.encode({username: user.username, _id: user._id}, process.env.SECRET_OR_KEY);
+					user.getModules((err, modules_arr) => {
+						if (err)  return next(err);
+						res.status(200).json({
+								"success": true,
+								"token": 'JWT ' + token,
+								"user": {
+										"_id": user._id,
+										"username":user.username,
+										"modules": modules_arr
+								}
+						});
+					})
+
+        } else {
+          res.status(401).send({success: false, message: 'Failed. Wrong password.'});
+        }
+      });
+    }
+  });
+});
+//----------------------------------------------------
+// get user from the auth token
+// ----------------------------------------------------
+router.get('/user', requiresAuth, (req, res, next) => {
+	const user = req.user;
+	user.getModules((err, modules_arr) => {
+		if (err)  return next(err);
+		res.status(200).json({
+				"success": true,
+				"user": {
+						"_id": user._id,
+						"username":user.username,
+						"modules": modules_arr
+				}
+		});
+	})
+});
+
 //----------------------------------------------------
 // get modules listing
 // ----------------------------------------------------

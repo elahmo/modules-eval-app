@@ -1,0 +1,116 @@
+//----------------Rihards part
+POST /signup
+  Takes
+        {
+        	"username": "username",
+        	"password": "password"
+        }
+  Returns
+        {
+           "success": true,
+           "token": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ",
+           "user": {
+             "_id": 58dd7615252d832035a074b0,
+             "username":"username",
+              "modules" []
+           }
+         }
+POST /auth
+  Takes
+    {
+      "username": "username",
+      "password": "password"
+    }
+  Returns
+    {
+       "success": true,
+       "token": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ",
+       "user": {
+         "_id": 58dd7615252d832035a074b0,
+         "username":"username",
+         "modules" [module_obj1, module_obj2]
+       }
+     }
+
+GET /user/
+  Required Http Headers:
+    'Authorization: JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ'
+  Returns
+    {
+       "success": true,
+       "user": {
+         "_id": 58dd7615252d832035a074b0,
+         "username":"username",
+          "modules" [module_obj1, module_obj2]
+    }
+
+//----------------Ahmet part
+GET /modules/{:id|:name}
+  Required Http Headers:
+    'Authorization: JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ'
+  Returns
+    {"success":true,
+      "module":{"_id":"58e51e0475770423fccb1997",
+                  "MAJOR_CODE":"4970",
+                  "DEPT_CODE":"BJ",
+                  "MAJOR_DEPT":"F6",
+                  "COURSE_ECT_POINT":"",
+                  "COURSE_DESCRI":
+                  "The neurobiology that underpins the aetiology and pathogenesis of neurodegenerative disease has been a focus of intense and exciting research activity over the last several decades. The module is largely a research-led module whereby the contributing staff will where possible, lecture on topics that are their own research interests. ",
+                  "PTRM_DESC":"Semester 2",
+                  "SUBJ_CODE":"BIOL",
+                  "MAJOR_DEPT_DESC":"Master of Biomedical Sci",
+                  "CRSE_NUMBER":"3048",
+                  "MAJOR_DESC":"Master of Biomedical Sci",
+                  "ACADEMIC_SESSION":"201415",
+                  "COURSE_LECTURER":{"url":"http://www.southampton.ac.uk/biosci/research/staff/amrit.page?","phone_number":"","name":"Dr Amritpal Mudher","email":""},
+                  "COURSE_URL":"http://www.southampton.ac.uk/biosci/undergraduate/modules/biol3048_neurobiology_of_neurodegenerative_diseases.page?",
+                  "DEPT_DESC":"Biological Sciences",
+                  "COURSE_LONG_TITLE":"Neurodegenerative Disease",
+                  "PROG_LEVL":"UG",
+                  "PTRM_CODE":"S2",
+                  "COLL_CODE":"F6",
+                  "COURSE_CAT_POINT":"",
+                  "PROG_CODE":"4970",
+                  "PROG_DESC":"Master of Biomedical Sci",
+                  "UCAS_CRSE_CODE":"B991",
+                  "COURSE_CODE":
+                  "BIOL3048",
+                  "COLL_DESC":"Natural and Environmental Sci",
+                  "Rating": "4.5",
+                  "Recommended Courses" [
+                    {
+                      "name": "Systems Biology and Biotechnology Specialization,
+                      "image_url": "https://d15cw65ipctsrr.cloudfront.net/26/ba0bd0e1a111e694f5a3541db3c91a/Feature-Image_thumbnail.jpg?auto=format%2Ccompress&dpr=1&w=100&h=100&fit=fill&bg=FFF",
+                      "url": "https://www.coursera.org/specializations/systems-biology"
+                    }
+                  ]
+                }
+    }
+
+POST /favourite/{:module_id}
+  Required Http Headers:
+    'Authorization: JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ'
+  Takes
+    {
+      "user_id": "58dd7615252d832035a074b0"
+    }
+    Returns
+    {
+     "success": true,
+     "message" "Module added to favourites"
+   }
+
+Rate /favourite/{:module_id}
+   Required Http Headers:
+   'Authorization: JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ'
+  Takes
+   {
+   "user_id": "58dd7615252d832035a074b0",
+   "rating": "5"
+   }
+   Returns
+   {
+    "success": true,
+    "message" "Module rated"
+   }

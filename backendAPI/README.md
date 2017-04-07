@@ -44,11 +44,3 @@ CSV Import collection
 
 CSV Export collection
 > mongoexport -h ds145220.mlab.com:45220 -d modules-eval-app -c modules -u \<user\> -p \<password\> -o modules.csv --csv -f \<comma-separated list of field names\>
-
-
-
-
-
-
-
-
