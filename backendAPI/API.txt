@@ -102,7 +102,7 @@ POST /favourite/{:module_id}
       "message" "Module added to favourites"
      }
 
-PUT  /Rate/{:module_id}
+PUT  /rate/{:module_id}
   *Description: Rate a module already in the users favourite list. User is detected from the auth token.
   *Required Http Headers:
      'Authorization: JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ'
