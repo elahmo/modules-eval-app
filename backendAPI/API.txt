@@ -1,12 +1,12 @@
 //----------------Rihards part
 POST /signup
   *Description: create new user and get back user object and auth token
-  Takes
+  *Takes
         {
         	"username": "username",
         	"password": "password"
         }
-  Returns
+  *Returns
         {
            "success": true,
            "token": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ",
@@ -96,22 +96,22 @@ POST /favourite/{:module_id}
   *Description: favourite a module, add it to the users module list. User is detected from the auth token.
   *Required Http Headers:
     'Authorization: JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ'
-    Returns
-    {
-     "success": true,
-     "message" "Module added to favourites"
-   }
+  *Returns
+     {
+      "success": true,
+      "message" "Module added to favourites"
+     }
 
 PUT  /Rate/{:module_id}
   *Description: Rate a module already in the users favourite list. User is detected from the auth token.
-   Required Http Headers:
-   'Authorization: JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ'
-  Takes
-   {
-   "rating": "5"
-   }
-   Returns
-   {
-    "success": true,
-    "message" "Module rated"
-   }
+  *Required Http Headers:
+     'Authorization: JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ'
+  *Takes
+     {
+     "rating": "5"
+     }
+  *Returns
+     {
+      "success": true,
+      "message" "Module rated"
+     }
