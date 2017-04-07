@@ -1,5 +1,6 @@
 //----------------Rihards part
 POST /signup
+  *Description: create new user and get back user object and auth token
   Takes
         {
         	"username": "username",
@@ -16,12 +17,13 @@ POST /signup
            }
          }
 POST /auth
-  Takes
+  *Description: authenticate user and get back user object and auth token
+  *Takes
     {
       "username": "username",
       "password": "password"
     }
-  Returns
+  *Returns
     {
        "success": true,
        "token": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ",
@@ -32,10 +34,11 @@ POST /auth
        }
      }
 
-GET /user/
-  Required Http Headers:
+GET /user
+  *Description: get current user simply from the auth token
+  *Required Http Headers:
     'Authorization: JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ'
-  Returns
+  *Returns
     {
        "success": true,
        "user": {
@@ -46,9 +49,10 @@ GET /user/
 
 //----------------Ahmet part
 GET /modules/{:id|:name}
-  Required Http Headers:
+  *Description: get a module either from id or name. Getting by name should implement search type behaviour (finding simmilar names, incomplete names etc)
+  *Required Http Headers:
     'Authorization: JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ'
-  Returns
+  *Returns
     {"success":true,
       "module":{"_id":"58e51e0475770423fccb1997",
                   "MAJOR_CODE":"4970",
@@ -89,24 +93,21 @@ GET /modules/{:id|:name}
     }
 
 POST /favourite/{:module_id}
-  Required Http Headers:
+  *Description: favourite a module, add it to the users module list. User is detected from the auth token.
+  *Required Http Headers:
     'Authorization: JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ'
-  Takes
-    {
-      "user_id": "58dd7615252d832035a074b0"
-    }
     Returns
     {
      "success": true,
      "message" "Module added to favourites"
    }
 
-Rate /favourite/{:module_id}
+PUT  /Rate/{:module_id}
+  *Description: Rate a module already in the users favourite list. User is detected from the auth token.
    Required Http Headers:
    'Authorization: JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ'
   Takes
    {
-   "user_id": "58dd7615252d832035a074b0",
    "rating": "5"
    }
    Returns
