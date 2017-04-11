@@ -27,6 +27,7 @@ export class SchedulePage {
 
   dayIndex = 0;
   queryText = '';
+  // segment tells where currently the user is: 'all' tag or 'favorite' tag
   segment = 'all';
   excludeTracks: any = [];
   shownSessions: any = [];
@@ -43,11 +44,13 @@ export class SchedulePage {
     public user: UserData,
   ) {}
 
+// 1. page initilization
   ionViewDidLoad() {
     this.app.setTitle('Schedule');
     this.updateSchedule();
   }
 
+// 2. choosing between All and Favorites
   updateSchedule() {
     // Close any open sliding items when the schedule updates
     this.scheduleList && this.scheduleList.closeSlidingItems();
@@ -58,6 +61,7 @@ export class SchedulePage {
     });
   }
 
+// 3. Setting button on the upper right corner
   presentFilter() {
     let modal = this.modalCtrl.create(ScheduleFilterPage, this.excludeTracks);
     modal.present();
@@ -71,12 +75,14 @@ export class SchedulePage {
 
   }
 
+// 4. Direct the page to detail page to view detail
   goToSessionDetail(sessionData: any) {
     // go to the session detail page
     // and pass in the session data
     this.navCtrl.push(SessionDetailPage, sessionData);
   }
 
+// 5. add an item to favorite tag
   addFavorite(slidingItem: ItemSliding, sessionData: any) {
 
     if (this.user.hasFavorite(sessionData.name)) {
@@ -104,6 +110,7 @@ export class SchedulePage {
 
   }
 
+// 6. remove an item from favorite tag
   removeFavorite(slidingItem: ItemSliding, sessionData: any, title: string) {
     let alert = this.alertCtrl.create({
       title: title,
@@ -134,6 +141,7 @@ export class SchedulePage {
     alert.present();
   }
 
+// 7. 
   openSocial(network: string, fab: FabContainer) {
     let loading = this.loadingCtrl.create({
       content: `Posting to ${network}`,

@@ -63,9 +63,11 @@ export class ConferenceData {
     return this.data;
   }
 
+// read data and put it into a formate like {'showSession': n(interger denoting the number of sessions), 'group':[1,2,3,4]}
   getTimeline(dayIndex: number, queryText = '', excludeTracks: any[] = [], segment = 'all') {
     return this.load().map((data: any) => {
       let day = data.schedule[dayIndex];
+      // count the number of sessions
       day.shownSessions = 0;
 
       queryText = queryText.toLowerCase().replace(/,|\.|-/g, ' ');
