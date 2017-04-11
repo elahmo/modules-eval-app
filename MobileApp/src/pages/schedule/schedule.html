@@ -1,84 +1,96 @@
 <ion-header>
-  <ion-navbar no-border-bottom>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
 
-    <ion-segment [(ngModel)]="segment" (ionChange)="updateSchedule()">
-      <ion-segment-button value="all">
-        All
-      </ion-segment-button>
-      <ion-segment-button value="favorites">
-        Favorites
-      </ion-segment-button>
-    </ion-segment>
+    <!--4 header parts, 1. menu button, 2. All tab, 3. Favorites tab, 4. Setting button-->
+    <ion-navbar no-border-bottom>
 
-    <ion-buttons end>
-      <button ion-button icon-only (click)="presentFilter()">
-        <ion-icon ios="ios-options-outline" md="md-options"></ion-icon>
-      </button>
-    </ion-buttons>
-  </ion-navbar>
+        <!--the menu button on the upper left corner-->
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
 
-  <ion-toolbar no-border-top>
-    <ion-searchbar color="primary"
-                   [(ngModel)]="queryText"
-                   (ionInput)="updateSchedule()"
-                   placeholder="Search">
-    </ion-searchbar>
-  </ion-toolbar>
+        <!--selecting between all and favorites-->
+        <ion-segment [(ngModel)]="segment" (ionChange)="updateSchedule()">
+            <ion-segment-button value="all">
+                All
+            </ion-segment-button>
+            <ion-segment-button value="favorites">
+                Favorites
+            </ion-segment-button>
+        </ion-segment>
+
+        <!--the Setting button on the upper right corner-->
+        <ion-buttons end>
+            <button ion-button icon-only (click)="presentFilter()">
+                <ion-icon ios="ios-options-outline" md="md-options"></ion-icon>
+            </button>
+        </ion-buttons>
+
+    </ion-navbar>
+
+    <!--the Search Box-->
+    <ion-toolbar no-border-top>
+        <ion-searchbar color="primary" [(ngModel)]="queryText" (ionInput)="updateSchedule()" placeholder="Search">
+        </ion-searchbar>
+    </ion-toolbar>
+
 </ion-header>
 
 <ion-content>
-  <ion-list #scheduleList [hidden]="shownSessions === 0">
+    <!--Show timetable if shownSessions equals to 0-->
+    <ion-list #scheduleList [hidden]="shownSessions === 0">
 
-    <ion-item-group *ngFor="let group of groups" [hidden]="group.hide">
+        <ion-item-group *ngFor="let group of groups" [hidden]="group.hide">
 
-      <ion-item-divider sticky>
-        <ion-label>
-          {{group.time}}
-        </ion-label>
-      </ion-item-divider>
+            <!--Show group time in between text box-->
+            <ion-item-divider sticky>
+                <ion-label>
+                    {{group.time}}
+                </ion-label>
+            </ion-item-divider>
 
-      <ion-item-sliding *ngFor="let session of group.sessions" #slidingItem [attr.track]="session.tracks[0] | lowercase" [hidden]="session.hide">
+            <ion-item-sliding *ngFor="let session of group.sessions" #slidingItem [attr.track]="session.tracks[0] | lowercase" [hidden]="session.hide">
 
-        <button ion-item (click)="goToSessionDetail(session)">
-          <h3>{{session.name}}</h3>
-          <p>
-            {{session.timeStart}} &mdash;
-            {{session.timeEnd}}:
-            {{session.location}}
-          </p>
-        </button>
+                <button ion-item (click)="goToSessionDetail(session)">
+                    <h3>{{session.name}}</h3>
+                    <p>
+                      {{session.timeStart}} &mdash;
+                      {{session.timeEnd}}:
+                      {{session.location}}
+                    </p>
+                </button>
 
-        <ion-item-options>
-          <button ion-button color="favorite" (click)="addFavorite(slidingItem, session)" *ngIf="segment === 'all'">
-            Favorite
-          </button>
-          <button ion-button color="danger" (click)="removeFavorite(slidingItem, session, 'Remove Favorite')" *ngIf="segment === 'favorites'">
-            Remove
-          </button>
-        </ion-item-options>
+                <ion-item-options>
+                    <!--if in ALL tag-->
+                    <button ion-button color="favorite" (click)="addFavorite(slidingItem, session)" *ngIf="segment === 'all'">
+                      Favorite
+                    </button>
 
-      </ion-item-sliding>
+                    <!--if in Favorites tag-->
+                    <button ion-button color="danger" (click)="removeFavorite(slidingItem, session, 'Remove Favorite')" *ngIf="segment === 'favorites'">
+                      Remove
+                    </button>
 
-    </ion-item-group>
+                </ion-item-options>
 
-  </ion-list>
+            </ion-item-sliding>
 
-  <ion-list-header [hidden]="shownSessions > 0">
-      No Sessions Found
-  </ion-list-header>
+        </ion-item-group>
 
-  <ion-fab bottom right #fab>
-    <button ion-fab><ion-icon name="share"></ion-icon></button>
-    <ion-fab-list side="top">
-      <button ion-fab color="vimeo" (click)="openSocial('Vimeo', fab)"><ion-icon name="logo-vimeo"></ion-icon></button>
-      <button ion-fab color="google" (click)="openSocial('Google+', fab)"><ion-icon name="logo-googleplus"></ion-icon></button>
-      <button ion-fab color="twitter" (click)="openSocial('Twitter', fab)"><ion-icon name="logo-twitter"></ion-icon></button>
-      <button ion-fab color="facebook" (click)="openSocial('Facebook', fab)"><ion-icon name="logo-facebook"></ion-icon></button>
-    </ion-fab-list>
-  </ion-fab>
+    </ion-list>
+
+    <ion-list-header [hidden]="shownSessions > 0">
+        No Sessions Found
+    </ion-list-header>
+
+    <ion-fab bottom right #fab>
+        <button ion-fab><ion-icon name="share"></ion-icon></button>
+        <ion-fab-list side="top">
+            <button ion-fab color="vimeo" (click)="openSocial('Vimeo', fab)"><ion-icon name="logo-vimeo"></ion-icon></button>
+            <button ion-fab color="google" (click)="openSocial('Google+', fab)"><ion-icon name="logo-googleplus"></ion-icon></button>
+            <button ion-fab color="twitter" (click)="openSocial('Twitter', fab)"><ion-icon name="logo-twitter"></ion-icon></button>
+            <button ion-fab color="facebook" (click)="openSocial('Facebook', fab)"><ion-icon name="logo-facebook"></ion-icon></button>
+        </ion-fab-list>
+    </ion-fab>
 
 
 </ion-content>
