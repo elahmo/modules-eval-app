@@ -54,7 +54,8 @@ router.post('/signup', (req, res, next) => {
 		password: req.body.password,
 		//this is hardcoded for now for development purposes
 		modules: [{_id:"58e51e0475770423fccb1997", rating:2.5},
-							{_id:"58e51e0475770423fccb1998", rating:4.0}]
+							{_id:"58e51e0475770423fccb1998", rating:4.0}],
+		details: !req.body.details ? {} : req.body.details
 	});
 	//lookup for user
 	User.findOne({username: req.body.username}, (err, user) => {
@@ -72,7 +73,8 @@ router.post('/signup', (req, res, next) => {
 							"user": {
 									"_id": newUser._id,
 									"username":newUser.username,
-									"modules": modules_arr
+									"modules": modules_arr,
+									"details": newUser.details
 							}
 					});
 				})
@@ -104,7 +106,8 @@ router.post('/auth', (req, res, next) => {
 								"user": {
 										"_id": user._id,
 										"username":user.username,
-										"modules": modules_arr
+										"modules": modules_arr,
+										"details": user.details
 								}
 						});
 					})
@@ -128,7 +131,8 @@ router.get('/user', requiresAuth, (req, res, next) => {
 				"user": {
 						"_id": user._id,
 						"username":user.username,
-						"modules": modules_arr
+						"modules": modules_arr,
+						"details": user.details
 				}
 		});
 	})
