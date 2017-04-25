@@ -206,4 +206,16 @@ router.route('/modules/:module_id')
 	});
 
 
+//----------------------------------------------------
+// post a rating for a module
+// ----------------------------------------------------
+router.route('/rating')
+	.post((req, res, next) => {
+		res.status(201).json({success: true, message: 'POST OK'});
+	})
+	.get((req, res, next) => {
+		res.status(201).json({success: true, message: 'GET OK'});
+	});
+
+
 module.exports = router;
