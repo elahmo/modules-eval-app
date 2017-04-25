@@ -13,6 +13,7 @@ const UserSchema   = new Schema({
 		type: String,
 		required: true
 	},
+	details: Object,
 	modules : [{
     _id : String,
     rating : Number
