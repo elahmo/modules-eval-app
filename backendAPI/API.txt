@@ -97,7 +97,6 @@ GET /modules/{:id|:name}
                   "COURSE_CODE":
                   "BIOL3048",
                   "COLL_DESC":"Natural and Environmental Sci",
-                  "Rating": "4.5",
                   "Recommended Courses" [
                     {
                       "name": "Systems Biology and Biotechnology Specialization,
@@ -105,7 +104,8 @@ GET /modules/{:id|:name}
                       "url": "https://www.coursera.org/specializations/systems-biology"
                     }
                   ]
-                }
+                },
+      "rating": "4.5"
     }
 
 POST /favourite/{:module_id}

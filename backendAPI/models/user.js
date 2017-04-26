@@ -88,6 +88,18 @@ UserSchema.methods.rateModule = function (module, rating, cb) {
 		cb();
 }
 
+//get a module rating for a user
+UserSchema.methods.getRating = function (module, cb) {
+		//go through the ratings and return if found
+		var moduleRating = 'N/A';
+		for (var i = 0; i < this.modules.length; i++)
+			if (this.modules[i]._id == module) { 
+				moduleRating = this.modules[i].rating;
+				break;
+			}
+		cb(null, moduleRating);
+}
+
 //get favourite lists
 UserSchema.methods.favouriteModule = function (module, cb) {
 		//just in case, remove previous favourite if found

@@ -171,10 +171,14 @@ router.route('/modules')
 router.route('/modules/:module_id')
 
 	// get the module with that id
-	.get((req, res, next) => {
+	.get(requiresAuth, (req, res, next) => {
+		const user = req.user;
 		Module.findById(req.params.module_id, function(err, module) {
 			if (err) return next(err)
-			res.status(200).json({success: true, module:module});
+			user.getRating(module._id, (err, rating) => {
+				if (err)  return next(err);
+				res.status(200).json({success: true, module:module, rating:rating});
+			})
 		});
 	})
 
