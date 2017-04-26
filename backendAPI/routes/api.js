@@ -132,7 +132,8 @@ router.get('/user', requiresAuth, (req, res, next) => {
 						"_id": user._id,
 						"username":user.username,
 						"modules": modules_arr,
-						"details": user.details
+						"details": user.details,
+						"favourites": user.favourites
 				}
 		});
 	})
@@ -219,6 +220,18 @@ router.put('/rate/:module_id', requiresAuth, (req, res, next) => {
 		}
 	})
 	
+});
+
+//----------------------------------------------------
+// add a module to favourites
+// ----------------------------------------------------
+router.post('/favourite/:module_id', requiresAuth, (req, res, next) => {
+	const user = req.user;
+	//get the users modules first
+	user.favouriteModule(req.params.module_id, (err, modules_arr) => {
+		if (err)  return next(err);
+		res.status(200).json({success: true, message: 'Successfully added module to the favourites.' });
+	})	
 });
 
 //for /api simply dump out all the endpoints

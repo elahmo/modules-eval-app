@@ -88,4 +88,17 @@ UserSchema.methods.rateModule = function (module, rating, cb) {
 		cb();
 }
 
+//get favourite lists
+UserSchema.methods.favouriteModule = function (module, cb) {
+		//just in case, remove previous favourite if found
+		for (var i = 0; i < this.favourites; i++)
+			if (this.favourites[i] === module) { 
+				this.favourites.splice(i, 1);
+				break;
+			}
+		this.favourites.push(module);
+		this.save();
+		cb();
+}
+
 module.exports = mongoose.model('User', UserSchema);
