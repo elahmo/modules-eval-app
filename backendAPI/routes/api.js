@@ -203,7 +203,7 @@ router.route('/modules/:module_id')
 //----------------------------------------------------
 // post a rating for a module
 // ----------------------------------------------------
-router.post('/modules/:module_id/rating', requiresAuth, (req, res, next) => {
+router.put('/rate/:module_id', requiresAuth, (req, res, next) => {
 	const user = req.user;
 	//get the users modules first
 	user.getModulesList((err, modules_list) => {
