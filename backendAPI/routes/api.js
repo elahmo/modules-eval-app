@@ -204,6 +204,16 @@ router.route('/modules/:module_id')
 		});
 	});
 
+//----------------------------------------------------
+// find a module by name
+// ----------------------------------------------------
+router.get('/modules/find/:name', (req, res, next) => {
+	//get the users modules first
+	Module.find({COURSE_LONG_TITLE: new RegExp(req.params.name, "i")}, (err, modules) => {
+		if (err) return next(err)
+		res.status(200).json({success: true, message: 'Found following modules.', modules:modules});
+	});
+});
 
 //----------------------------------------------------
 // post a rating for a module
