@@ -64,5 +64,35 @@ UserSchema.methods.getModules = function (cb) {
 			})
 		});
 }
+//have a list of modulesids for user
+UserSchema.methods.getModulesList = function (cb) {
+		const modules_list = [];
+		this.modules.forEach((mod) => {
+			modules_list.push(mod._id);
+			if (this.modules.length === modules_list.length) cb(null, modules_list);
+			});
+}
+
+//rate a module for the user
+UserSchema.methods.rateModule = function (module, rating, cb) {
+		//save a rating for the module
+		// UserSchema.update({_id: this._id, 'modules._id': module}, 
+		// {'$set': {
+		// 	'modules.$.rating': rating
+		// }}, function(err) { 
+		// 	if (err) return cb(err);
+		// 	cb('Updated');
+		// });
+		var newRating = { _id: module, rating: rating,  };
+		//just in case, remove previous rating if found
+		for (var i = 0; i < this.modules.length; i++)
+			if (this.modules[i]._id && this.modules[i]._id === module) { 
+				this.modules.splice(i, 1);
+				break;
+			}
+		this.modules.push(newRating);
+		this.save();
+		cb();
+}
 
 module.exports = mongoose.model('User', UserSchema);

@@ -199,27 +199,36 @@ router.route('/modules/:module_id')
 		});
 	});
 
-//for /api simply dump out all the endpoints
-	router.get('/', function(req, res) {
-			res.send("The api supports following calls: " + JSON.stringify(
-				router.stack
-				.map(r => { return {"path": r.route.path , "methods": Object.keys( r.route.methods )}})
-				.filter(r => r.path !== "/")
-				)
-			)
-	});
-
 
 //----------------------------------------------------
 // post a rating for a module
 // ----------------------------------------------------
-router.route('/rating')
-	.post((req, res, next) => {
-		res.status(201).json({success: true, message: 'POST OK'});
+router.post('/modules/:module_id/rating', requiresAuth, (req, res, next) => {
+	const user = req.user;
+	//get the users modules first
+	user.getModulesList((err, modules_list) => {
+		if (err)  return next(err);
+		if (modules_list.includes(req.params.module_id)) {
+			user.rateModule(req.params.module_id, req.body.rating, (err, modules_arr) => {
+				if (err)  return next(err);
+				res.status(200).json({success: true, message: 'Successfully added a rating for the module.' });
+			})
+		} else {
+			//else return that user cant rate module hes not taking
+			return res.status(422).json({success: false, message: 'You can only rate modules you are taking.'});
+		}
 	})
-	.get((req, res, next) => {
-		res.status(201).json({success: true, message: 'GET OK'});
-	});
+	
+});
 
+//for /api simply dump out all the endpoints
+router.get('/', function(req, res) {
+		res.send("The api supports following calls: " + JSON.stringify(
+			router.stack
+			.map(r => { return {"path": r.route.path , "methods": Object.keys( r.route.methods )}})
+			.filter(r => r.path !== "/")
+			)
+		)
+});
 
 module.exports = router;
