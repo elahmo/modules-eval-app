@@ -17,7 +17,8 @@ const UserSchema   = new Schema({
 	modules : [{
     _id : String,
     rating : Number
-     }]
+     }],
+	favourites: [String]
 });
 
 //define mongo hooks
@@ -75,14 +76,6 @@ UserSchema.methods.getModulesList = function (cb) {
 
 //rate a module for the user
 UserSchema.methods.rateModule = function (module, rating, cb) {
-		//save a rating for the module
-		// UserSchema.update({_id: this._id, 'modules._id': module}, 
-		// {'$set': {
-		// 	'modules.$.rating': rating
-		// }}, function(err) { 
-		// 	if (err) return cb(err);
-		// 	cb('Updated');
-		// });
 		var newRating = { _id: module, rating: rating,  };
 		//just in case, remove previous rating if found
 		for (var i = 0; i < this.modules.length; i++)
