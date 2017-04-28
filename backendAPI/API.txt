@@ -99,8 +99,10 @@ GET /modules/{:id}
                   "COLL_DESC":"Natural and Environmental Sci",
                   "Recommended Courses" [
                     {
-                      "name": "Systems Biology and Biotechnology Specialization,
-                      "image_url": "https://d15cw65ipctsrr.cloudfront.net/26/ba0bd0e1a111e694f5a3541db3c91a/Feature-Image_thumbnail.jpg?auto=format%2Ccompress&dpr=1&w=100&h=100&fit=fill&bg=FFF",
+                      "title": "Systems Biology and Biotechnology Specialization,
+                      "description": "some description",
+                      "source": "coursera"
+                      "image": "https://d15cw65ipctsrr.cloudfront.net/26/ba0bd0e1a111e694f5a3541db3c91a/Feature-Image_thumbnail.jpg?auto=format%2Ccompress&dpr=1&w=100&h=100&fit=fill&bg=FFF",
                       "url": "https://www.coursera.org/specializations/systems-biology"
                     }
                   ]
