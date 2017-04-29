@@ -1,7 +1,8 @@
 const mongoose     = require('mongoose');
 const Schema       = mongoose.Schema;
 const bcrypt 			 = require('bcrypt');
-const Module 			= require('./module');
+const Module 			 = require('./module');
+const ObjectId    = Schema.Types.ObjectId;
 //define schemas
 const UserSchema   = new Schema({
 	username: {
@@ -11,14 +12,13 @@ const UserSchema   = new Schema({
 	},
 	password: {
 		type: String,
-		required: true
+		required: true,
 	},
 	details: Object,
 	modules : [{
-    _id : String,
-    rating : Number
-     }],
-	favourites: [String]
+		_id			 : {type: ObjectId,  ref: 'Module'}, //def is the open data module
+		local_rating : Number
+	}]
 });
 
 //define mongo hooks
@@ -52,65 +52,64 @@ UserSchema.methods.comparePassword = function (passw, cb) {
 	});
 }
 
-//prepopulate module array with objects
-UserSchema.methods.getModules = function (cb) {
-		const modules_arr = []
-		console.log("this modules is");
-		console.log(this.modules);
-		this.modules.forEach((mod) => {
-			Module.findById ({ _id: mod._id }, (err, m) => {
-				if (err) return cb(err)
-				modules_arr.push({module:m, your_rating:mod.rating})
-				if (this.modules.length === modules_arr.length) cb(null, modules_arr);
-			})
+//rate a module for the user
+UserSchema.methods.rateModule = function (module_id, rating, cb) {
+		let index = this.modules.findIndex((module) => module._id._id.toString() === module_id)
+		//if index found remove and save, otherwise return an arro
+		if (index !== -1) {
+			//savae current rating
+			let current_local_rating = this.modules[index].local_rating
+			this.modules[index].local_rating = rating
+			Module.findById(module_id, (err, module) => {
+				if (err) return cb(err);
+				//if user has not favorited yet, add as a new rating to the global module rating
+				if (current_local_rating === null) {
+					let new_num_raters = parseInt(module.rating[1]) + 1
+					let new_tot_score = parseFloat(module.rating[0])*parseFloat(module.rating[1]) + parseFloat(rating)
+					module.rating = [new_tot_score / new_num_raters, new_num_raters]
+				//if user has already favourtie, substract the old rating from the total global and divived by the samen number of raters
+				}else {
+					let new_num_raters =  parseInt(module.rating[1])
+					let new_tot_score = parseFloat(module.rating[0])*parseFloat(module.rating[1]) - parseFloat(current_local_rating) + parseFloat(rating)
+					module.rating = [new_tot_score/new_num_raters, new_num_raters]
+				}
+				module.save((err) => {
+						if (err) return cb(err);
+						this.save((err) => {
+								return cb(err);
+						});
+				});
+			});
+		} else {
+			return cb('Module has to be favourited, before rating')
+		}
+}
+//favourite module
+UserSchema.methods.favouriteModule = function (module_id, cb) {
+		//if already favourited array is favbourited, return an error
+		if (this.modules.find((module) => module._id._id.toString() === module_id))
+			return cb('Module is already favourited')
+		this.modules.push({
+			_id: module_id,
+			local_rating: null
+		});
+		this.save((err) => {
+				return cb(err);
 		});
 }
-//have a list of modulesids for user
-UserSchema.methods.getModulesList = function (cb) {
-		const modules_list = [];
-		this.modules.forEach((mod) => {
-			modules_list.push(mod._id);
-			if (this.modules.length === modules_list.length) cb(null, modules_list);
+//unfavourite module
+UserSchema.methods.unfavouriteModule = function (module_id, cb) {
+		//find index
+		let index = this.modules.findIndex((module) => module._id._id.toString() === module_id)
+		//if index found remove and save, otherwise return an arro
+		if (index !== -1) {
+			this.modules.splice(index, 1);
+			this.save((err) => {
+					return cb(err);
 			});
-}
-
-//rate a module for the user
-UserSchema.methods.rateModule = function (module, rating, cb) {
-		var newRating = { _id: module, rating: rating,  };
-		//just in case, remove previous rating if found
-		for (var i = 0; i < this.modules.length; i++)
-			if (this.modules[i]._id && this.modules[i]._id === module) { 
-				this.modules.splice(i, 1);
-				break;
-			}
-		this.modules.push(newRating);
-		this.save();
-		cb();
-}
-
-//get a module rating for a user
-UserSchema.methods.getRating = function (module, cb) {
-		//go through the ratings and return if found
-		var moduleRating = 'N/A';
-		for (var i = 0; i < this.modules.length; i++)
-			if (this.modules[i]._id == module) { 
-				moduleRating = this.modules[i].rating;
-				break;
-			}
-		cb(null, moduleRating);
-}
-
-//get favourite lists
-UserSchema.methods.favouriteModule = function (module, cb) {
-		//just in case, remove previous favourite if found
-		for (var i = 0; i < this.favourites; i++)
-			if (this.favourites[i] === module) { 
-				this.favourites.splice(i, 1);
-				break;
-			}
-		this.favourites.push(module);
-		this.save();
-		cb();
+		} else {
+			return cb('Module has to be favourited, before unfavourite is executed')
+		}
 }
 
 module.exports = mongoose.model('User', UserSchema);

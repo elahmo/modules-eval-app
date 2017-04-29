@@ -13,7 +13,12 @@ POST /signup
            "user": {
              "_id": 58dd7615252d832035a074b0,
              "username":"username",
-              "modules" [],
+             "modules": [
+             { "_id": module_obj1,
+               "local_rating": 2.5 },
+             { "_id": module_obj2,
+               "local_rating": 5 }
+             ],
               "details": {
                 "detail1": detail,
                 "detail2": detail
@@ -35,7 +40,12 @@ POST /auth
        "user": {
          "_id": 58dd7615252d832035a074b0,
          "username":"username",
-         "modules" [module_obj1, module_obj2],
+         "modules": [
+         { "_id": module_obj1,
+           "local_rating": 2.5 },
+         { "_id": module_obj2,
+           "local_rating": 5 }
+         ],
          "details": {
            "detail1": detail,
            "detail2": detail
@@ -54,8 +64,12 @@ GET /user
        "user": {
          "_id": 58dd7615252d832035a074b0,
          "username":"username",
-          "modules": [module_obj1, module_obj2],
-          "favourites": [favourite1, favourite2]
+          "modules": [
+          { "_id": module_obj1,
+            "local_rating": 2.5 },
+          { "_id": module_obj2,
+            "local_rating": 5 }
+          ],
           "details": {
             "detail1": detail,
             "detail2": detail
@@ -97,17 +111,19 @@ GET /modules/{:id}
                   "COURSE_CODE":
                   "BIOL3048",
                   "COLL_DESC":"Natural and Environmental Sci",
-                  "Recommended Courses" [
+                  "RECOMMENDATIONS" [
                     {
-                      "title": "Systems Biology and Biotechnology Specialization,
-                      "description": "some description",
-                      "source": "coursera"
-                      "image": "https://d15cw65ipctsrr.cloudfront.net/26/ba0bd0e1a111e694f5a3541db3c91a/Feature-Image_thumbnail.jpg?auto=format%2Ccompress&dpr=1&w=100&h=100&fit=fill&bg=FFF",
-                      "url": "https://www.coursera.org/specializations/systems-biology"
+                    "_id":{
+                          "title": "Systems Biology and Biotechnology Specialization,
+                          "description": "some description",
+                          "source": "coursera"
+                          "image": "https://d15cw65ipctsrr.cloudfront.net/26/ba0bd0e1a111e694f5a3541db3c91a/Feature-Image_thumbnail.jpg?auto=format%2Ccompress&dpr=1&w=100&h=100&fit=fill&bg=FFF",
+                          "url": "https://www.coursera.org/specializations/systems-biology"
+                      }
                     }
                   ]
-                },
-      "rating": "4.5"
+                  "rating": [4.5, 5] //first number is average rating, second number is number of user rated
+              }
     }
 
 GET /modules/find/{:name}
@@ -142,8 +158,20 @@ GET /modules/find/{:name}
                   "UCAS_CRSE_CODE":"B991",
                   "COURSE_CODE":
                   "BIOL3048",
-                  "COLL_DESC":"Natural and Environmental Sci"
-                }],
+                  "COLL_DESC":"Natural and Environmental Sci",
+                  "RECOMMENDATIONS" [
+                    {
+                    "_id":{
+                          "title": "Systems Biology and Biotechnology Specialization,
+                          "description": "some description",
+                          "source": "coursera"
+                          "image": "https://d15cw65ipctsrr.cloudfront.net/26/ba0bd0e1a111e694f5a3541db3c91a/Feature-Image_thumbnail.jpg?auto=format%2Ccompress&dpr=1&w=100&h=100&fit=fill&bg=FFF",
+                          "url": "https://www.coursera.org/specializations/systems-biology"
+                      }
+                    }
+                  ]
+                  "rating": [4.5, 5] //first number is average rating, second number is number of user rated
+              }],
     }
 
 POST /favourite/{:module_id}

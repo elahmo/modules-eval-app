@@ -38,6 +38,7 @@ app.use('/mongo_admin', mongo_express(mongo_express_config)) //login admin:admin
 
 //define error handler, so that expections dont kill the app
 app.use((err, req, res, next) => {
+	console.error("[Error stack]:")
   console.error(err.stack)
 	res.status(500).send({success:false, message:"An error has occured", error: 'Error: ' + err })
 });
