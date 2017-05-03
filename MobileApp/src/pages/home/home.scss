@@ -1,28 +1,35 @@
 page-home {}
 
 .home-header {
-    background-color: #434954;
-    padding: 16px;
+    background-color: #0d47a1;
+    padding: 0px;
     width: 100%;
-    min-height: 150px;
+    min-height: 90px;
     text-align: center;
+    max-height: 150px;
 }
 
 .home-header img {
     max-width: 200px;
-    min-height: 115px;
     margin-left: -15px;
-    padding: 25px 0 20px 0;
+    padding-top: 30px;
 }
 
 .home-header h1 {
     color: white;
-    font-size: 1.8em;
+    font-size: large;
     text-align: left;
+    position: relative;
+    padding-left: 16px;
+    margin-bottom: 2px
 }
 
 .home-header h2 {
     color: white;
-    font-size: 1.2em;
+    font-size: medium;
     text-align: right;
+    padding-right: 16px;
+    padding-bottom: 16px;
 }
+
+.home-header-text {}

@@ -14,12 +14,22 @@ import { NavController, NavParams } from 'ionic-angular';
 export class HomePage {
   myDate: any;
   myUser: any;
+  items: any[];
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.myDate = new Date().toISOString();
     this.myUser = {
       name: "Jordan",
-      uni: "University of Southampton"
+      uni: "University of Southampton"      
     }
+    
+      this.items = [];
+    for(var i = 0; i < 5; i++){
+      this.items.push({
+        text: 'Module ' + i,
+        id: 'Comp 320' + i
+      });
+    }
+
   }
 
   ionViewDidLoad() {
