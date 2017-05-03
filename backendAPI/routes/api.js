@@ -18,14 +18,16 @@ function get_rid_of_field(obj, field){
 }
 
 function slice_recomendations(user){
+	if (user.modules !== undefined) {
 	let modules_sliced = user.modules
-	modules_sliced.forEach( (mod) => {
-		if (mod._id.RECOMMENDATIONS !== undefined) {
-			let recom =  mod._id.RECOMMENDATIONS.slice(0,recom_amount)
-			mod._id.RECOMMENDATIONS = recom
-		}
-	})
-	user.modules = modules_sliced
+		modules_sliced.forEach( (mod) => {
+			if (mod._id.RECOMMENDATIONS !== undefined) {
+				let recom =  mod._id.RECOMMENDATIONS.slice(0,recom_amount)
+				mod._id.RECOMMENDATIONS = recom
+			}
+		})
+		user.modules = modules_sliced
+	}
 	return user
 }
 
@@ -94,7 +96,7 @@ router.post('/signup', (req, res, next) => {
 					res.status(200).json({
 							"success": true,
 							"token": 'JWT ' + token,
-							"user": slice_recomendations(get_rid_of_field(user, 'password'))
+							"user": slice_recomendations(get_rid_of_field(newUser, 'password'))
 					});
 				})
 			})
