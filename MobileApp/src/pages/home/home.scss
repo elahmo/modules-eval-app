@@ -1,0 +1,28 @@
+page-home {}
+
+.home-header {
+    background-color: #434954;
+    padding: 16px;
+    width: 100%;
+    min-height: 150px;
+    text-align: center;
+}
+
+.home-header img {
+    max-width: 200px;
+    min-height: 115px;
+    margin-left: -15px;
+    padding: 25px 0 20px 0;
+}
+
+.home-header h1 {
+    color: white;
+    font-size: 1.8em;
+    text-align: left;
+}
+
+.home-header h2 {
+    color: white;
+    font-size: 1.2em;
+    text-align: right;
+}
