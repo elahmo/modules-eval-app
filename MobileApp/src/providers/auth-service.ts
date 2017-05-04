@@ -103,7 +103,7 @@ export class AuthService {
         let headers = new Headers();
         headers.append('Authorization', localStorage.getItem('token'));
         // this.http.get(apiUrl+'user', {}, {headers: headers}).;
-        this.http.get(apiUrl+'modules/' + 'Neurodegenerative Disease',{headers: headers})
+        this.http.get(apiUrl+'modules/find/' + 'Neurodegenerative Disease',{headers: headers})
         // .map(res => res.json());
           .subscribe(res => {
             resolve(res.json());
