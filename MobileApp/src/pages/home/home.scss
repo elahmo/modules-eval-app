@@ -21,13 +21,15 @@ page-home {}
     text-align: left;
     position: relative;
     padding-left: 16px;
-    margin-bottom: 2px
+    margin-bottom: 2px;
+    font-weight: bolder;
 }
 
 .home-header h2 {
     color: white;
     font-size: medium;
-    text-align: right;
+    text-align: left;
+    padding-left: 16px;
     padding-right: 16px;
     padding-bottom: 16px;
 }
