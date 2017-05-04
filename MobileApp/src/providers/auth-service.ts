@@ -134,6 +134,7 @@ export class AuthService {
         // .map(res => res.json());
           .subscribe(res => {
             resolve(res.json());
+            console.log(res.json());
             console.log("get module successfully");
             
           }, (err) => {
