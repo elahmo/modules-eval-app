@@ -22,19 +22,23 @@ export class HomePage {
       name: "Jordan",
       uni: "University of Southampton"      
     }
-    
-      this.items = [];
-    for(var i = 0; i < 5; i++){
-      this.items.push({
-        text: 'Module ' + i,
-        id: 'Comp 320' + i
-      });
-    }
 
     this.user = JSON.parse(localStorage.getItem('user'));
-    console.log(this.user);
-    console.log(this.user.username);
-
+    console.log(this.user.modules[0]._id.COURSE_CODE);
+    console.log(this.user.modules[0].local_rating);
+    
+    this.items = [];
+    if(this.user.modules.length === 0){
+          for(var i = 0; i < this.user.modules; i++){
+            this.items.push({
+              id: this.user.modules[i]._id.COURSE_CODE
+            });
+          }
+    }else{
+      this.items.push({
+              id: "No modules chosen"
+      });
+    }
   }
 
   ionViewDidLoad() {
