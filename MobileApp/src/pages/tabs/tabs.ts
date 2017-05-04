@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { NavParams } from 'ionic-angular';
+import { NavParams, NavController } from 'ionic-angular';
 
 import { AboutPage } from '../about/about';
 import { HomePage } from '../home/home';
@@ -8,6 +8,7 @@ import { MapPage } from '../map/map';
 import { SchedulePage } from '../schedule/schedule';
 import { SpeakerListPage } from '../speaker-list/speaker-list';
 
+import { LoginPage } from '../login/login';
 
 @Component({
   templateUrl: 'tabs.html'
@@ -22,8 +23,11 @@ export class TabsPage {
   tab5Root: any = AboutPage;
   mySelectedIndex: number;
 
-  constructor(navParams: NavParams) {
+  constructor(navParams: NavParams, public navCtrl: NavController) {
     this.mySelectedIndex = navParams.data.tabIndex || 0;
+    //   if(!localStorage.getItem("token")) {
+    //   navCtrl.setRoot(LoginPage);
+    // }
   }
 
 

@@ -27,6 +27,8 @@ import { UserData } from '../providers/user-data';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
+import { AuthService } from '../providers/auth-service';
+
 
 @NgModule({
   declarations: [
@@ -74,7 +76,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     ConferenceData,
     UserData,
     InAppBrowser,
-    SplashScreen
+    SplashScreen,
+    AuthService
   ]
 })
 export class AppModule { }
