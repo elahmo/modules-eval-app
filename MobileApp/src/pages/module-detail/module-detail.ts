@@ -29,12 +29,14 @@ export class ModuleDetailPage {
     console.log('ionViewDidLoad ModuleDetailPage');
   }
 
-  itemFavourite(item) {
+  itemFavourite() {
   	// alert(item.text);
   	// this.navCtrl.push(HomePage,{
   	// 	item: item
   	// })
-    this.authService.favourite(item._id).then((result) => {
+    console.log("Coming into itemFavourite");
+    console.log(this.item._id);
+    this.authService.favourite(this.item._id).then((result) => {
       // this.loading.dismiss();
       // this.data = result;
       // console.log(this.data);

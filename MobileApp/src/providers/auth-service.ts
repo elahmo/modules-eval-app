@@ -151,13 +151,23 @@ export class AuthService {
         let headers = new Headers();
         headers.append('Authorization', localStorage.getItem('token'));
         // this.http.get(apiUrl+'user', {}, {headers: headers}).;
-        this.http.get(apiUrl+'favourite/' + moduleId ,{headers: headers})
-        // .map(res => res.json());
+        // this.http.get(apiUrl+'favourite/' + moduleId ,{headers: headers})
+        // // .map(res => res.json());
+        //   .subscribe(res => {
+        //     resolve(res.json());
+        //     console.log(res.json());
+        //     console.log("module added successfully");
+            
+        //   }, (err) => {
+        //     console.log("failed to add module");
+        //     reject(err);
+        //   });
+
+        this.http.post(apiUrl+'favourite/' + moduleId, {}, {headers: headers})
           .subscribe(res => {
             resolve(res.json());
             console.log(res.json());
             console.log("module added successfully");
-            
           }, (err) => {
             console.log("failed to add module");
             reject(err);
