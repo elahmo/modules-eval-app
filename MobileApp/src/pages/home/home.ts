@@ -30,7 +30,7 @@ export class HomePage {
     console.log(this.user.modules[0].local_rating);
     
     this.items = [];
-    if(this.user.modules.length === 0){
+    if(this.user.modules.length != 0){
           for(var i = 0; i < this.user.modules; i++){
             this.items.push({
               id: this.user.modules[i]._id.COURSE_CODE

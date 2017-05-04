@@ -21,8 +21,8 @@
 
 <ion-content padding>
     <ion-list>
-        <button ion-item *ngFor="let item of items" (click)="itemSelected(item)">
-            {{item.id}}
+        <button ion-item *ngFor="let item of result" (click)="itemSelected(item)">
+            {{item.COURSE_LONG_TITLE}}
         </button>
     </ion-list>
 </ion-content>

@@ -21,6 +21,7 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { TutorialPage } from '../pages/tutorial/tutorial';
 import { SupportPage } from '../pages/support/support';
 import { SearchModulePage } from '../pages/search-module/search-module';
+import { ModuleDetailPage } from '../pages/module-detail/module-detail';
 
 
 import { ConferenceData } from '../providers/conference-data';
@@ -50,7 +51,8 @@ import { AuthService } from '../providers/auth-service';
     TutorialPage,
     SupportPage,
     HomePage,
-    SearchModulePage
+    SearchModulePage,
+    ModuleDetailPage
   ],
   imports: [
     IonicModule.forRoot(ConferenceApp),
@@ -74,7 +76,8 @@ import { AuthService } from '../providers/auth-service';
     TutorialPage,
     SupportPage,
     HomePage,
-    SearchModulePage
+    SearchModulePage,
+    ModuleDetailPage
   ],
   providers: [
     ConferenceData,
