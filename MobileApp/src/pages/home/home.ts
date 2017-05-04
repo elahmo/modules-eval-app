@@ -30,7 +30,8 @@ export class HomePage {
     
     this.items = [];
     this.items =  this.user.modules;
-    // console.log(this.user.modules);
+
+    console.log(this.items);
 
     // if(this.user.modules.length != 0){
     //       for(var i = 0; i < this.user.modules; i++){

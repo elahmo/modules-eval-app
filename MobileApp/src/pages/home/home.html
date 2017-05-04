@@ -32,13 +32,16 @@
         </div>
     </div>
     <div padding class="about-info">
-        <h4>Favourite modules &nbsp;
-            <ion-icon name="bookmarks"></ion-icon>
+        <h4>Favourite modules
         </h4>
         <ion-list>
-            <button ion-item *ngFor="let item of items" (click)="itemSelected(item)">
-                    {{item.COURSE_LONG_TITLE}}
-                </button>
+            <ion-item ion-item *ngFor="let item of items" (click)="itemSelected(item)">
+                {{item._id.COURSE_LONG_TITLE}}
+                <ion-icon name="star" item-right></ion-icon>
+            </ion-item>
+            <!--<button ion-item *ngFor="let item of items" (click)="itemSelected(item)">
+                    {{item._id.COURSE_LONG_TITLE}}
+            </button>-->
         </ion-list>
         <p>
             The Ionic Conference is a one-day conference featuring talks from the Ionic team. It is focused on Ionic applications being built with Ionic 2. This includes migrating apps from Ionic 1 to Ionic 2, Angular concepts, Webpack, Sass, and many other technologies
