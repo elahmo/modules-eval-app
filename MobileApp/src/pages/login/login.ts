@@ -40,7 +40,7 @@ export class LoginPage {
       this.data = result;
       console.log(this.data);
       localStorage.setItem('token', this.data.token);
-      localStorage.setItem('user', this.data.user);
+      localStorage.setItem('user', JSON.stringify(this.data.user));
       this.navCtrl.setRoot(TabsPage);
     }, (err) => {
       this.loading.dismiss();

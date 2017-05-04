@@ -12,6 +12,7 @@ import { NavController, NavParams } from 'ionic-angular';
   templateUrl: 'home.html'
 })
 export class HomePage {
+  user:any;
   myDate: any;
   myUser: any;
   items: any[];
@@ -29,6 +30,10 @@ export class HomePage {
         id: 'Comp 320' + i
       });
     }
+
+    this.user = JSON.parse(localStorage.getItem('user'));
+    console.log(this.user);
+    console.log(this.user.username);
 
   }
 
