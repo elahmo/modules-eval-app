@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { SearchModulePage } from '../search-module/search-module';
+import { ModuleDetailPage } from '../module-detail/module-detail';
 
 
 /*
@@ -26,25 +27,33 @@ export class HomePage {
     }
 
     this.user = JSON.parse(localStorage.getItem('user'));
-    console.log(this.user.modules[0]._id.COURSE_CODE);
-    console.log(this.user.modules[0].local_rating);
     
     this.items = [];
-    if(this.user.modules.length != 0){
-          for(var i = 0; i < this.user.modules; i++){
-            this.items.push({
-              id: this.user.modules[i]._id.COURSE_CODE
-            });
-          }
-    }else{
-      this.items.push({
-              id: "No modules chosen"
-      });
-    }
+    this.items =  this.user.modules;
+    // console.log(this.user.modules);
+
+    // if(this.user.modules.length != 0){
+    //       for(var i = 0; i < this.user.modules; i++){
+    //         this.items.push({
+    //           id: this.user.modules[i]._id.COURSE_CODE
+    //         });
+    //       }
+    // }else{
+    //   this.items.push({
+    //           id: "No modules chosen"
+    //   });
+    // }
   }
 
   searchModule() {
       this.navCtrl.push(SearchModulePage);
+  }
+
+  itemSelected(item) {
+  	// alert(item.text);
+  	this.navCtrl.push(ModuleDetailPage,{
+  		item: item
+  	});
   }
 
   
