@@ -38,7 +38,9 @@ export class LoginPage {
     this.authService.login(this.loginData).then((result) => {
       this.loading.dismiss();
       this.data = result;
+      console.log(this.data);
       localStorage.setItem('token', this.data.token);
+      localStorage.setItem('user', this.data.user);
       this.navCtrl.setRoot(TabsPage);
     }, (err) => {
       this.loading.dismiss();
