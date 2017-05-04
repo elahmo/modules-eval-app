@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { SearchModulePage } from '../search-module/search-module';
+
 
 /*
   Generated class for the Home page.
@@ -40,6 +42,12 @@ export class HomePage {
       });
     }
   }
+
+  searchModule() {
+      this.navCtrl.push(SearchModulePage);
+  }
+
+  
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad HomePage');

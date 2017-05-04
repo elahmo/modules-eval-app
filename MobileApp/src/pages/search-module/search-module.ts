@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { ConferenceData } from '../../providers/conference-data';
+import { AuthService } from '../../providers/auth-service';
+
 
 /*
   Generated class for the SearchModule page.
@@ -12,9 +15,14 @@ import { NavController, NavParams } from 'ionic-angular';
   templateUrl: 'search-module.html'
 })
 export class SearchModulePage {
+  queryText = '';
+  authServices = AuthService;
+  constructor(public navCtrl: NavController, public navParams: NavParams, public confData: ConferenceData, public authService: AuthService) {}
+  searchModule() {
+      // this.queryText = "";
+      this.authService.get_module_by_name(this.queryText);
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
-
+  }
   ionViewDidLoad() {
     console.log('ionViewDidLoad SearchModulePage');
   }

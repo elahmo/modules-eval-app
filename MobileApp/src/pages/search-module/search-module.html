@@ -6,13 +6,23 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>searchModule</ion-title>
-  </ion-navbar>
+    <!--the Search Box-->
+
+
+    <ion-navbar>
+        <ion-toolbar no-border-top>
+            <ion-searchbar color="primary" [(ngModel)]="queryText" (ionInput)="searchModule()" placeholder="Search">
+            </ion-searchbar>
+        </ion-toolbar>
+    </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-
+    <ion-list>
+        <button ion-item *ngFor="let item of items" (click)="itemSelected(item)">
+            {{item.id}}
+        </button>
+    </ion-list>
 </ion-content>
