@@ -1,0 +1,56 @@
+<!--
+  Generated template for the Detail page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar color="primary">
+        <ion-title>{{item.data.title}}</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-card>
+        <img src="{{item.data.thumbnail}}" />
+        <ion-card-content>
+            <ion-card-title>
+                {{item.data.title}}
+            </ion-card-title>
+            <ion-list>
+                <ion-item>
+                    <ion-icon name="person" item-left></ion-icon>
+                    Author
+                    <ion-note item-right>
+                        {{item.data.author}}
+                    </ion-note>
+                </ion-item>
+
+                <ion-item>
+                    <ion-icon name="thumbs-up" item-left>
+                        Score
+                    </ion-icon>
+                    <ion-note item-right>
+                        {{item.data.score}}
+                    </ion-note>
+                </ion-item>
+
+                <ion-item>
+                    <ion-icon name="thumbs-up" item-left>
+                        Comments
+                    </ion-icon>
+                    <ion-note item-right>
+                        {{item.data.num_comments}}
+                    </ion-note>
+                </ion-item>
+            </ion-list>
+            <a iion-button block target="_blank" href="http://reddit.com{{item.data.permalink}}">
+            View On Reddit
+            </a>
+        </ion-card-content>
+    </ion-card>
+
+</ion-content>

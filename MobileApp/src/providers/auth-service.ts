@@ -96,14 +96,41 @@ export class AuthService {
     });
   }
 
-  get_module_by_name(){
+// return this.load().map((data: any) => {
+//       let day = data.schedule[dayIndex];
+//       // count the number of sessions
+//       day.shownSessions = 0;
+
+//       queryText = queryText.toLowerCase().replace(/,|\.|-/g, ' ');
+//       let queryWords = queryText.split(' ').filter(w => !!w.trim().length);
+
+//       day.groups.forEach((group: any) => {
+//         group.hide = true;
+
+//         group.sessions.forEach((session: any) => {
+//           // check if this session should show or not
+//           this.filterSession(session, queryWords, excludeTracks, segment);
+
+//           if (!session.hide) {
+//             // if this session is not hidden then this group should show
+//             group.hide = false;
+//             day.shownSessions++;
+//           }
+//         });
+
+//       });
+
+//       return day;
+//     });
+
+  get_module_by_name(queryText){
     console.log("coming into get_module_by_name!");
     console.log(localStorage.getItem('token'));
     return new Promise((resolve, reject) => {
         let headers = new Headers();
         headers.append('Authorization', localStorage.getItem('token'));
         // this.http.get(apiUrl+'user', {}, {headers: headers}).;
-        this.http.get(apiUrl+'modules/find/' + 'Neurodegenerative Disease',{headers: headers})
+        this.http.get(apiUrl+'modules/find/' + queryText ,{headers: headers})
         // .map(res => res.json());
           .subscribe(res => {
             resolve(res.json());

@@ -25,9 +25,9 @@ export class TabsPage {
 
   constructor(navParams: NavParams, public navCtrl: NavController) {
     this.mySelectedIndex = navParams.data.tabIndex || 0;
-    //   if(!localStorage.getItem("token")) {
-    //   navCtrl.setRoot(LoginPage);
-    // }
+      if(!localStorage.getItem("token")) {
+      navCtrl.setRoot(LoginPage);
+    }
   }
 
 
