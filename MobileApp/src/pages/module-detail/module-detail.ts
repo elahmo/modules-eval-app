@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+// import { NavController, NavParams } from 'ionic-angular';
+
+import { NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
+import { AuthService } from '../../providers/auth-service';
+import { TabsPage } from '../tabs/tabs';
+import { HomePage } from '../home/home';
 
 /*
   Generated class for the ModuleDetail page.
@@ -14,8 +19,9 @@ import { NavController, NavParams } from 'ionic-angular';
 export class ModuleDetailPage {
   item: any;
   
-  constructor(public navCtrl: NavController, public navParams: NavParams){
+  constructor(public navCtrl: NavController, public navParams: NavParams, public authService: AuthService, public loadingCtrl: LoadingController, private toastCtrl: ToastController){
     	this.item = navParams.get('item');
+    console.log("coming into detail constructor");
     console.log(this.item);
   }
 
@@ -23,6 +29,24 @@ export class ModuleDetailPage {
     console.log('ionViewDidLoad ModuleDetailPage');
   }
 
+  itemFavourite(item) {
+  	// alert(item.text);
+  	// this.navCtrl.push(HomePage,{
+  	// 	item: item
+  	// })
+    this.authService.favourite(item._id).then((result) => {
+      // this.loading.dismiss();
+      // this.data = result;
+      // console.log(this.data);
+      // localStorage.setItem('token', this.data.token);
+      // localStorage.setItem('user', JSON.stringify(this.data.user));
+      this.navCtrl.setRoot(TabsPage);
+    }, (err) => {
+      // this.loading.dismiss();
+      // this.presentToast(err);
+      console.log("failed to add to favourite");
+    });
+  }
 }
 
 // @Component({

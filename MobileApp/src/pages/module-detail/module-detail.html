@@ -7,7 +7,7 @@
 <ion-header>
 
     <ion-navbar color="primary">
-        <ion-title>{{item.data.title}}</ion-title>
+        <ion-title>{{item.COURSE_CODE }}</ion-title>
     </ion-navbar>
 
 </ion-header>
@@ -15,40 +15,39 @@
 
 <ion-content padding>
     <ion-card>
-        <img src="{{item.data.thumbnail}}" />
+        <!--<img src="{{item.data.thumbnail}}" />-->
         <ion-card-content>
             <ion-card-title>
-                {{item.data.title}}
+                {{item.COURSE_LONG_TITLE}}
             </ion-card-title>
             <ion-list>
                 <ion-item>
                     <ion-icon name="person" item-left></ion-icon>
-                    Author
+                    Lecturer
                     <ion-note item-right>
-                        {{item.data.author}}
+                        <a iion-button block target="_blank" href="{{item.COURSE_LECTURER.url}}">
+                        {{item.COURSE_LECTURER.name}}
+                      </a>
                     </ion-note>
                 </ion-item>
 
                 <ion-item>
-                    <ion-icon name="thumbs-up" item-left>
-                        Score
-                    </ion-icon>
+                    <ion-icon name="thumbs-up" item-left></ion-icon>
+                    Ratting
                     <ion-note item-right>
-                        {{item.data.score}}
+                        {{item.rating[0]}}
                     </ion-note>
                 </ion-item>
 
                 <ion-item>
-                    <ion-icon name="thumbs-up" item-left>
-                        Comments
-                    </ion-icon>
+                    Description
                     <ion-note item-right>
-                        {{item.data.num_comments}}
+                        {{item.COURSE_DESCRI}}
                     </ion-note>
                 </ion-item>
             </ion-list>
-            <a iion-button block target="_blank" href="http://reddit.com{{item.data.permalink}}">
-            View On Reddit
+            <a iion-button block target="_blank" href="{{item.COURSE_URL}}">
+            View On Course Page
             </a>
         </ion-card-content>
     </ion-card>

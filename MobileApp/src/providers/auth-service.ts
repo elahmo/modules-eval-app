@@ -144,9 +144,25 @@ export class AuthService {
     });
   }
 
-  favourite(){
+  favourite(moduleId){
     console.log("coming into favourite!");
     console.log(localStorage.getItem('token'));
+    return new Promise((resolve, reject) => {
+        let headers = new Headers();
+        headers.append('Authorization', localStorage.getItem('token'));
+        // this.http.get(apiUrl+'user', {}, {headers: headers}).;
+        this.http.get(apiUrl+'favourite/' + moduleId ,{headers: headers})
+        // .map(res => res.json());
+          .subscribe(res => {
+            resolve(res.json());
+            console.log(res.json());
+            console.log("module added successfully");
+            
+          }, (err) => {
+            console.log("failed to add module");
+            reject(err);
+          });
+    });
   }
 
   unfavourite(){
