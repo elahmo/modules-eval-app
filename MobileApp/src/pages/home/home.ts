@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { SearchModulePage } from '../search-module/search-module';
 import { ModuleDetailPage } from '../module-detail/module-detail';
-
+import { AuthService } from '../../providers/auth-service';
 
 /*
   Generated class for the Home page.
@@ -19,19 +19,30 @@ export class HomePage {
   myDate: any;
   myUser: any;
   items: any[];
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  result: any;
+  constructor(public navCtrl: NavController, public navParams: NavParams, public authService: AuthService) {
     this.myDate = new Date().toISOString();
     this.myUser = {
       name: "Jordan",
       uni: "University of Southampton"      
     }
 
+    this.authService.get_module_by_user().then((result) => {
+        this.result = result;
+        this.items = this.result.user.modules;
+        console.log(this.items);
+      },(err) => {
+        // this.loading.dismiss();
+        // this.presentToast(err);
+        console.log(err);
+      });
+
     this.user = JSON.parse(localStorage.getItem('user'));
     
-    this.items = [];
-    this.items =  this.user.modules;
+    // this.items = [];
+    // this.items =  this.user.modules;
 
-    console.log(this.items);
+    // console.log(this.items);
 
     // if(this.user.modules.length != 0){
     //       for(var i = 0; i < this.user.modules; i++){

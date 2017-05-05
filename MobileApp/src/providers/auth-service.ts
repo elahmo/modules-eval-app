@@ -52,7 +52,7 @@ export class AuthService {
   }
 
   //logout function
-  logout(){
+  get_module_by_user(){
     console.log("coming into logout!");
     console.log(localStorage.getItem('token'));
     return new Promise((resolve, reject) => {
@@ -62,8 +62,9 @@ export class AuthService {
         this.http.get(apiUrl+'user',{headers: headers})
         // .map(res => res.json());
           .subscribe(res => {
+            resolve(res.json());
             console.log("no error from logout!");
-            localStorage.clear();
+            // localStorage.clear();
           }, (err) => {
             console.log("There is error from logout!");
             reject(err);
