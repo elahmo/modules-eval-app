@@ -35,7 +35,7 @@
         <h4>Favourite modules
         </h4>
         <ion-list>
-            <ion-item ion-item *ngFor="let item of items" (click)="itemSelected(item._id)">
+            <ion-item ion-item *ngFor="let item of items" (click)="itemSelected(item._id, true)">
                 {{item._id.COURSE_LONG_TITLE}}
                 <ion-icon name="star" item-right></ion-icon>
             </ion-item>

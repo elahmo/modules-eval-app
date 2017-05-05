@@ -35,10 +35,11 @@ export class SearchModulePage {
       });  
   }
 
- itemSelected(item) {
+ itemSelected(item, favd) {
   	// alert(item.text);
   	this.navCtrl.push(ModuleDetailPage,{
-  		item: item
+  		item: item,
+      favourited: favd
   	});
   }
   ionViewDidLoad() {

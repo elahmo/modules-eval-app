@@ -46,11 +46,13 @@
                     </ion-note>
                 </ion-item>
             </ion-list>
-            <a iion-button block target="_blank" href="{{item.COURSE_URL}}">
+            <a ion-button block target="_blank" href="{{item.COURSE_URL}}">
             View On Course Page
             </a>
         </ion-card-content>
+        <button ion-button (click)="itemUnfavourite()" type="submit" block>Unfavourite</button>
         <button ion-button (click)="itemFavourite()" type="submit" block>Favourite</button>
+        
         <!--<button ion-button full>Favourite</button>-->
     </ion-card>
 

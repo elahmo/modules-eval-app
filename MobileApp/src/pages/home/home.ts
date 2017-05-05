@@ -50,10 +50,10 @@ export class HomePage {
       this.navCtrl.push(SearchModulePage);
   }
 
-  itemSelected(item) {
-  	// alert(item.text);
+  itemSelected(item, favd) {
   	this.navCtrl.push(ModuleDetailPage,{
-  		item: item
+  		item: item,
+      favourited: favd
   	});
   }
 
