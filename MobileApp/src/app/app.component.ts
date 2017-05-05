@@ -59,7 +59,7 @@ export class ConferenceApp {
     { title: 'Signup', component: SignupPage, icon: 'person-add' }
   ];
   rootPage: any;
-
+  hasLoggedIn:  boolean;
   constructor(
     public events: Events,
     public userData: UserData,
@@ -87,7 +87,9 @@ export class ConferenceApp {
     // decide which menu items should be hidden by current login status stored in local storage
     this.userData.hasLoggedIn().then((hasLoggedIn) => {
       console.log('hasLoggedIn is:' + hasLoggedIn);
-      this.enableMenu(hasLoggedIn === true);
+      this.hasLoggedIn = hasLoggedIn;
+      // this.enableMenu(hasLoggedIn === true);
+      this.enableMenu();
     });
 
     this.listenToLoginEvents();
@@ -121,21 +123,25 @@ export class ConferenceApp {
 
   listenToLoginEvents() {
     this.events.subscribe('user:login', () => {
-      this.enableMenu(true);
+      this.hasLoggedIn = true;
+      this.enableMenu();
     });
 
     this.events.subscribe('user:signup', () => {
-      this.enableMenu(true);
+      this.hasLoggedIn = true;
+      this.enableMenu();
     });
 
     this.events.subscribe('user:logout', () => {
-      this.enableMenu(false);
+      this.hasLoggedIn = false;
+      this.enableMenu();
     });
   }
 
-  enableMenu(loggedIn: boolean) {
-    console.log('loggedIn is:' + loggedIn);
-    this.menu.enable(loggedIn, 'loggedInMenu');
+  // enableMenu(loggedIn: boolean) {
+  enableMenu() {
+    console.log('loggedIn is:' + this.hasLoggedIn);
+    this.menu.enable(this.hasLoggedIn, 'loggedInMenu');
     // this.menu.enable(!loggedIn, 'loggedOutMenu');
   }
 

@@ -64,6 +64,7 @@ export class UserData {
     if(localStorage.getItem("token")) {
       console.log("has token");
       this.storage.set(this.HAS_LOGGED_IN, true);
+      console.log('storage has_logged_in is:' + this.storage.get(this.HAS_LOGGED_IN));
     }else{
       console.log("no token");
       this.storage.set(this.HAS_LOGGED_IN, false);

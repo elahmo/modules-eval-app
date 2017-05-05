@@ -4,7 +4,7 @@ import { NavController, LoadingController, ToastController } from 'ionic-angular
 import { AuthService } from '../../providers/auth-service';
 import { TabsPage } from '../tabs/tabs';
 import { SignupPage } from '../signup/signup';
-
+import { ConferenceApp } from '../../app/app.component'
 @Component({
   selector: 'page-user',
   templateUrl: 'login.html'
@@ -16,8 +16,8 @@ export class LoginPage {
   loading: any;
   loginData = { username:'', password:'' };
   data: any;
-
-  constructor(public navCtrl: NavController, public authService: AuthService, public loadingCtrl: LoadingController, private toastCtrl: ToastController) { }
+  conApp: ConferenceApp;
+  constructor(public navCtrl: NavController, public authService: AuthService,  public loadingCtrl: LoadingController, private toastCtrl: ToastController) { }
 
   // onLogin(form: NgForm) {
   //   this.submitted = true;
@@ -42,6 +42,7 @@ export class LoginPage {
       localStorage.setItem('token', this.data.token);
       localStorage.setItem('user', JSON.stringify(this.data.user));
       this.navCtrl.setRoot(TabsPage);
+      this.conApp.enableMenu();
     }, (err) => {
       this.loading.dismiss();
       this.presentToast(err);
