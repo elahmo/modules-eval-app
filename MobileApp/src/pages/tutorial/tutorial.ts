@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { MenuController, NavController, Slides } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { TabsPage } from '../tabs/tabs';
+import { LoginPage } from '../login/login';
 
 @Component({
   selector: 'page-tutorial',
@@ -20,7 +21,7 @@ export class TutorialPage {
   ) { }
 
   startApp() {
-    this.navCtrl.push(TabsPage).then(() => {
+    this.navCtrl.setRoot(LoginPage).then(() => {
       this.storage.set('hasSeenTutorial', 'true');
     })
   }
