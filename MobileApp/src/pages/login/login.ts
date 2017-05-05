@@ -17,7 +17,9 @@ export class LoginPage {
   loginData = { username:'', password:'' };
   data: any;
   conApp: ConferenceApp;
-  constructor(public navCtrl: NavController, public authService: AuthService,  public loadingCtrl: LoadingController, private toastCtrl: ToastController) { }
+  constructor(public navCtrl: NavController, public authService: AuthService,  public loadingCtrl: LoadingController, private toastCtrl: ToastController) { 
+    console.log("coming into login page");
+  }
 
   // onLogin(form: NgForm) {
   //   this.submitted = true;

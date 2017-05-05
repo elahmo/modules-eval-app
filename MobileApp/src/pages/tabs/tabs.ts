@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild} from '@angular/core';
 
-import { NavParams, NavController } from 'ionic-angular';
+import { NavParams, NavController, Nav } from 'ionic-angular';
 
 import { AboutPage } from '../about/about';
 import { HomePage } from '../home/home';
@@ -15,6 +15,7 @@ import { LoginPage } from '../login/login';
 })
 
 export class TabsPage {
+    // @ViewChild(Nav) nav: Nav;
   // set the root pages for each tab
   tab1Root: any = HomePage;
   tab2Root: any = SchedulePage;
@@ -28,7 +29,13 @@ export class TabsPage {
     console.log("coming into to Tab");
     console.log(localStorage.getItem("token"));
       if(!localStorage.getItem("token")) {
-      navCtrl.setRoot(LoginPage);
+        console.log("direct to login page");
+      //  navCtrl.setRoot(LoginPage);
+      // this.nav.setRoot(LoginPage).catch(() => {
+      // });
+      navCtrl.push(LoginPage).then(() => {
+      // this.storage.set('hasSeenTutorial', 'true');
+    })
     }
   }
 
