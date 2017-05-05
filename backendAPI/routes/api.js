@@ -179,7 +179,7 @@ router.route('/modules/:module_id')
 //----------------------------------------------------
 // find a module by name
 // ----------------------------------------------------
-router.get('/modules/find/:name', (req, res, next) => {
+router.get('/modules/find/:name', requiresAuth, (req, res, next) => {
 	//get the users modules first
 	Module.find({COURSE_LONG_TITLE: new RegExp(req.params.name, "i")})
 		.populate({ path: 'RECOMMENDATIONS._id'})
