@@ -128,8 +128,9 @@ export class AuthService {
     console.log(localStorage.getItem('token'));
     return new Promise((resolve, reject) => {
         let headers = new Headers();
-        // headers.append('Authorization', localStorage.getItem('token'));
+        headers.append('Authorization', localStorage.getItem('token'));
         // this.http.get(apiUrl+'user', {}, {headers: headers}).;
+        console.log(headers);
         this.http.get(apiUrl+'modules/find/' + queryText ,{headers: headers})
         // .map(res => res.json());
           .subscribe(res => {
