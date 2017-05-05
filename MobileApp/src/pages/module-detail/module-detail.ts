@@ -21,6 +21,11 @@ export class ModuleDetailPage {
   
   constructor(public navCtrl: NavController, public navParams: NavParams, public authService: AuthService, public loadingCtrl: LoadingController, private toastCtrl: ToastController){
     	this.item = navParams.get('item');
+      console.log(this.item.COURSE_LECTURER);
+      if(this.item.COURSE_LECTURER == undefined){
+        this.item.COURSE_LECTURER = {url:'',phone_number:'', name:'',email:''};
+        console.log(this.item.COURSE_LECTURER);
+    }
     console.log("coming into detail constructor");
     console.log(this.item);
   }
