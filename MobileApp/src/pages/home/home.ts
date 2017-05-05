@@ -21,6 +21,7 @@ export class HomePage {
   items: any[];
   result: any;
   constructor(public navCtrl: NavController, public navParams: NavParams, public authService: AuthService) {
+    console.log("coming into HomePage");
     this.myDate = new Date().toISOString();
     this.myUser = {
       name: "Jordan",
