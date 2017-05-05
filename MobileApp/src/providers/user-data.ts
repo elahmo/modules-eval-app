@@ -59,6 +59,16 @@ export class UserData {
   };
 
   hasLoggedIn(): Promise<boolean> {
+    console.log("coming into hasLoggedIn");
+    console.log(localStorage.getItem("token"));
+    if(localStorage.getItem("token")) {
+      console.log("has token");
+      this.storage.set(this.HAS_LOGGED_IN, true);
+    }else{
+      console.log("no token");
+      this.storage.set(this.HAS_LOGGED_IN, false);
+    }
+    // localStorage.getItem("token").
     return this.storage.get(this.HAS_LOGGED_IN).then((value) => {
       return value === true;
     });

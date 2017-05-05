@@ -25,6 +25,8 @@ export class TabsPage {
 
   constructor(navParams: NavParams, public navCtrl: NavController) {
     this.mySelectedIndex = navParams.data.tabIndex || 0;
+    console.log("coming into to Tab");
+    console.log(localStorage.getItem("token"));
       if(!localStorage.getItem("token")) {
       navCtrl.setRoot(LoginPage);
     }

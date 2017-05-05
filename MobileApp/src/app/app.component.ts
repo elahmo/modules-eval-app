@@ -86,6 +86,7 @@ export class ConferenceApp {
 
     // decide which menu items should be hidden by current login status stored in local storage
     this.userData.hasLoggedIn().then((hasLoggedIn) => {
+      console.log('hasLoggedIn is:' + hasLoggedIn);
       this.enableMenu(hasLoggedIn === true);
     });
 
@@ -133,8 +134,9 @@ export class ConferenceApp {
   }
 
   enableMenu(loggedIn: boolean) {
+    console.log('loggedIn is:' + loggedIn);
     this.menu.enable(loggedIn, 'loggedInMenu');
-    this.menu.enable(!loggedIn, 'loggedOutMenu');
+    // this.menu.enable(!loggedIn, 'loggedOutMenu');
   }
 
   platformReady() {
