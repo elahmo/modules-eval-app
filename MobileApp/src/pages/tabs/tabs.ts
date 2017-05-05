@@ -16,8 +16,10 @@ import { LoginPage } from '../login/login';
 
 export class TabsPage {
   // set the root pages for each tab
-  tab1Root: any = SchedulePage;
-  tab2Root: any = HomePage;
+  // tab1Root: any = SchedulePage;
+  // tab2Root: any = HomePage;
+  tab1Root: any = HomePage;
+  tab2Root: any = SchedulePage;
   tab3Root: any = SpeakerListPage;
   tab4Root: any = MapPage;
   tab5Root: any = AboutPage;

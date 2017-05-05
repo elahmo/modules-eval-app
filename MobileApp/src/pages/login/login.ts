@@ -4,7 +4,7 @@ import { NavController, LoadingController, ToastController } from 'ionic-angular
 import { AuthService } from '../../providers/auth-service';
 import { TabsPage } from '../tabs/tabs';
 import { SignupPage } from '../signup/signup';
-
+import { HomePage } from '../home/home';
 import { UserData } from '../../providers/user-data';
 
 @Component({
@@ -43,7 +43,8 @@ export class LoginPage {
       console.log(this.data);
       localStorage.setItem('token', this.data.token);
       localStorage.setItem('user', JSON.stringify(this.data.user));
-      this.userData.signup(this.loginData.username);
+
+      this.userData.login(this.loginData.username);
       this.navCtrl.setRoot(TabsPage);
     }, (err) => {
       this.loading.dismiss();

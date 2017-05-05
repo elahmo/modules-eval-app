@@ -22,6 +22,7 @@ export class SignupPage {
 
   loading: any;
   regData = { 'username':'', 'password':'' };
+  data: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public userData: UserData, public authService: AuthService, public loadingCtrl: LoadingController, private toastCtrl: ToastController) {}
 
@@ -40,8 +41,13 @@ export class SignupPage {
     this.authService.register(this.regData).then((result) => {
       console.log("register success");
       this.loading.dismiss();
-      this.userData.login(this.regData.username);
-      this.navCtrl.push(HomePage);
+      this.data = result;
+      console.log(this.data);
+      localStorage.setItem('token', this.data.token);
+      localStorage.setItem('user', JSON.stringify(this.data.user));
+      this.userData.signup(this.regData.username);
+      // this.userData.login(this.regData.username);
+      this.navCtrl.setRoot(TabsPage);
       // this.navCtrl.pop();
     }, (err) => {
       console.log("register failed");
