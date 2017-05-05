@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, MenuController } from 'ionic-angular';
 import { SearchModulePage } from '../search-module/search-module';
 import { ModuleDetailPage } from '../module-detail/module-detail';
 import { AuthService } from '../../providers/auth-service';
-
+import { UserData } from '../../providers/user-data';
 /*
   Generated class for the Home page.
 
@@ -20,13 +20,18 @@ export class HomePage {
   myUser: any;
   items: any[];
   result: any;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public authService: AuthService) {
-    console.log("coming into HomePage");
+  constructor(public navCtrl: NavController, public navParams: NavParams, public userData: UserData, public menu: MenuController, public authService: AuthService) {
     this.myDate = new Date().toISOString();
     this.myUser = {
       name: "Jordan",
-      uni: "University of Southampton"      
+      uni: "University of Southampton"     
     }
+
+              // decide which menu items should be hidden by current login status stored in local storage
+    this.userData.hasLoggedIn().then((hasLoggedIn) => {
+      console.log('hasLoggedIn is:' + hasLoggedIn);
+      this.enableMenu(hasLoggedIn === true);
+    }); 
 
     this.authService.get_module_by_user().then((result) => {
         this.result = result;
@@ -39,7 +44,9 @@ export class HomePage {
       });
 
     this.user = JSON.parse(localStorage.getItem('user'));
-    
+    if(this.user == null){
+
+    }
     // this.items = [];
     // this.items =  this.user.modules;
 
@@ -69,6 +76,11 @@ export class HomePage {
   	});
   }
 
+  enableMenu(loggedIn: boolean) {
+    console.log('loggedIn is:' + loggedIn);
+    this.menu.enable(loggedIn, 'loggedInView');
+    this.menu.enable(!loggedIn, 'loggedOutView');
+  }
   
 
   ionViewDidLoad() {

@@ -9,6 +9,8 @@ import { TabsPage } from '../tabs/tabs';
 // import { UserData } from '../../providers/user-data';
 import { HomePage } from '../home/home'
 
+import { UserData } from '../../providers/user-data';
+
 @Component({
   selector: 'page-user',
   templateUrl: 'signup.html'
@@ -21,7 +23,7 @@ export class SignupPage {
   loading: any;
   regData = { 'username':'', 'password':'' };
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public authService: AuthService, public loadingCtrl: LoadingController, private toastCtrl: ToastController) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams, public userData: UserData, public authService: AuthService, public loadingCtrl: LoadingController, private toastCtrl: ToastController) {}
 
   // onSignup(form: NgForm) {
   //   this.submitted = true;
@@ -38,6 +40,7 @@ export class SignupPage {
     this.authService.register(this.regData).then((result) => {
       console.log("register success");
       this.loading.dismiss();
+      this.userData.login(this.regData.username);
       this.navCtrl.push(HomePage);
       // this.navCtrl.pop();
     }, (err) => {

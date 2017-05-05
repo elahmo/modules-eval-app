@@ -10,17 +10,10 @@ export class UserData {
   HAS_LOGGED_IN = 'hasLoggedIn';
   HAS_SEEN_TUTORIAL = 'hasSeenTutorial';
 
-  user: any;
   constructor(
     public events: Events,
     public storage: Storage
-  ) {
-    this.user = JSON.parse(localStorage.getItem('user'));
-    if(this.user != null){
-      this.setUsername(this.user.username);
-    }
-    
-  }
+  ) {}
 
   hasFavorite(sessionName: string): boolean {
     return (this._favorites.indexOf(sessionName) > -1);
@@ -39,7 +32,6 @@ export class UserData {
 
   login(username: string): void {
     this.storage.set(this.HAS_LOGGED_IN, true);
-    // this.user = JSON.parse(localStorage.getItem('user'));  
     this.setUsername(username);
     this.events.publish('user:login');
   };
@@ -55,7 +47,6 @@ export class UserData {
     this.storage.remove('username');
     this.events.publish('user:logout');
     localStorage.clear();
-    console.log("inside logout" + localStorage.getItem('token'));
   };
 
   setUsername(username: string): void {
@@ -74,7 +65,6 @@ export class UserData {
     if(localStorage.getItem("token")) {
       console.log("has token");
       this.storage.set(this.HAS_LOGGED_IN, true);
-      console.log('storage has_logged_in is:' + this.storage.get(this.HAS_LOGGED_IN));
     }else{
       console.log("no token");
       this.storage.set(this.HAS_LOGGED_IN, false);

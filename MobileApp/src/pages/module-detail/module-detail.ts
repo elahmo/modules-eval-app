@@ -49,7 +49,7 @@ export class ModuleDetailPage {
       // console.log(this.data);
       // localStorage.setItem('token', this.data.token);
       // localStorage.setItem('user', JSON.stringify(this.data.user));
-      this.navCtrl.setRoot(TabsPage);
+      this.navCtrl.setRoot(HomePage);
       }, (err) => {
         // this.loading.dismiss();
         // this.presentToast(err);
@@ -62,7 +62,7 @@ export class ModuleDetailPage {
     console.log("Coming into itemUnfavourite");
     console.log(this.item._id);
     this.authService.unfavourite(this.item._id).then((result) => {
-      this.navCtrl.setRoot(TabsPage);
+      this.navCtrl.setRoot(HomePage);
       }, (err) => {
         console.log("failed to add to favourite");
       });

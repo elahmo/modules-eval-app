@@ -42,8 +42,8 @@ export class ConferenceApp {
   // the left menu only works after login
   // the login page disables the left menu
   appPages: PageInterface[] = [
-    { title: 'Home', component: TabsPage, tabComponent: HomePage, index: 1, icon: 'home' },
     { title: 'Schedule', component: TabsPage, tabComponent: SchedulePage, icon: 'calendar' },
+    { title: 'Home', component: TabsPage, tabComponent: HomePage, index: 1, icon: 'home' },
     { title: 'Speakers', component: TabsPage, tabComponent: SpeakerListPage, index: 2, icon: 'contacts' },
     { title: 'Map', component: TabsPage, tabComponent: MapPage, index: 3, icon: 'map' },
     { title: 'About', component: TabsPage, tabComponent: AboutPage, index: 4, icon: 'information-circle' }
@@ -51,7 +51,7 @@ export class ConferenceApp {
   loggedInPages: PageInterface[] = [
     { title: 'Account', component: AccountPage, icon: 'person' },
     { title: 'Support', component: SupportPage, icon: 'help' },
-    { title: 'Logout', component: TabsPage, icon: 'log-out', logsOut: true }
+    { title: 'Logout', component: LoginPage, icon: 'log-out', logsOut: true }
   ];
   loggedOutPages: PageInterface[] = [
     { title: 'Login', component: LoginPage, icon: 'log-in' },
@@ -59,7 +59,7 @@ export class ConferenceApp {
     { title: 'Signup', component: SignupPage, icon: 'person-add' }
   ];
   rootPage: any;
-  hasLoggedIn:  boolean;
+
   constructor(
     public events: Events,
     public userData: UserData,
@@ -87,9 +87,7 @@ export class ConferenceApp {
     // decide which menu items should be hidden by current login status stored in local storage
     this.userData.hasLoggedIn().then((hasLoggedIn) => {
       console.log('hasLoggedIn is:' + hasLoggedIn);
-      this.hasLoggedIn = hasLoggedIn;
-      // this.enableMenu(hasLoggedIn === true);
-      this.enableMenu();
+      this.enableMenu(hasLoggedIn === true);
     });
 
     this.listenToLoginEvents();
@@ -100,12 +98,12 @@ export class ConferenceApp {
     // reset the nav to remove previous pages and only have this page
     // we wouldn't want the back button to show in this scenario
     if (page.index) {
-      console.log(page.index);
       this.nav.setRoot(page.component, { tabIndex: page.index }).catch(() => {
+        console.log("Didn't set nav root");
       });
     } else {
-      console.log(page.component);
       this.nav.setRoot(page.component).catch(() => {
+        console.log("Didn't set nav root");
       });
     }
 
@@ -123,26 +121,22 @@ export class ConferenceApp {
 
   listenToLoginEvents() {
     this.events.subscribe('user:login', () => {
-      this.hasLoggedIn = true;
-      this.enableMenu();
+      this.enableMenu(true);
     });
 
     this.events.subscribe('user:signup', () => {
-      this.hasLoggedIn = true;
-      this.enableMenu();
+      this.enableMenu(true);
     });
 
     this.events.subscribe('user:logout', () => {
-      this.hasLoggedIn = false;
-      this.enableMenu();
+      this.enableMenu(false);
     });
   }
 
-  // enableMenu(loggedIn: boolean) {
-  enableMenu() {
-    console.log('loggedIn is:' + this.hasLoggedIn);
-    this.menu.enable(this.hasLoggedIn, 'loggedInMenu');
-    // this.menu.enable(!loggedIn, 'loggedOutMenu');
+  enableMenu(loggedIn: boolean) {
+    console.log('loggedIn is:' + loggedIn);
+    this.menu.enable(loggedIn, 'loggedInMenu');
+    this.menu.enable(!loggedIn, 'loggedOutMenu');
   }
 
   platformReady() {

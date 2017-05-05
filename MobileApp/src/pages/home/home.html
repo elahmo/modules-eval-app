@@ -19,33 +19,37 @@
     </ion-navbar>
 </ion-header>
 
-
 <ion-content>
-    <div class="home-header">
-        <img src="assets/img/home-back.svg" alt="ionic logo">
-        <!--<ion-item>
+    <!--when user logged in-->
+    <div id="loggedInView">
+        <div class="home-header">
+            <img src="assets/img/home-back.svg" alt="ionic logo">
+            <!--<ion-item>
                 <ion-datetime displayFormat="D DDDD" [(ngModel)]="myDate"></ion-datetime>
             </ion-item>-->
-        <div class="home-header-text">
-            <h1>Hi, {{user.username}}</h1>
-            <h2>{{myDate | date:'EEEE d MMMM'}}</h2>
+            <div class="home-header-text">
+                <h1>Hi, {{user.username}}</h1>
+                <h2>{{myDate | date:'EEEE d MMMM'}}</h2>
+            </div>
         </div>
-    </div>
-    <div padding class="about-info">
-        <h4>Favourite modules
-        </h4>
-        <ion-list>
-            <ion-item ion-item *ngFor="let item of items" (click)="itemSelected(item._id, true)">
-                {{item._id.COURSE_LONG_TITLE}}
-                <ion-icon name="star" item-right></ion-icon>
-            </ion-item>
-            <!--<button ion-item *ngFor="let item of items" (click)="itemSelected(item)">
+        <div padding class="about-info">
+            <h4>Favourite modules
+            </h4>
+            <ion-list>
+                <ion-item ion-item *ngFor="let item of items" (click)="itemSelected(item._id, true)">
+                    {{item._id.COURSE_LONG_TITLE}}
+                    <ion-icon name="star" item-right></ion-icon>
+                </ion-item>
+                <!--<button ion-item *ngFor="let item of items" (click)="itemSelected(item)">
                     {{item._id.COURSE_LONG_TITLE}}
             </button>-->
-        </ion-list>
-        <p>
-            The Ionic Conference is a one-day conference featuring talks from the Ionic team. It is focused on Ionic applications being built with Ionic 2. This includes migrating apps from Ionic 1 to Ionic 2, Angular concepts, Webpack, Sass, and many other technologies
-            used in Ionic 2. Tickets are completely sold out, and we’re expecting more than 1000 developers – making this the largest Ionic conference ever!
-        </p>
+            </ion-list>
+            <p>
+                The Ionic Conference is a one-day conference featuring talks from the Ionic team. It is focused on Ionic applications being built with Ionic 2. This includes migrating apps from Ionic 1 to Ionic 2, Angular concepts, Webpack, Sass, and many other technologies
+                used in Ionic 2. Tickets are completely sold out, and we’re expecting more than 1000 developers – making this the largest Ionic conference ever!
+            </p>
+        </div>
     </div>
+    <!--when user not logged in-->
+
 </ion-content>
