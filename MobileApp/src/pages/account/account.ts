@@ -63,6 +63,7 @@ export class AccountPage {
   }
 
   logout() {
+    localStorage.clear();
     this.userData.logout();
     this.nav.setRoot(LoginPage);
   }
