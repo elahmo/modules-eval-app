@@ -22,7 +22,7 @@ export class TutorialPage {
 
   startApp() {
     this.navCtrl.setRoot(LoginPage).then(() => {
-      this.storage.set('hasSeenTutorial', 'true');
+      this.storage.set('hasSeenTutorial', 'false');
     })
   }
 

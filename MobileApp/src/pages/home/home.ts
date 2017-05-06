@@ -27,6 +27,7 @@ export class HomePage {
       uni: "University of Southampton"     
     }
 
+    console.log("coming into home page");
               // decide which menu items should be hidden by current login status stored in local storage
     this.userData.hasLoggedIn().then((hasLoggedIn) => {
       console.log('hasLoggedIn is:' + hasLoggedIn);
@@ -45,6 +46,8 @@ export class HomePage {
 
     this.user = JSON.parse(localStorage.getItem('user'));
     if(this.user == null){
+      this.user = {username: ''};
+      this.items = [];
 
     }
     // this.items = [];

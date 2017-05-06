@@ -30,6 +30,7 @@ export class TabsPage {
     console.log("coming into to Tab");
     console.log(localStorage.getItem("token"));
       if(!localStorage.getItem("token")) {
+        console.log("if statment in tab");
       navCtrl.setRoot(LoginPage);
     }
   }

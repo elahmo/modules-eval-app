@@ -6,6 +6,7 @@ import { TabsPage } from '../tabs/tabs';
 import { SignupPage } from '../signup/signup';
 import { HomePage } from '../home/home';
 import { UserData } from '../../providers/user-data';
+import { ConferenceApp } from '../../app/app.component';
 
 @Component({
   selector: 'page-user',
@@ -18,8 +19,11 @@ export class LoginPage {
   loading: any;
   loginData = { username:'', password:'' };
   data: any;
-
-  constructor(public navCtrl: NavController, public authService: AuthService, public userData: UserData, public loadingCtrl: LoadingController, private toastCtrl: ToastController) { }
+  conApp: ConferenceApp;
+  constructor(public navCtrl: NavController, public authService: AuthService, public userData: UserData, public loadingCtrl: LoadingController, private toastCtrl: ToastController) {
+    // this.conApp.enableMenu(false);
+    console.log("coming into log in page");
+   }
 
   // onLogin(form: NgForm) {
   //   this.submitted = true;
@@ -46,6 +50,7 @@ export class LoginPage {
 
       this.userData.login(this.loginData.username);
       this.navCtrl.setRoot(TabsPage);
+      this.conApp.enableMenu(false);
     }, (err) => {
       this.loading.dismiss();
       this.presentToast(err);
