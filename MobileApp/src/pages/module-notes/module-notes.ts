@@ -6,6 +6,7 @@ import { AuthService } from '../../providers/auth-service';
 import { TabsPage } from '../tabs/tabs';
 import { HomePage } from '../home/home';
 
+
 /*
   Generated class for the ModuleDetail page.
 
@@ -13,16 +14,16 @@ import { HomePage } from '../home/home';
   Ionic pages and navigation.
 */
 @Component({
-  selector: 'page-module-detail',
-  templateUrl: 'module-detail.html'
+  selector: 'page-module-notes',
+  templateUrl: 'module-notes.html',
+
 })
-export class ModuleDetailPage {
+export class ModuleNotesPage {
   item: any;
   favourited: boolean;
-  
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public authService: AuthService, public loadingCtrl: LoadingController, private toastCtrl: ToastController){
     	this.item = navParams.get('item');
-      this.favourited = navParams.get('favourited')
       console.log(this.item.COURSE_LECTURER);
       if(this.item.COURSE_LECTURER == undefined){
         this.item.COURSE_LECTURER = {url:'',phone_number:'', name:'',email:''};
@@ -41,7 +42,7 @@ export class ModuleDetailPage {
   	// this.navCtrl.push(HomePage,{
   	// 	item: item
   	// })
-    console.log("Coming into itemFavourite");
+    console.log("Coming into itemNotes");
     console.log(this.item._id);
     this.authService.favourite(this.item._id).then((result) => {
       // this.loading.dismiss();

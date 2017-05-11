@@ -6,6 +6,7 @@ import { AuthService } from '../../providers/auth-service';
 import { TabsPage } from '../tabs/tabs';
 import { HomePage } from '../home/home';
 import { feedbackPage } from '../feedback/feedback';
+import { ModuleNotesPage } from '../module-notes/module-notes';
 /*
   Generated class for the ModuleDetail page.
 
@@ -20,7 +21,7 @@ export class ModuleDetailPage {
   item: any;
   favourited: boolean;
   data: any;
-  
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public authService: AuthService, public loadingCtrl: LoadingController, private toastCtrl: ToastController){
     	this.item = navParams.get('item');
       this.favourited = navParams.get('favourited')
@@ -79,5 +80,12 @@ export class ModuleDetailPage {
       }, (err) => {
         console.log("failed to add to favourite");
       });
+    }
+
+    itemNotes() {
+    	this.navCtrl.push(ModuleNotesPage,{
+    		item: this.item
+        //favourited: favd
+    	});
     }
 }

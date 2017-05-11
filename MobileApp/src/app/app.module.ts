@@ -24,7 +24,7 @@ import { TutorialPage } from '../pages/tutorial/tutorial';
 import { SupportPage } from '../pages/support/support';
 import { SearchModulePage } from '../pages/search-module/search-module';
 import { ModuleDetailPage } from '../pages/module-detail/module-detail';
-
+import { ModuleNotesPage } from '../pages/module-notes/module-notes';
 
 import { ConferenceData } from '../providers/conference-data';
 import { UserData } from '../providers/user-data';
@@ -56,7 +56,8 @@ import { AuthService } from '../providers/auth-service';
     HomePage,
     feedbackPage,
     SearchModulePage,
-    ModuleDetailPage
+    ModuleDetailPage,
+    ModuleNotesPage
   ],
   imports: [
     IonicModule.forRoot(ConferenceApp),
@@ -83,7 +84,8 @@ import { AuthService } from '../providers/auth-service';
     leaveCommentPage,
     feedbackPage,
     SearchModulePage,
-    ModuleDetailPage
+    ModuleDetailPage,
+    ModuleNotesPage
   ],
   providers: [
     ConferenceData,
