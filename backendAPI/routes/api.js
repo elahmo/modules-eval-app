@@ -10,6 +10,35 @@ const recom_amount = 3
 //----------------------------------------------------
 // authentication helper functions
 // ----------------------------------------------------
+function get_feeback(module, user){
+	if (module !== null && module.FEEDBACKS !== undefined) {
+			let index = module.FEEDBACKS.findIndex( (feedback) => feedback._id._id.toString() === user._id.toString())
+			if (index !== -1) {
+				module['current_user_feedback'] = {
+					feedback: module.FEEDBACKS[index]['feedback'],
+					rating:   module.FEEDBACKS[index]['local_rating']
+				}
+			} else {
+				module['current_user_feedback'] = null
+			}
+		return module
+	} else {
+		return module
+	}
+}
+
+function get_feebacks(modules, user){
+	if (modules !== null){
+		modules.forEach((mod) => {
+			mod = get_feeback(mod, user)
+		})
+		return modules
+	} else  {
+		return modules
+	}
+}
+
+
 
 function get_rid_of_field(obj, field){
 	let newObj = Object.create(obj)
@@ -157,7 +186,10 @@ router.route('/modules')
 			//.slice('RECOMMENDATIONS', recom_amount)
 			.exec((err, modules) => {
 			if (err) return next(err)
-			res.status(200).json({success: true, modules:modules});
+			res.status(200).json({
+				success: true,
+				modules: modules
+			});
 		});
 	});
 
@@ -173,8 +205,12 @@ router.route('/modules/:module_id')
 			.populate({ path: 'FEEDBACKS._id'})
 			.slice('RECOMMENDATIONS', recom_amount)
 			.exec((err, module) => {
+					if (module === null) return next("No module found with this id")
 					if (err) return next(err)
-						res.status(200).json({success: true, module:module});
+						res.status(200).json({
+							success: true,
+							module: get_feeback(module, user)
+						});
 				})
 	})
 //----------------------------------------------------
@@ -182,13 +218,14 @@ router.route('/modules/:module_id')
 // ----------------------------------------------------
 router.get('/modules/find/:name', requiresAuth, (req, res, next) => {
 	//get the users modules first
+	const user = req.user;
 	Module.find({COURSE_LONG_TITLE: new RegExp(req.params.name, "i")})
 		.populate({ path: 'RECOMMENDATIONS._id'})
 		.populate({ path: 'FEEDBACKS._id'})
 		.slice('RECOMMENDATIONS', recom_amount)
 		.exec((err, modules) => {
 		if (err) return next(err)
-		res.status(200).json({success: true, message: 'Found following modules.', modules:modules});
+		res.status(200).json({success: true, message: 'Found following modules.', modules:get_feebacks(modules, user)});
 	});
 });
 
@@ -224,6 +261,22 @@ router.post('/unfavourite/:module_id', requiresAuth, (req, res, next) => {
 		if (err)  return next(err);
 		res.status(200).json({success: true, message: 'Removed added module from the favourites.' });
 	})
+});
+
+//----------------------------------------------------
+// remove a module from favourites
+// ----------------------------------------------------
+router.put('/notes/:module_id', requiresAuth, (req, res, next) => {
+	const user = req.user;
+	if (!req.body.notes) return res.status(422).json({success: false, message: 'Please provide body of the notes'});
+		Module.findById(req.params.module_id)
+		.exec((err, module) => {
+			if (err) return next(err)
+			module.save((err) => {
+				if (err) return next(err)
+				res.status(200).json({success: true, message: 'Successfully changed the notes of the module.' });
+			});
+	});
 });
 
 //for /api simply dump out all the endpoints

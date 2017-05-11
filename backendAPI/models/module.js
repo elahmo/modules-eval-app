@@ -14,7 +14,8 @@ const ModuleSchema   = new Schema({
 	rating: [Number],
 	RECOMMENDATIONS: [{
 			_id:        {type: Schema.Types.ObjectId, ref: 'Course'} //def is the open data module
-	}]
+	}],
+	current_user_feedback: Object
 });
 
 module.exports = mongoose.model('Module', ModuleSchema);

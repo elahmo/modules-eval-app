@@ -14,10 +14,8 @@ POST /signup
              "_id": 58dd7615252d832035a074b0,
              "username":"username",
              "modules": [
-             { "_id": module_obj1,
-               "local_rating": 2.5 },
-             { "_id": module_obj2,
-               "local_rating": 5 }
+              module_obj1,
+              module_obj2
              ],
               "details": {
                 "detail1": detail,
@@ -41,10 +39,8 @@ POST /auth
          "_id": 58dd7615252d832035a074b0,
          "username":"username",
          "modules": [
-         { "_id": module_obj1,
-           "local_rating": 2.5 },
-         { "_id": module_obj2,
-           "local_rating": 5 }
+          module_obj1,
+          module_obj2
          ],
          "details": {
            "detail1": detail,
@@ -64,12 +60,10 @@ GET /user
        "user": {
          "_id": 58dd7615252d832035a074b0,
          "username":"username",
-          "modules": [
-          { "_id": module_obj1,
-            "local_rating": 2.5 },
-          { "_id": module_obj2,
-            "local_rating": 5 }
-          ],
+         "modules": [
+          module_obj1,
+          module_obj2
+         ],
           "details": {
             "detail1": detail,
             "detail2": detail
@@ -131,7 +125,11 @@ GET /modules/{:id}
                     "feedback": "very good",
                     "local_rating": 5 }
                   ],
-                  "rating": [4.5, 5] //first number is average rating, second number is number of user rated
+                  "rating": [4.5, 5], //first number is average rating, second number is number of user rated
+                  "current_user_feedback": { //if no feedback given, this will be null
+          					feedback: "feedback"
+          					rating:  rating
+          				}
               }
     }
 
@@ -189,6 +187,10 @@ GET /modules/find/{:name}
                     "local_rating": 5 }
                   ],
                   "rating": [4.5, 5] //first number is average rating, second number is number of user rated
+                  "current_user_feedback": { //if no feedback given, this will be null
+                    feedback: "feedback"
+                    rating:  rating
+                  }
               }],
     }
 
@@ -225,3 +227,17 @@ PUT  /feedback/{:module_id}
       "success": true,
       "message" "Module rated"
      }
+
+PUT  /notes/{:module_id}
+ *Description: change the notes field of the modules
+ *Required Http Headers:
+    'Authorization: JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ'
+*Takes
+    {
+  "notes": <html code or object of the updated notes>
+    }
+*Returns
+  {
+  "success": true,
+  "message" "Successfully changed the notes of the module."
+  }
