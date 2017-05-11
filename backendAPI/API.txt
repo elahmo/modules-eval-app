@@ -220,12 +220,13 @@ PUT  /feedback/{:module_id}
      'Authorization: JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ'
   *Takes
      {
-     "rating": "5"
+     "rating": "5",
+     "feedback": "feedback"
      }
   *Returns
      {
       "success": true,
-      "message" "Module rated"
+      "message" "Successfully added rating and feedback for the module."
      }
 
 PUT  /notes/{:module_id}

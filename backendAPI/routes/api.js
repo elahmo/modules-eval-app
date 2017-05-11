@@ -237,7 +237,7 @@ router.put('/feedback/:module_id', requiresAuth, (req, res, next) => {
 			if (!req.body.feedback || !req.body.rating) return res.status(422).json({success: false, message: 'Please pass feedback and rating values.'});
 			user.leaveFeedback(req.params.module_id, req.body.feedback, req.body.rating, (err) => {
 				if (err)  return next(err);
-				res.status(200).json({success: true, message: 'Successfully added a rating for the module.' });
+				res.status(200).json({success: true, message: 'Successfully added rating and feedback for the module.' });
 			})
 });
 //----------------------------------------------------
