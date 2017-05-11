@@ -14,14 +14,15 @@
 
 
 <ion-content padding>
-    <ion-card>
-        <ion-card-content>
-            <ion-card-title>Feedbacks</ion-card-title>
-            <ion-list>
-                <ion-item ion-item *ngFor="let feedback of feedbacks.FEEDBACKS">
-                    {{feedback.feedback}}
-                </ion-item>
-            </ion-list>
-        </ion-card-content>
-    </ion-card>
+    <ion-card-title>Comments</ion-card-title>
+    <ion-list>
+        <ion-card ion-tem *ngFor="let feedback of feedbacks">
+            <ion-card-content>
+                    <ion-item>by: {{feedback._id.username}}</ion-item>
+                    <ion-item>
+                        {{feedback.feedback}}
+                    </ion-item>
+            </ion-card-content>
+        </ion-card>
+    </ion-list>
 </ion-content>

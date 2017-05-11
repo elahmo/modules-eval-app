@@ -20,10 +20,14 @@ export class feedbackPage {
   feedbacks: any;
   item: any;
   cours: string;
+  user:any;
+  module: any;
   
   constructor(public navCtrl: NavController, public navParams: NavParams, public authService: AuthService, public loadingCtrl: LoadingController, private toastCtrl: ToastController){
-    	this.feedbacks = navParams.get('item');
+    	this.module = navParams.get('item');
+      this.feedbacks = this.module.FEEDBACKS;
       console.log(this.feedbacks);
+
       // this.item = navParams.get('module');
 
   }
