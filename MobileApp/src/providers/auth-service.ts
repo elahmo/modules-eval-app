@@ -39,7 +39,7 @@ export class AuthService {
     return new Promise((resolve, reject) => {
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
-
+   
         this.http.post(apiUrl+'signup', JSON.stringify(data), {headers: headers})
           .subscribe(res => {
             resolve(res.json());
@@ -197,12 +197,13 @@ export class AuthService {
   }
 
   feedback(moduleId, data){
-    console.log("coming into favourite!");
+    console.log("coming into feedback!");
     console.log(localStorage.getItem('token'));
     return new Promise((resolve, reject) => {
         let headers = new Headers();
         headers.append('Authorization', localStorage.getItem('token'));
-
+         console.log(data);
+         console.log(moduleId);
         this.http.put(apiUrl+'feedback/' + moduleId, JSON.stringify(data), {headers: headers})
           .subscribe(res => {
             resolve(res.json());

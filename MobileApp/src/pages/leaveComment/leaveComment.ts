@@ -5,7 +5,7 @@ import { NavController, NavParams, LoadingController, ToastController } from 'io
 import { AuthService } from '../../providers/auth-service';
 import { TabsPage } from '../tabs/tabs';
 import { HomePage } from '../home/home';
-import { leaveCommentPage } from '../leaveComment/leaveComment';
+import { feedbackPage } from '../feedback/feedback';
 /*
   Generated class for the ModuleDetail page.
 
@@ -13,26 +13,20 @@ import { leaveCommentPage } from '../leaveComment/leaveComment';
   Ionic pages and navigation.
 */
 @Component({
-  selector: 'feedback',
-  templateUrl: 'feedback.html'
+  selector: 'leaveComment',
+  templateUrl: 'leaveComment.html'
 })
-export class feedbackPage {
-  feedbacks: any;
-  item: any;
-  cours: string;
-  user:any;
+export class leaveCommentPage {
   module: any;
-  
+  feedback: any;
   constructor(public navCtrl: NavController, public navParams: NavParams, public authService: AuthService, public loadingCtrl: LoadingController, private toastCtrl: ToastController){
-    	this.module = navParams.get('item');
-      this.feedbacks = this.module.FEEDBACKS;
-      console.log(this.feedbacks);
-
-      // this.item = navParams.get('module');
-
+    	this.module = navParams.get('module');
   }
 
   leaveComment(){
-    this.navCtrl.push(leaveCommentPage,{module: this.module});
+    this.authService.feedback(this.module._id, {rating:4, feedback:this.feedback}).then((result)=>{
+      console.log(result)},(err)=>{
+      console.log(err)});
+    this.navCtrl.push(feedbackPage, {item: this.module});
   }
 }

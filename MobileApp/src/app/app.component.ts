@@ -9,6 +9,7 @@ import { AccountPage } from '../pages/account/account';
 import { LoginPage } from '../pages/login/login';
 import { HomePage } from '../pages/home/home';
 import { feedbackPage } from '../pages/feedback/feedback';
+import { leaveCommentPage } from '../pages/leaveComment/leaveComment';
 import { MapPage } from '../pages/map/map';
 import { SignupPage } from '../pages/signup/signup';
 import { TabsPage } from '../pages/tabs/tabs';

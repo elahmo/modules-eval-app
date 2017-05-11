@@ -13,6 +13,7 @@ import { MapPage } from '../pages/map/map';
 import { SchedulePage } from '../pages/schedule/schedule';
 import { HomePage } from '../pages/home/home';
 import { feedbackPage } from '../pages/feedback/feedback';
+import { leaveCommentPage} from '../pages/leaveComment/leaveComment';
 import { ScheduleFilterPage } from '../pages/schedule-filter/schedule-filter';
 import { SessionDetailPage } from '../pages/session-detail/session-detail';
 import { SignupPage } from '../pages/signup/signup';
@@ -46,6 +47,7 @@ import { AuthService } from '../providers/auth-service';
     ScheduleFilterPage,
     SessionDetailPage,
     SignupPage,
+    leaveCommentPage,
     SpeakerDetailPage,
     SpeakerListPage,
     TabsPage,
@@ -78,6 +80,7 @@ import { AuthService } from '../providers/auth-service';
     TutorialPage,
     SupportPage,
     HomePage,
+    leaveCommentPage,
     feedbackPage,
     SearchModulePage,
     ModuleDetailPage
