@@ -45,10 +45,8 @@ export class ConferenceApp {
     // { title: 'Schedule', component: TabsPage, tabComponent: SchedulePage, icon: 'calendar' },
     // { title: 'Home', component: TabsPage, tabComponent: HomePage, index: 1, icon: 'home' },
     { title: 'Home', component: TabsPage, tabComponent: HomePage, icon: 'home'},
-    { title: 'Schedule', component: TabsPage, tabComponent: SchedulePage, index: 1, icon: 'calendar' },
-    { title: 'Speakers', component: TabsPage, tabComponent: SpeakerListPage, index: 2, icon: 'contacts' },
-    { title: 'Map', component: TabsPage, tabComponent: MapPage, index: 3, icon: 'map' },
-    { title: 'About', component: TabsPage, tabComponent: AboutPage, index: 4, icon: 'information-circle' }
+    { title: 'Map', component: TabsPage, tabComponent: MapPage, index: 1, icon: 'map' },
+    { title: 'About', component: TabsPage, tabComponent: AboutPage, index: 2, icon: 'information-circle' }
   ];
   loggedInPages: PageInterface[] = [
     { title: 'Account', component: AccountPage, icon: 'person' },

@@ -13,7 +13,7 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
     <ion-card>
         <!--<img src="{{item.data.thumbnail}}" />-->
         <ion-card-content>
@@ -46,12 +46,13 @@
                     </ion-note>
                 </ion-item>
             </ion-list>
-            <a ion-button block target="_blank" href="{{item.COURSE_URL}}">
-            View On Course Page
-            </a>
         </ion-card-content>
-        <button ion-button (click)="itemUnfavourite()" type="submit" block [disabled]="!favourited">Unfavourite</button>
-        <button ion-button (click)="itemFavourite()" type="submit" block [disabled]="favourited">Favourite</button>
+        <a ion-button color="dark" outline block target="_blank" href="{{item.COURSE_URL}}">
+            <ion-icon name="globe"></ion-icon> View Course Page
+        </a>
+        <button ion-button (click)="itemNotes()" block color="success" outline><ion-icon name="book"></ion-icon> Notes</button>
+        <button ion-button (click)="itemUnfavourite()" type="submit" block [hidden]="!favourited" color="danger" outline><ion-icon name="remove-circle"></ion-icon> Unfavourite</button>
+        <button ion-button (click)="itemFavourite()" type="submit" block [hidden]="favourited" color="secondary" outline><ion-icon name="add-circle"></ion-icon> Favourite</button>
 
         <!--<button ion-button full>Favourite</button>-->
     </ion-card>
