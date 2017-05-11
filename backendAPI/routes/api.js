@@ -170,6 +170,7 @@ router.route('/modules/:module_id')
 		const user = req.user;
 		Module.findById(req.params.module_id)
 			.populate({ path: 'RECOMMENDATIONS._id'})
+			.populate({ path: 'FEEDBACKS._id'})
 			.slice('RECOMMENDATIONS', recom_amount)
 			.exec((err, module) => {
 					if (err) return next(err)
@@ -183,6 +184,7 @@ router.get('/modules/find/:name', requiresAuth, (req, res, next) => {
 	//get the users modules first
 	Module.find({COURSE_LONG_TITLE: new RegExp(req.params.name, "i")})
 		.populate({ path: 'RECOMMENDATIONS._id'})
+		.populate({ path: 'FEEDBACKS._id'})
 		.slice('RECOMMENDATIONS', recom_amount)
 		.exec((err, modules) => {
 		if (err) return next(err)
@@ -193,9 +195,10 @@ router.get('/modules/find/:name', requiresAuth, (req, res, next) => {
 //----------------------------------------------------
 // post a rating for a module
 // ----------------------------------------------------
-router.put('/rate/:module_id', requiresAuth, (req, res, next) => {
+router.put('/feedback/:module_id', requiresAuth, (req, res, next) => {
 	const user = req.user;
-			user.rateModule(req.params.module_id, req.body.rating, (err, modules_arr) => {
+			if (!req.body.feedback || !req.body.rating) return res.status(422).json({success: false, message: 'Please pass feedback and rating values.'});
+			user.leaveFeedback(req.params.module_id, req.body.feedback, req.body.rating, (err) => {
 				if (err)  return next(err);
 				res.status(200).json({success: true, message: 'Successfully added a rating for the module.' });
 			})

@@ -111,7 +111,8 @@ GET /modules/{:id}
                   "COURSE_CODE":
                   "BIOL3048",
                   "COLL_DESC":"Natural and Environmental Sci",
-                  "RECOMMENDATIONS" [
+                  "NOTES": Object
+                  "RECOMMENDATIONS": [
                     {
                     "_id":{
                           "title": "Systems Biology and Biotechnology Specialization,
@@ -121,7 +122,15 @@ GET /modules/{:id}
                           "url": "https://www.coursera.org/specializations/systems-biology"
                       }
                     }
-                  ]
+                  ],
+                  "FEEDBACKS": [
+                  { "_id": user_obj1,
+                    "feedback": "very bad",
+                    "local_rating": 2.5 },
+                  { "_id": user_obj2,
+                    "feedback": "very good",
+                    "local_rating": 5 }
+                  ],
                   "rating": [4.5, 5] //first number is average rating, second number is number of user rated
               }
     }
@@ -159,6 +168,7 @@ GET /modules/find/{:name}
                   "COURSE_CODE":
                   "BIOL3048",
                   "COLL_DESC":"Natural and Environmental Sci",
+                  "NOTES": Object
                   "RECOMMENDATIONS" [
                     {
                     "_id":{
@@ -170,6 +180,14 @@ GET /modules/find/{:name}
                       }
                     }
                   ]
+                  "FEEDBACKS": [
+                  { "_id": user_obj1,
+                    "feedback": "very bad",
+                    "local_rating": 2.5 },
+                  { "_id": user_obj2,
+                    "feedback": "very good",
+                    "local_rating": 5 }
+                  ],
                   "rating": [4.5, 5] //first number is average rating, second number is number of user rated
               }],
     }
@@ -194,8 +212,8 @@ POST /favourite/{:module_id}
        "message" "Removed added module from the favourites."
       }
 
-PUT  /rate/{:module_id}
-  *Description: Rate a module already in the users favourite list. User is detected from the auth token.
+PUT  /feedback/{:module_id}
+  *Description: Leave feedback and rate a module. User is detected from the auth token.
   *Required Http Headers:
      'Authorization: JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ'
   *Takes
