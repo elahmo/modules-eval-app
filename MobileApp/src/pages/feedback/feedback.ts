@@ -22,8 +22,9 @@ export class feedbackPage {
   cours: string;
   
   constructor(public navCtrl: NavController, public navParams: NavParams, public authService: AuthService, public loadingCtrl: LoadingController, private toastCtrl: ToastController){
-    	this.feedbacks = navParams.get('feedbacks');
-      this.item = navParams.get('module');
+    	this.feedbacks = navParams.get('item');
+      console.log(this.feedbacks);
+      // this.item = navParams.get('module');
 
   }
 }

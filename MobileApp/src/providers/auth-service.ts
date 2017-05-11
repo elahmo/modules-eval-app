@@ -77,14 +77,15 @@ export class AuthService {
     //     .map(res => res.json());
     // }
 
-  get_module_by_id(){
+  get_module_by_id(moduleId){
     console.log("coming into get_module_by_id!");
     console.log(localStorage.getItem('token'));
     return new Promise((resolve, reject) => {
         let headers = new Headers();
         headers.append('Authorization', localStorage.getItem('token'));
         // this.http.get(apiUrl+'user', {}, {headers: headers}).;
-        this.http.get(apiUrl+'modules/' + '58e51e0475770423fccb1997',{headers: headers})
+        // this.http.get(apiUrl+'modules/' + '58e51e0475770423fccb1997',{headers: headers})
+        this.http.get(apiUrl+'modules/' + moduleId,{headers: headers})
         // .map(res => res.json());
           .subscribe(res => {
             resolve(res.json());

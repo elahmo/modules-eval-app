@@ -7,7 +7,7 @@
 <ion-header>
 
     <ion-navbar color="primary">
-        <ion-title>{{item.COURSE_LONG_TITLE}}</ion-title>
+        <ion-title>{{feedbacks.COURSE_LONG_TITLE}}</ion-title>
     </ion-navbar>
 
 </ion-header>
@@ -18,8 +18,8 @@
         <ion-card-content>
             <ion-card-title>Feedbacks</ion-card-title>
             <ion-list>
-                <ion-item ion-item *ngFor="let feedback of feedbacks">
-                    {{feedback.comment}}
+                <ion-item ion-item *ngFor="let feedback of feedbacks.FEEDBACKS">
+                    {{feedback.feedback}}
                 </ion-item>
             </ion-list>
         </ion-card-content>

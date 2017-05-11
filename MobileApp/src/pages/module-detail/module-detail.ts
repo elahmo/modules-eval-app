@@ -5,7 +5,7 @@ import { NavController, NavParams, LoadingController, ToastController } from 'io
 import { AuthService } from '../../providers/auth-service';
 import { TabsPage } from '../tabs/tabs';
 import { HomePage } from '../home/home';
-
+import { feedbackPage } from '../feedback/feedback';
 /*
   Generated class for the ModuleDetail page.
 
@@ -19,6 +19,7 @@ import { HomePage } from '../home/home';
 export class ModuleDetailPage {
   item: any;
   favourited: boolean;
+  data: any;
   
   constructor(public navCtrl: NavController, public navParams: NavParams, public authService: AuthService, public loadingCtrl: LoadingController, private toastCtrl: ToastController){
     	this.item = navParams.get('item');
@@ -63,6 +64,18 @@ export class ModuleDetailPage {
     console.log(this.item._id);
     this.authService.unfavourite(this.item._id).then((result) => {
       this.navCtrl.setRoot(HomePage);
+      }, (err) => {
+        console.log("failed to add to favourite");
+      });
+    }
+
+    itemFeedback(){
+    this.authService.get_module_by_id(this.item._id).then((result) => {
+      // this.navCtrl.setRoot(HomePage);
+      this.data = result;
+    this.navCtrl.push(feedbackPage,{
+  		item: this.data.module,
+  	});
       }, (err) => {
         console.log("failed to add to favourite");
       });
