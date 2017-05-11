@@ -37,3 +37,18 @@ page-home {}
 }
 
 .home-header-text {}
+
+.row {
+    padding: 0px;
+    width: 100%;
+    min-height: 90px;
+    text-align: center;
+    max-height: 150px;
+}
+
+.row img {
+    max-width: 215px;
+    margin-left: -15px;
+    padding-top: 10px;
+    margin-bottom: 20px;
+}

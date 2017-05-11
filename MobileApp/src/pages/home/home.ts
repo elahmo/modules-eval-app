@@ -16,6 +16,7 @@ import { UserData } from '../../providers/user-data';
 })
 export class HomePage {
   user:any;
+  favoriteText:any;
   myDate: any;
   myUser: any;
   items: any[];
@@ -37,6 +38,11 @@ export class HomePage {
     this.authService.get_module_by_user().then((result) => {
         this.result = result;
         this.items = this.result.user.modules;
+        if(this.items.length > 0){
+          this.favoriteText = "Favourite Modules";
+        }else{
+          this.favoriteText = "No favourite modules found...";
+        }
         console.log(this.items);
       },(err) => {
         // this.loading.dismiss();
