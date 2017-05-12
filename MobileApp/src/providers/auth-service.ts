@@ -25,6 +25,7 @@ export class AuthService {
 
         this.http.post(apiUrl+'auth', JSON.stringify(credentials), {headers: headers})
           .subscribe(res => {
+            console.log(res);
             resolve(res.json());
           }, (err) => {
             reject(err);
@@ -39,7 +40,7 @@ export class AuthService {
     return new Promise((resolve, reject) => {
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
-   
+
         this.http.post(apiUrl+'signup', JSON.stringify(data), {headers: headers})
           .subscribe(res => {
             resolve(res.json());
@@ -90,7 +91,7 @@ export class AuthService {
           .subscribe(res => {
             resolve(res.json());
             console.log("get module successfully");
-            
+
           }, (err) => {
             console.log("failed get module");
             reject(err);
@@ -139,7 +140,7 @@ export class AuthService {
             resolve(res.json());
             console.log(res.json());
             console.log("get module successfully");
-            
+
           }, (err) => {
             console.log("failed get module");
             reject(err);
@@ -160,7 +161,7 @@ export class AuthService {
         //     resolve(res.json());
         //     console.log(res.json());
         //     console.log("module added successfully");
-            
+
         //   }, (err) => {
         //     console.log("failed to add module");
         //     reject(err);
@@ -201,6 +202,7 @@ export class AuthService {
     console.log(localStorage.getItem('token'));
     return new Promise((resolve, reject) => {
         let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
         headers.append('Authorization', localStorage.getItem('token'));
          console.log(data);
          console.log(moduleId);
@@ -221,6 +223,7 @@ export class AuthService {
     console.log(localStorage.getItem('token'));
     return new Promise((resolve, reject) => {
         let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
         headers.append('Authorization', localStorage.getItem('token'));
 
         this.http.put(apiUrl+'notes/' + moduleId, JSON.stringify(data), {headers: headers})

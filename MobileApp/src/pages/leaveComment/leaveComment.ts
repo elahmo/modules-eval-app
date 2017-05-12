@@ -26,7 +26,25 @@ export class leaveCommentPage {
   leaveComment(){
     this.authService.feedback(this.module._id, {rating:4, feedback:this.feedback}).then((result)=>{
       console.log(result)},(err)=>{
-      console.log(err)});
+        this.presentToast(err.json()['message']);
+        console.log(err)
+    });
     this.navCtrl.push(feedbackPage, {item: this.module});
   }
+  presentToast(msg) {
+    let toast = this.toastCtrl.create({
+      message: msg,
+      duration: 3000,
+      position: 'bottom',
+      dismissOnPageChange: true
+    });
+
+    toast.onDidDismiss(() => {
+      console.log('Dismissed toast');
+    });
+
+    toast.present();
+  }
+
+
 }

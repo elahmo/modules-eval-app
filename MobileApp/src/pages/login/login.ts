@@ -53,7 +53,8 @@ export class LoginPage {
       this.conApp.enableMenu(false);
     }, (err) => {
       this.loading.dismiss();
-      this.presentToast(err);
+      this.presentToast(err.json()['message']);
+      console.log(err)
     });
   }
 

@@ -50,9 +50,9 @@ export class SignupPage {
       this.navCtrl.setRoot(TabsPage);
       // this.navCtrl.pop();
     }, (err) => {
-      console.log("register failed");
       this.loading.dismiss();
-      this.presentToast(err);
+      this.presentToast(err.json()['message']);
+      console.log(err)
     });
   }
 
