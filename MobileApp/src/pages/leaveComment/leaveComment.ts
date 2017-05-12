@@ -6,6 +6,7 @@ import { AuthService } from '../../providers/auth-service';
 import { TabsPage } from '../tabs/tabs';
 import { HomePage } from '../home/home';
 import { feedbackPage } from '../feedback/feedback';
+import {RatingComponent} from 'rating';
 /*
   Generated class for the ModuleDetail page.
 

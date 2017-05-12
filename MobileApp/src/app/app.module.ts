@@ -12,6 +12,7 @@ import { LoginPage } from '../pages/login/login';
 import { MapPage } from '../pages/map/map';
 import { SchedulePage } from '../pages/schedule/schedule';
 import { HomePage } from '../pages/home/home';
+import {RatingComponent} from '../pages/leaveComment/rating';
 import { feedbackPage } from '../pages/feedback/feedback';
 import { leaveCommentPage} from '../pages/leaveComment/leaveComment';
 import { ScheduleFilterPage } from '../pages/schedule-filter/schedule-filter';
@@ -48,6 +49,7 @@ import { AuthService } from '../providers/auth-service';
     SessionDetailPage,
     SignupPage,
     leaveCommentPage,
+    RatingComponent,
     SpeakerDetailPage,
     SpeakerListPage,
     TabsPage,
@@ -82,6 +84,7 @@ import { AuthService } from '../providers/auth-service';
     SupportPage,
     HomePage,
     leaveCommentPage,
+    RatingComponent,
     feedbackPage,
     SearchModulePage,
     ModuleDetailPage,
