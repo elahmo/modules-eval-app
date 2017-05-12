@@ -1,12 +1,11 @@
-import {Component, ChangeDetectionStrategy, Input} from '@angular/core';
-import {Icon} from 'ionic-angular/components/icon/icon';
+import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
+import { Icon } from 'ionic-angular/components/icon/icon';
 
 @Component({
-	selector: 'rating',
-	//directives: [Icon],
+	selector: 'update-rating',
 	template: `
 		<ul>
-			<li *ngFor="let icon of icons()">
+			<li *ngFor="let icon of icons(); let i = index" (click)="onUpdate(i+1)">
 				<ion-icon [name]="icon"></ion-icon>
 			</li>
 		</ul>
@@ -21,7 +20,7 @@ import {Icon} from 'ionic-angular/components/icon/icon';
 		li {
 			display: inline-block;
 			color: #ffa500;
-			font-size:2em;
+			font-size: 2em;
 		}
 		li + li {
 			margin-left: .1em;
@@ -29,7 +28,7 @@ import {Icon} from 'ionic-angular/components/icon/icon';
 	`],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class RatingComponent {
+export class updateRating {
 
 	@Input() public score: number = 1;
 	@Input() public max: number = 5;
@@ -37,6 +36,13 @@ export class RatingComponent {
 	@Input() public iconEmpty: string = 'star-outline';
 	@Input() public iconHalf: string = 'star-half';
 	@Input() public iconFull: string = 'star';
+
+	@Output() public update: EventEmitter<number> = new EventEmitter();
+
+	onUpdate(score: number): void {
+		this.score = score;
+		this.update.emit(score);
+	}
 
 	public icons(): string[] {
 		let step = 0.5;
@@ -54,5 +60,4 @@ export class RatingComponent {
 		}
 		return icons;
 	}
-
 }

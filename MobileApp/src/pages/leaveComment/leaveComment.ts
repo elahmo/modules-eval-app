@@ -6,7 +6,7 @@ import { AuthService } from '../../providers/auth-service';
 import { TabsPage } from '../tabs/tabs';
 import { HomePage } from '../home/home';
 import { feedbackPage } from '../feedback/feedback';
-import {RatingComponent} from 'rating';
+import {updateRating} from 'updateRating';
 /*
   Generated class for the ModuleDetail page.
 
@@ -20,17 +20,23 @@ import {RatingComponent} from 'rating';
 export class leaveCommentPage {
   module: any;
   feedback: any;
+  rate: any;
   constructor(public navCtrl: NavController, public navParams: NavParams, public authService: AuthService, public loadingCtrl: LoadingController, private toastCtrl: ToastController){
     	this.module = navParams.get('module');
+      this.rate=0;
   }
 
   leaveComment(){
-    this.authService.feedback(this.module._id, {rating:4, feedback:this.feedback}).then((result)=>{
+    this.authService.feedback(this.module._id, {rating: this.rate, feedback:this.feedback}).then((result)=>{
       console.log(result)},(err)=>{
         this.presentToast(err.json()['message']);
         console.log(err)
     });
     this.navCtrl.push(feedbackPage, {item: this.module});
+  }
+
+  rating(event){
+    this.rate =event;
   }
   presentToast(msg) {
     let toast = this.toastCtrl.create({

@@ -16,6 +16,12 @@
     <form #commentFrom="ngForm">
         <ion-label>Comment</ion-label>
         <ion-input [(ngModel)]="feedback" name = "comment" type="text" #comment="ngModel"></ion-input>
+        <ion-item>
+            <ion-icon name="thumbs-up" item-left></ion-icon>Rate
+                <ion-note item-right>
+                        <update-rating score="0" max="5" (update)="rating($event)"></update-rating>
+                </ion-note>
+        </ion-item>
         <button ion-button (click)="leaveComment()" type="submit" block color="success" outline><ion-icon name="book"></ion-icon>  Leave Comment</button>
     </form>
 </ion-content>
