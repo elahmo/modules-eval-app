@@ -138,17 +138,17 @@ router.post('/signup', (req, res, next) => {
 // create a new user account (POST http://localhost:8080/api/auth)
 router.post('/auth', (req, res, next) => {
 	if (!req.body.username || !req.body.password) return res.status(422).json({success: false, message: 'Please pass username and password.'});
-  User.findOne({  username: req.body.username })
+	User.findOne({  username: req.body.username })
 		.populate({ path: 'modules._id',	populate: { path: 'RECOMMENDATIONS._id'}})
 		.exec((err, user) => {
-    if (err)  return next(err);
+	if (err)  return next(err);
 
-    if (!user) {
-      res.status(404).json({success: false, message: 'Username not found.'});
-    } else {
-      // check if password matches
-      user.comparePassword(req.body.password, (err, isMatch) => {
-        if (isMatch && !err) {
+	if (!user) {
+		res.status(404).json({success: false, message: 'Username not found.'});
+	} else {
+		// check if password matches
+		user.comparePassword(req.body.password, (err, isMatch) => {
+		if (isMatch && !err) {
 					const token = jwt.encode({username: user.username, _id: user._id}, process.env.SECRET_OR_KEY);
 						if (err)  return next(err);
 						res.status(200).json({
@@ -156,12 +156,12 @@ router.post('/auth', (req, res, next) => {
 								"token": 'JWT ' + token,
 								"user": slice_recomendations(get_rid_of_field(user, 'password'))
 						});
-        } else {
-          res.status(401).send({success: false, message: 'Failed. Wrong password.'});
-        }
-      });
-    }
-  });
+		} else {
+			res.status(401).send({success: false, message: 'Failed. Wrong password.'});
+		}
+		});
+	}
+	});
 });
 //----------------------------------------------------
 // get user from the auth token
@@ -200,16 +200,21 @@ router.route('/modules/:module_id')
 	// get the module with that id
 	.get(requiresAuth, (req, res, next) => {
 		const user = req.user;
+		const query = req.query
+		let resp_fields = query['fields'] ? query['fields'].replace(",", " ") : ''
+		let query_fields = query['fields'] ? query['fields'].replace(",", " ") : ''
 		Module.findById(req.params.module_id)
 			.populate({ path: 'RECOMMENDATIONS._id'})
 			.populate({ path: 'FEEDBACKS._id'})
 			.slice('RECOMMENDATIONS', recom_amount)
+			.select(query_fields)
 			.exec((err, module) => {
 					if (module === null) return next("No module found with this id")
 					if (err) return next(err)
 						res.status(200).json({
 							success: true,
 							module: get_feeback(module, user)
+							//module:module
 						});
 				})
 	})

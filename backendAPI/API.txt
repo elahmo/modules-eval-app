@@ -72,8 +72,8 @@ GET /user
     }
 
 //----------------Ahmet part
-GET /modules/{:id}
-  *Description: get a module either from id.
+GET /modules/{:id}?fields=<field1,field2>
+  *Description: get a module either from id. Accept field queries, which will make the response containt only the fields specified. Any field can be specified, which is shown in the module object.
   *Required Http Headers:
     'Authorization: JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ'
   *Returns
