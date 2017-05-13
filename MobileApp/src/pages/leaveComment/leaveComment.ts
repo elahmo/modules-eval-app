@@ -26,13 +26,29 @@ export class leaveCommentPage {
       this.rate=0;
   }
 
+
+/*
+    itemFeedback(){
+    this.authService.get_module_by_id(this.item._id).then((result) => {
+      // this.navCtrl.setRoot(HomePage);
+      this.data = result;
+    this.navCtrl.push(feedbackPage,{
+      item: this.data.module,
+    });
+      }, (err) => {
+        console.log("failed to add to favourite");
+      });
+    }
+*/
+
   leaveComment(){
     this.authService.feedback(this.module._id, {rating: this.rate, feedback:this.feedback}).then((result)=>{
-      console.log(result)},(err)=>{
+        console.log(result)
+        this.navCtrl.push(feedbackPage, {item: this.module});
+      },(err)=>{
         this.presentToast(err.json()['message']);
         console.log(err)
-    });
-    this.navCtrl.push(feedbackPage, {item: this.module});
+      });
   }
 
   rating(event){

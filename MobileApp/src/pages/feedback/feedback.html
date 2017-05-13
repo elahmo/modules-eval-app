@@ -19,9 +19,8 @@
         <ion-card ion-tem *ngFor="let feedback of feedbacks">
             <ion-card-content>
                     <ion-item>by: {{feedback._id.username}}</ion-item>
-                    <ion-item>
-                        {{feedback.feedback}}
-                    </ion-item>
+                    <ion-item>feedback: {{feedback.feedback}}</ion-item>
+                    <ion-item>rating: {{feedback.local_rating}}</ion-item>
             </ion-card-content>
         </ion-card>
     </ion-list>
