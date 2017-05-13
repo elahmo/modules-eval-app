@@ -22,7 +22,6 @@ export class ModuleDetailPage {
   item: any;
   favourited: boolean;
   data: any;
-  rating: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public authService: AuthService, public loadingCtrl: LoadingController, private toastCtrl: ToastController){
     	this.item = navParams.get('item');
@@ -33,12 +32,6 @@ export class ModuleDetailPage {
         console.log(this.item.COURSE_LECTURER);
     }
     console.log("coming into detail constructor");
-
-    this.rating =0;
-    for (var i = 0; i < this.item.rating.length; ++i) {
-      this.rating = this.rating+this.item.rating[i];
-    }
-    this.rating = this.rating/i;
   }
 
   ionViewDidLoad() {
@@ -78,18 +71,14 @@ export class ModuleDetailPage {
     }
 
     itemFeedback(){
-    this.authService.get_module_by_id(this.item._id).then((result) => {
-      // this.navCtrl.setRoot(HomePage);
-      this.data = result;
-    this.navCtrl.push(feedbackPage,{
-  		item: this.data.module,
-  	});
-      }, (err) => {
-        console.log("failed to add to favourite");
-      });
+      console.log("Coming into feedback");
+      this.navCtrl.push(feedbackPage,{
+    		item_id: this.item._id
+  	  });
     }
 
     itemNotes() {
+      console.log("Coming into ntoes");
     	this.navCtrl.push(ModuleNotesPage,{
     		item: this.item
         //favourited: favd
