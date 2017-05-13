@@ -219,7 +219,7 @@ export class AuthService {
   }
 
   notes(moduleId, data){
-    console.log("coming into favourite!");
+    console.log("coming into notes!");
     console.log(localStorage.getItem('token'));
     return new Promise((resolve, reject) => {
         let headers = new Headers();

@@ -18,16 +18,12 @@
         <!--<img src="{{item.data.thumbnail}}" />-->
         <ion-card-content>
             <ion-card-title>
-                {{item.COURSE_LONG_TITLE}}
+                Notes: {{item.COURSE_LONG_TITLE}}
             </ion-card-title>
-            <ion-list>
-                <ion-item>
-                    Notes
                     <ion-note item-right>
                         {{item.NOTES}}
                     </ion-note>
-                </ion-item>
-            </ion-list>
+                    <app-tinymce></app-tinymce>
         </ion-card-content>
 
         <!--<button ion-button full>Favourite</button>-->

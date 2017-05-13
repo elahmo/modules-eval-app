@@ -36,7 +36,6 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { AuthService } from '../providers/auth-service';
 
-
 @NgModule({
   declarations: [
     ConferenceApp,
@@ -65,8 +64,8 @@ import { AuthService } from '../providers/auth-service';
   ],
   imports: [
     IonicModule.forRoot(ConferenceApp),
-		IonicStorageModule.forRoot()
-  ],
+	IonicStorageModule.forRoot()
+    ],
   bootstrap: [IonicApp],
   entryComponents: [
     ConferenceApp,
