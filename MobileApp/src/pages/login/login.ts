@@ -23,6 +23,7 @@ export class LoginPage {
   constructor(public navCtrl: NavController, public authService: AuthService, public userData: UserData, public loadingCtrl: LoadingController, private toastCtrl: ToastController) {
     // this.conApp.enableMenu(false);
     console.log("coming into log in page");
+    // userData.hasLoggedIn();
    }
 
   // onLogin(form: NgForm) {
