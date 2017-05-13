@@ -22,17 +22,55 @@ export class feedbackPage {
   cours: string;
   user:any;
   module: any;
+  loading: any;
   
-  constructor(public navCtrl: NavController, public navParams: NavParams, public authService: AuthService, public loadingCtrl: LoadingController, private toastCtrl: ToastController){
-    	this.module = navParams.get('item');
+  constructor(public navCtrl: NavController, public navParams: NavParams, public authService: 
+    AuthService, public loadingCtrl: LoadingController, private toastCtrl: ToastController){
+    this.showLoader('Loading Feedback..');
+    this.module = null;
+    this.feedbacks = null;
+    this.authService.get_module_by_id( navParams.get('item_id')).then((result) => {
+      this.module = result['module'];
       this.feedbacks = this.module.FEEDBACKS;
-      console.log(this.feedbacks);
+      this.loading.dismiss();
+      }, (err) => {
+      this.module = null;
+      this.feedbacks = null;
+      this.loading.dismiss();
+      this.presentToast(err.json()['message']);
+      console.log("failed to fetch module");
+      });
 
-      // this.item = navParams.get('module');
-
-  }
+    }
 
   leaveComment(){
     this.navCtrl.push(leaveCommentPage,{module: this.module});
   }
+
+
+
+  showLoader(text){
+    this.loading = this.loadingCtrl.create({
+        content: text
+    });
+
+    this.loading.present();
+  }
+
+  presentToast(msg) {
+    let toast = this.toastCtrl.create({
+      message: msg,
+      duration: 3000,
+      position: 'bottom',
+      dismissOnPageChange: true
+    });
+
+    toast.onDidDismiss(() => {
+      console.log('Dismissed toast');
+    });
+
+    toast.present();
+  }
+
 }
+

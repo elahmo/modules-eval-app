@@ -71,18 +71,14 @@ export class ModuleDetailPage {
     }
 
     itemFeedback(){
-    this.authService.get_module_by_id(this.item._id).then((result) => {
-      // this.navCtrl.setRoot(HomePage);
-      this.data = result;
-    this.navCtrl.push(feedbackPage,{
-  		item: this.data.module,
-  	});
-      }, (err) => {
-        console.log("failed to add to favourite");
-      });
+      console.log("Coming into feedback");
+      this.navCtrl.push(feedbackPage,{
+    		item_id: this.item._id
+  	  });
     }
 
     itemNotes() {
+      console.log("Coming into ntoes");
     	this.navCtrl.push(ModuleNotesPage,{
     		item: this.item
         //favourited: favd

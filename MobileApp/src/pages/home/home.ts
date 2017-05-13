@@ -51,6 +51,7 @@ export class HomePage {
       });
 
     this.user = JSON.parse(localStorage.getItem('user'));
+
     if(this.user == null){
       this.user = {username: ''};
       this.items = [];
