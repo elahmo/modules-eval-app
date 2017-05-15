@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
 import { ConferenceData } from '../../providers/conference-data';
 import { MicroServices } from '../../providers/microservices';
 import { ModuleDetailPage } from '../module-detail/module-detail';
@@ -9,10 +9,18 @@ import { ModuleDetailPage } from '../module-detail/module-detail';
   templateUrl: 'search-module.html'
 })
 export class SearchModulePage {
+  loading: any;
   queryText = '';
   modules: any;
   result: any;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public confData: ConferenceData, public microServices: MicroServices) {}
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public confData: ConferenceData,
+    public microServices: MicroServices,
+    public loadingCtrl: LoadingController,
+    private toastCtrl: ToastController
+    ) {}
   searchModule() {
       // this.queryText = "";
       this.microServices.get_module_by_name(this.queryText).then((result) => {
@@ -21,9 +29,7 @@ export class SearchModulePage {
         this.result = this.modules.modules;
 
       },(err) => {
-        // this.loading.dismiss();
-        // this.presentToast(err);
-        console.log(err);
+        this.presentToast(err.json()['message']);
       });  
   }
 
@@ -34,8 +40,24 @@ export class SearchModulePage {
       favourited: favd
   	});
   }
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad SearchModulePage');
+
+    showLoader(){
+    this.loading = this.loadingCtrl.create({
+        content: 'Signing Up...'
+    });
+
+    this.loading.present();
+  }
+
+  presentToast(msg) {
+    let toast = this.toastCtrl.create({
+      message: msg,
+      duration: 3000,
+      position: 'bottom',
+      dismissOnPageChange: true
+    });
+
+    toast.present();
   }
 
 }

@@ -62,13 +62,14 @@ export class ModuleDetailPage {
 
     itemFeedback(){
       this.navCtrl.push(feedbackPage,{
-    		item: this.item
+    		item: this.item,
+        favourited: this.favourited
   	  });
     }
 
     itemNotes() {
     	this.navCtrl.push(ModuleNotesPage,{
-    		item: this.item
+    		item: this.item,
     	});
     }
 

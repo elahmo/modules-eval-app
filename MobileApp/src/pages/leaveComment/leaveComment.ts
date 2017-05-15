@@ -24,40 +24,51 @@ export class leaveCommentPage {
   module: any;
   feedback: any;
   rate: any;
+  current_user_feedback: any;
+  favourited: any;
+
   constructor(
     private store: Store<State, Action>,
     public navCtrl: NavController,
     public navParams: NavParams,
     public loadingCtrl: LoadingController,
     private toastCtrl: ToastController,
-    public microServices: MicroServices){
+    public microServices: MicroServices
+    ){
     	this.module = navParams.get('module');
-      this.rate=0;
+      this.favourited = navParams.get('favourited');
+      this.current_user_feedback = this.module.current_user_feedback ? this.module.current_user_feedback : null
+      if (this.current_user_feedback !== null) {
+        this.rate=this.current_user_feedback['rating'];
+        this.feedback=this.current_user_feedback['feedback']; 
+      } else {
+        this.rate=0;
+        this.feedback="";
+      }
+
+      this.store.stateGlobal.subscribe(pair => {
+        console.log("selectiin state module detail")
+        console.log(pair)
+        this.module = pair.state.current_module.module
+        this.favourited = pair.state.current_module.favourited
+        this.current_user_feedback = this.module.current_user_feedback ? this.module.current_user_feedback : null
+        if (this.current_user_feedback !== null) {
+          this.rate=this.current_user_feedback['rating'];
+          this.feedback=this.current_user_feedback['feedback']; 
+        } else {
+          this.rate=0;
+          this.feedback="";
+        }
+       })
+       console.log("leave comment favourite")
+       console.log(this.favourited)
   }
 
-
-/*
-    itemFeedback(){
-    this.authService.get_module_by_id(this.item._id).then((result) => {
-      // this.navCtrl.setRoot(HomePage);
-      this.data = result;
-    this.navCtrl.push(feedbackPage,{
-      item: this.data.module,
-    });
-      }, (err) => {
-        console.log("failed to add to favourite");
-      });
-    }
-*/
-
   leaveComment(){
-    this.store.sendAction({type: 'SET_USER', user: {username:  this.feedback}});
-    this.microServices.feedback(this.module._id, {rating: this.rate, feedback:this.feedback}).then((result)=>{
-        console.log(result)
+    this.microServices.feedback(this.module, this.favourited, this.module.current_user_feedback, {rating: this.rate, feedback:this.feedback}).then((result)=>{
         this.navCtrl.push(feedbackPage, {item: this.module});
       },(err)=>{
         this.presentToast(err.json()['message']);
-        console.log(err)
       });
   }
 
@@ -70,10 +81,6 @@ export class leaveCommentPage {
       duration: 3000,
       position: 'bottom',
       dismissOnPageChange: true
-    });
-
-    toast.onDidDismiss(() => {
-      console.log('Dismissed toast');
     });
 
     toast.present();

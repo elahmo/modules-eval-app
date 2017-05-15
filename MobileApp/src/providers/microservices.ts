@@ -76,6 +76,26 @@ export class MicroServices {
     });
   }
 
+  fetch_feedback(module, favourited){
+    return new Promise((resolve, reject) => {
+        let headers = new Headers();
+        headers.append('Authorization', localStorage.getItem('token'));
+
+        this.http.get(apiUrl+'modules/' + module['_id'],{headers: headers})
+          .subscribe(res => {
+             const data = res.json()
+             this.store.sendAction({type: 'PUT_CURRENT_MODULE', module: data.module});
+             //if favourtied, save the fetched feedback
+             if (favourited) {
+               this.store.sendAction({type: 'APPEND_MODULE', module: data.module});
+             }
+            resolve(res.json());
+          }, (err) => {
+            reject(err);
+          });
+    });
+  }
+
   get_module_by_id(moduleId){
     return new Promise((resolve, reject) => {
         let headers = new Headers();
@@ -103,6 +123,7 @@ export class MicroServices {
           });
     });
   }
+
   selectItem(module){
     this.store.sendAction({type: 'PUT_CURRENT_MODULE', module: module});
     return;
@@ -140,22 +161,17 @@ export class MicroServices {
     });
   }
 
-  feedback(moduleId, data){
-    console.log("coming into feedback!");
-    console.log(localStorage.getItem('token'));
+  feedback(module, favourited, current_user_feedback, data){
     return new Promise((resolve, reject) => {
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
         headers.append('Authorization', localStorage.getItem('token'));
-         console.log(data);
-         console.log(moduleId);
-        this.http.put(apiUrl+'feedback/' + moduleId, JSON.stringify(data), {headers: headers})
+
+        this.http.put(apiUrl+'feedback/' + module['_id'], JSON.stringify(data), {headers: headers})
           .subscribe(res => {
+             this.store.sendAction({type: 'APPEND_FEEDBACK', module: module, favourited: favourited, current_user_feedback: current_user_feedback, feedback: data});
             resolve(res.json());
-            console.log(res.json());
-            console.log("module feedback added successfully");
           }, (err) => {
-            console.log("failed to add feedback module");
             reject(err);
           });
     });
