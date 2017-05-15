@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Inject} from '@angular/core';
 
 import { IonicApp, IonicModule } from 'ionic-angular';
 import { IonicStorageModule } from '@ionic/storage';
@@ -12,8 +12,8 @@ import { LoginPage } from '../pages/login/login';
 import { MapPage } from '../pages/map/map';
 import { SchedulePage } from '../pages/schedule/schedule';
 import { HomePage } from '../pages/home/home';
-import {RatingComponent} from '../pages/leaveComment/rating';
-import {updateRating} from '../pages/leaveComment/updateRating';
+import { RatingComponent } from '../pages/leaveComment/rating';
+import { updateRating } from '../pages/leaveComment/updateRating';
 import { feedbackPage } from '../pages/feedback/feedback';
 import { leaveCommentPage} from '../pages/leaveComment/leaveComment';
 import { ScheduleFilterPage } from '../pages/schedule-filter/schedule-filter';
@@ -34,7 +34,9 @@ import { UserData } from '../providers/user-data';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import { AuthService } from '../providers/auth-service';
+import { MicroServices } from '../providers/microservices';
+import {Store} from "../providers/store";
+import {reducer, initState} from "../providers/model";
 
 @NgModule({
   declarations: [
@@ -97,7 +99,8 @@ import { AuthService } from '../providers/auth-service';
     UserData,
     InAppBrowser,
     SplashScreen,
-    AuthService
+    MicroServices,
+    {provide: Store, useFactory: () => new Store(reducer(), initState)}
   ]
 })
-export class AppModule { }
+export class AppModule {}

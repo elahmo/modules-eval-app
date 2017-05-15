@@ -2,11 +2,14 @@ import { Component } from '@angular/core';
 // import { NavController, NavParams } from 'ionic-angular';
 
 import { NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
-import { AuthService } from '../../providers/auth-service';
 import { TabsPage } from '../tabs/tabs';
 import { HomePage } from '../home/home';
 import { feedbackPage } from '../feedback/feedback';
 import {updateRating} from 'updateRating';
+import { MicroServices } from '../../providers/microservices';
+import {User, State, Action} from "../../providers//model";
+import {Store} from "../../providers/store";
+
 /*
   Generated class for the ModuleDetail page.
 
@@ -21,7 +24,13 @@ export class leaveCommentPage {
   module: any;
   feedback: any;
   rate: any;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public authService: AuthService, public loadingCtrl: LoadingController, private toastCtrl: ToastController){
+  constructor(
+    private store: Store<State, Action>,
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public loadingCtrl: LoadingController,
+    private toastCtrl: ToastController,
+    public microServices: MicroServices){
     	this.module = navParams.get('module');
       this.rate=0;
   }
@@ -42,7 +51,8 @@ export class leaveCommentPage {
 */
 
   leaveComment(){
-    this.authService.feedback(this.module._id, {rating: this.rate, feedback:this.feedback}).then((result)=>{
+    this.store.sendAction({type: 'SET_USER', user: {username:  this.feedback}});
+    this.microServices.feedback(this.module._id, {rating: this.rate, feedback:this.feedback}).then((result)=>{
         console.log(result)
         this.navCtrl.push(feedbackPage, {item: this.module});
       },(err)=>{

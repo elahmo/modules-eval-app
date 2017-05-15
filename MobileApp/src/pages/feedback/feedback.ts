@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 // import { NavController, NavParams } from 'ionic-angular';
 
 import { NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
-import { AuthService } from '../../providers/auth-service';
+import { MicroServices } from '../../providers/microservices';
 import { TabsPage } from '../tabs/tabs';
 import { HomePage } from '../home/home';
 import { leaveCommentPage } from '../leaveComment/leaveComment';
@@ -23,13 +23,19 @@ export class feedbackPage {
   user:any;
   module: any;
   loading: any;
+  test_string: any;
   
-  constructor(public navCtrl: NavController, public navParams: NavParams, public authService: 
-    AuthService, public loadingCtrl: LoadingController, private toastCtrl: ToastController){
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public microServices: MicroServices,
+    public loadingCtrl: LoadingController,
+    private toastCtrl: ToastController,
+    ){
     this.showLoader('Loading Feedback..');
-    this.module = null;
+    this.module = navParams.get('item');
     this.feedbacks = null;
-    this.authService.get_module_by_id( navParams.get('item_id')).then((result) => {
+    this.microServices.get_module_by_id(navParams.get('item')['_id']).then((result) => {
       this.module = result['module'];
       this.feedbacks = this.module.FEEDBACKS;
       this.loading.dismiss();
@@ -40,7 +46,6 @@ export class feedbackPage {
       this.presentToast(err.json()['message']);
       console.log("failed to fetch module");
       });
-
     }
 
   leaveComment(){

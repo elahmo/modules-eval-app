@@ -4,7 +4,7 @@ import { NgForm } from '@angular/forms';
 // import { NavController } from 'ionic-angular';
 // import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
-import { AuthService } from '../../providers/auth-service';
+import { MicroServices } from '../../providers/microservices';
 import { TabsPage } from '../tabs/tabs';
 // import { UserData } from '../../providers/user-data';
 import { HomePage } from '../home/home'
@@ -24,7 +24,7 @@ export class SignupPage {
   regData = { 'username':'', 'password':'' };
   data: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public userData: UserData, public authService: AuthService, public loadingCtrl: LoadingController, private toastCtrl: ToastController) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams, public userData: UserData, public microServices: MicroServices, public loadingCtrl: LoadingController, private toastCtrl: ToastController) {}
 
   // onSignup(form: NgForm) {
   //   this.submitted = true;
@@ -38,17 +38,11 @@ export class SignupPage {
     doSignup() {
       console.log(this.regData);
     this.showLoader();
-    this.authService.register(this.regData).then((result) => {
+    this.microServices.register(this.regData).then((result) => {
       console.log("register success");
       this.loading.dismiss();
-      this.data = result;
-      console.log(this.data);
-      localStorage.setItem('token', this.data.token);
-      localStorage.setItem('user', JSON.stringify(this.data.user));
       this.userData.signup(this.regData.username);
-      // this.userData.login(this.regData.username);
       this.navCtrl.setRoot(TabsPage);
-      // this.navCtrl.pop();
     }, (err) => {
       this.loading.dismiss();
       this.presentToast(err.json()['message']);
@@ -58,7 +52,7 @@ export class SignupPage {
 
     showLoader(){
     this.loading = this.loadingCtrl.create({
-        content: 'Authenticating...'
+        content: 'Signing Up...'
     });
 
     this.loading.present();
@@ -70,10 +64,6 @@ export class SignupPage {
       duration: 3000,
       position: 'bottom',
       dismissOnPageChange: true
-    });
-
-    toast.onDidDismiss(() => {
-      console.log('Dismissed toast');
     });
 
     toast.present();

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 // import { NavController, NavParams } from 'ionic-angular';
 
 import { NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
-import { AuthService } from '../../providers/auth-service';
+import { MicroServices } from '../../providers/microservices';
 import { TabsPage } from '../tabs/tabs';
 import { HomePage } from '../home/home';
 
@@ -22,7 +22,7 @@ export class ModuleNotesPage {
   item: any;
   favourited: boolean;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public authService: AuthService, public loadingCtrl: LoadingController, private toastCtrl: ToastController){
+  constructor(public navCtrl: NavController, public navParams: NavParams, public microServices: MicroServices, public loadingCtrl: LoadingController, private toastCtrl: ToastController){
     	this.item = navParams.get('item');
       console.log(this.item.COURSE_LECTURER);
       if(this.item.COURSE_LECTURER == undefined){
@@ -44,7 +44,7 @@ export class ModuleNotesPage {
   	// })
     console.log("Coming into itemNotes");
     console.log(this.item._id);
-    this.authService.favourite(this.item._id).then((result) => {
+    this.microServices.favourite(this.item._id).then((result) => {
       // this.loading.dismiss();
       // this.data = result;
       // console.log(this.data);
@@ -62,7 +62,7 @@ export class ModuleNotesPage {
 
     console.log("Coming into itemUnfavourite");
     console.log(this.item._id);
-    this.authService.unfavourite(this.item._id).then((result) => {
+    this.microServices.unfavourite(this.item._id).then((result) => {
       this.navCtrl.setRoot(HomePage);
       }, (err) => {
         console.log("failed to add to favourite");

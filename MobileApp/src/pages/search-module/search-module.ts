@@ -1,16 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { ConferenceData } from '../../providers/conference-data';
-import { AuthService } from '../../providers/auth-service';
+import { MicroServices } from '../../providers/microservices';
 import { ModuleDetailPage } from '../module-detail/module-detail';
 
-
-/*
-  Generated class for the SearchModule page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-search-module',
   templateUrl: 'search-module.html'
@@ -19,11 +12,10 @@ export class SearchModulePage {
   queryText = '';
   modules: any;
   result: any;
-  authServices = AuthService;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public confData: ConferenceData, public authService: AuthService) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams, public confData: ConferenceData, public microServices: MicroServices) {}
   searchModule() {
       // this.queryText = "";
-      this.authService.get_module_by_name(this.queryText).then((result) => {
+      this.microServices.get_module_by_name(this.queryText).then((result) => {
         this.result = [];
         this.modules = result;
         this.result = this.modules.modules;
@@ -36,7 +28,7 @@ export class SearchModulePage {
   }
 
  itemSelected(item, favd) {
-  	// alert(item.text);
+  	this.microServices.selectItem(item)
   	this.navCtrl.push(ModuleDetailPage,{
   		item: item,
       favourited: favd
