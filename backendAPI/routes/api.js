@@ -277,6 +277,7 @@ router.put('/notes/:module_id', requiresAuth, (req, res, next) => {
 		Module.findById(req.params.module_id)
 		.exec((err, module) => {
 			if (err) return next(err)
+			module['NOTES'] = req.body.notes
 			module.save((err) => {
 				if (err) return next(err)
 				res.status(200).json({success: true, message: 'Successfully changed the notes of the module.' });
