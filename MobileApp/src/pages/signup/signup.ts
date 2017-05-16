@@ -39,7 +39,6 @@ export class SignupPage {
       console.log(this.regData);
     this.showLoader();
     this.microServices.register(this.regData).then((result) => {
-      console.log("register success");
       this.loading.dismiss();
       this.userData.signup(this.regData.username);
       this.navCtrl.setRoot(TabsPage);

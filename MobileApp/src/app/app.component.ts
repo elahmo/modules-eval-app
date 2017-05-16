@@ -76,6 +76,9 @@ export class ConferenceApp {
   ) {
     console.log("coming into constructor of app.component");
     // Check if the user has already seen the tutorial
+    this.rootPage = LoginPage
+    this.enableMenu(false);
+    /*
     this.storage.get('hasSeenTutorial')
       .then((hasSeenTutorial) => {
         if (hasSeenTutorial) {
@@ -85,7 +88,7 @@ export class ConferenceApp {
         }
         this.platformReady()
       })
-
+      */
     // load the conference data
     confData.load();
 

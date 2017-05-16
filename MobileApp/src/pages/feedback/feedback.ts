@@ -33,19 +33,17 @@ export class feedbackPage {
     public loadingCtrl: LoadingController,
     private toastCtrl: ToastController,
     ){
-    this.module = navParams.get('item');
-    this.feedbacks = null;
-    this.favourited = navParams.get('favourited')
-    console.log("feedback favourite")
-    console.log(this.favourited)
+    //get init values
+    this.module = store.state.current_module.module;
+    this.feedbacks = null
+    this.favourited = store.state.current_module.favourited
+
+    //subscribe to changes
     this.store.stateGlobal.subscribe(pair => {
-        console.log("selectiin state module detail")
-        console.log(pair)
         this.module = pair.state.current_module.module
         this.favourited = pair.state.current_module.favourited
         this.feedbacks = pair.state.current_module.module['FEEDBACKS']
       })
-    console.log("this.module.FEEDBACKS[0]")
 
     //if true, feedbacks exist, if false, feedbacks dont exist
     if(this.module.FEEDBACKS[0] !== undefined ){
@@ -62,7 +60,7 @@ export class feedbackPage {
     if (this.need_refetch) {
       console.log("Fetching feedback");
       this.showLoader('Loading Feedback..');
-      this.microServices.fetch_feedback(navParams.get('item'), navParams.get('favourited')).then((result) => {
+      this.microServices.fetch_feedback(this.module, this.favourited).then((result) => {
         this.loading.dismiss();
         }, (err) => {
         this.feedbacks = null;
@@ -76,9 +74,8 @@ export class feedbackPage {
    }
 
   leaveComment(){
-    this.navCtrl.push(leaveCommentPage,{module: this.module, favourited: this.favourited});
+    this.navCtrl.push(leaveCommentPage);
   }
-
 
 
   showLoader(text){

@@ -36,6 +36,15 @@ export class HomePage {
       this.enableMenu(hasLoggedIn === true);
     }); 
 
+    //set init values
+     this.user = store.state.user
+     this.items = store.state.modules
+     if(store.state.modules.length > 0){
+        this.favoriteText = "Favourite Modules";
+     }else{
+        this.favoriteText = "No favourite modules found...";
+     }
+    //subscribe to changes
      this.store.stateGlobal.subscribe(pair => {
        this.user = pair.state.user
        this.items = pair.state.modules

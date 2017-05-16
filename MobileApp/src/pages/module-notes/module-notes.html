@@ -15,13 +15,15 @@
 
 <ion-content>
     <ion-card>
-        <!--<img src="{{item.data.thumbnail}}" />-->
-        <ion-card-content>
+         <ion-card-content>
             <ion-card-title>
                 Notes: {{item.COURSE_LONG_TITLE}}
             </ion-card-title>
                     <ion-note item-right>
-                        {{item.NOTES}}
+                          <form (ngSubmit)="updateNotes()">
+                                <ion-textarea [(ngModel)]="notes" rows="22"  placeholder="Please enter the notes here!" name = "comment" type="text"></ion-textarea>
+                              <button ion-button type="submit" block>Update</button>
+                          </form>
                     </ion-note>                    
         </ion-card-content>
 
@@ -29,3 +31,4 @@
     </ion-card>
 
 </ion-content>
+

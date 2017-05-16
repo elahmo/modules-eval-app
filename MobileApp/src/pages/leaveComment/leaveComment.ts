@@ -35,8 +35,9 @@ export class leaveCommentPage {
     private toastCtrl: ToastController,
     public microServices: MicroServices
     ){
-    	this.module = navParams.get('module');
-      this.favourited = navParams.get('favourited');
+    //set init values
+    	this.module = store.state.current_module.module
+      this.favourited = store.state.current_module.favourited
       this.current_user_feedback = this.module.current_user_feedback ? this.module.current_user_feedback : null
       if (this.current_user_feedback !== null) {
         this.rate=this.current_user_feedback['rating'];
@@ -45,7 +46,7 @@ export class leaveCommentPage {
         this.rate=0;
         this.feedback="";
       }
-
+      //subscribe to changes
       this.store.stateGlobal.subscribe(pair => {
         console.log("selectiin state module detail")
         console.log(pair)
@@ -66,7 +67,8 @@ export class leaveCommentPage {
 
   leaveComment(){
     this.microServices.feedback(this.module, this.favourited, this.module.current_user_feedback, {rating: this.rate, feedback:this.feedback}).then((result)=>{
-        this.navCtrl.push(feedbackPage, {item: this.module});
+        //this.navCtrl.push(feedbackPage, {item: this.module});
+        this.navCtrl.pop()
       },(err)=>{
         this.presentToast(err.json()['message']);
       });

@@ -35,10 +35,11 @@ export class SearchModulePage {
 
  itemSelected(item, favd) {
   	this.microServices.selectItem(item)
-  	this.navCtrl.push(ModuleDetailPage,{
-  		item: item,
-      favourited: favd
-  	});
+  	this.navCtrl.push(ModuleDetailPage, {
+      item: item}).then(() => {
+      const index = this.navCtrl.getActive().index;
+      this.navCtrl.remove(index-1);
+    });
   }
 
     showLoader(){

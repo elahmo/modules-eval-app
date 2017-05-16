@@ -26,7 +26,9 @@ export class MicroServices {
             const data = res.json()
             this.store.sendAction({type: 'SET_USER', user: data.user});
             this.store.sendAction({type: 'SET_MODULES', modules: data.user.modules});
+            //just for the sake of asynchrounous consistency save them there
             localStorage.setItem('token', data.token);
+            localStorage.setItem('user', data.user);
             resolve(data);
           }, (err) => {
             //when unsuccessful, dont save anything
@@ -80,7 +82,8 @@ export class MicroServices {
     return new Promise((resolve, reject) => {
         let headers = new Headers();
         headers.append('Authorization', localStorage.getItem('token'));
-
+        console.log(module)
+        console.log(favourited)
         this.http.get(apiUrl+'modules/' + module['_id'],{headers: headers})
           .subscribe(res => {
              const data = res.json()
@@ -177,21 +180,22 @@ export class MicroServices {
     });
   }
 
-  notes(moduleId, data){
-    console.log("coming into notes!");
-    console.log(localStorage.getItem('token'));
+  notes(module, favourited, notes){
     return new Promise((resolve, reject) => {
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
         headers.append('Authorization', localStorage.getItem('token'));
 
-        this.http.put(apiUrl+'notes/' + moduleId, JSON.stringify(data), {headers: headers})
+        this.http.put(apiUrl+'notes/' + module['_id'], JSON.stringify({"notes":notes}), {headers: headers})
           .subscribe(res => {
+              const appendedModule = {...module, NOTES:notes}
+              this.store.sendAction({type: 'PUT_CURRENT_MODULE', module: appendedModule});
+             //if favourtied, save the fetched feedback
+             if (favourited) {
+               this.store.sendAction({type: 'APPEND_MODULE', module: appendedModule});
+             }
             resolve(res.json());
-            console.log(res.json());
-            console.log("module notes added successfully");
           }, (err) => {
-            console.log("failed to add module notes");
             reject(err);
           });
     });
