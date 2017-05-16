@@ -1,8 +1,11 @@
 import { Component, ViewChild } from '@angular/core';
-import { MenuController, NavController, Slides } from 'ionic-angular';
+import { MenuController, NavController, Slides, ViewController} from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { TabsPage } from '../tabs/tabs';
-import { LoginPage } from '../login/login';
+import { HomePage } from '../home/home';
+
+import {State, Action} from "../../providers//model";
+import {Store} from "../../providers/store";
 
 @Component({
   selector: 'page-tutorial',
@@ -15,32 +18,40 @@ export class TutorialPage {
 	@ViewChild('slides') slides: Slides;
 
   constructor(
+    private store: Store<State, Action>,
+    public viewCtrl: ViewController,
     public navCtrl: NavController,
     public menu: MenuController,
     public storage: Storage
   ) { }
 
-  startApp() {
-    this.navCtrl.setRoot(LoginPage).then(() => {
-      this.storage.set('hasSeenTutorial', 'false');
-    })
+  startApp(seen) {
+    //harrdcode to seen to every time user skips, so that it does not pop up
+    this.store.sendAction({type: 'SET_TUTORIAL', seen: true});
+    //this.store.sendAction({type: 'SET_TUTORIAL', seen: seen});
+    this.navCtrl.pop()
   }
 
   onSlideChangeStart(slider: Slides) {
     this.showSkip = !slider.isEnd();
   }
 
+/*
 	ionViewWillEnter() {
-		this.slides.update();
-	}
 
-  ionViewDidEnter() {
+	}
+*/
+
+  ionViewWillEnter() {
     // the root left menu should be disabled on the tutorial page
+    this.viewCtrl.showBackButton(false);
     this.menu.enable(false);
+    this.slides.update();
   }
 
-  ionViewDidLeave() {
+  ionViewWillLeave() {
     // enable the root left menu when leaving the tutorial page
+    this.viewCtrl.showBackButton(true);
     this.menu.enable(true);
   }
 

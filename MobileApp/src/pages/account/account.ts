@@ -6,6 +6,8 @@ import { LoginPage } from '../login/login';
 import { SupportPage } from '../support/support';
 import { UserData } from '../../providers/user-data';
 
+import {State, Action} from "../../providers//model";
+import {Store} from "../../providers/store";
 
 @Component({
   selector: 'page-account',
@@ -14,9 +16,12 @@ import { UserData } from '../../providers/user-data';
 export class AccountPage {
   username: string;
 
-  constructor(public alertCtrl: AlertController, public nav: NavController, public userData: UserData) {
-
-  }
+  constructor(
+    private store: Store<State, Action>,
+    public alertCtrl: AlertController,
+    public nav: NavController,
+    public userData: UserData
+    ) {}
 
   ngAfterViewInit() {
     this.getUsername();
@@ -53,9 +58,12 @@ export class AccountPage {
   }
 
   getUsername() {
+    this.username = this.store.state.user['username']
+    /*
     this.userData.getUsername().then((username) => {
       this.username = username;
     });
+    */
   }
 
   changePassword() {

@@ -8,9 +8,10 @@ export type User  = Object;
 export type Module = Object;
 export type Feedback = Object;
 export type CurrentModule = { module: Module, favourited: boolean};
-export type State = { user: User, modules: Array<Module>, current_module:CurrentModule};
+export type State = { user: User, seen_tutorial:boolean, modules: Array<Module>, current_module:CurrentModule};
 
 export type setUserAction      = { type: 'SET_USER',      user:   User };
+export type setTutorialAction  = { type: 'SET_TUTORIAL',      seen: boolean };
 export type setModuleAction    = { type: 'SET_MODULES',   modules: Array<Module> };
 export type appendModuleAction = { type: 'APPEND_MODULE',    module: Module };
 export type addModuleAction    = { type: 'ADD_MODULE',    module: Module };
@@ -18,16 +19,21 @@ export type removeModuleAction = { type: 'REMOVE_MODULE', module: Module };
 export type putCurrentModule   = { type: 'PUT_CURRENT_MODULE', module: Module };
 export type appendFeedback     = { type: 'APPEND_FEEDBACK', module: Module, favourited:boolean, current_user_feedback:Object, feedback: Feedback, };
 
-export type Action = setUserAction | setModuleAction | appendModuleAction | addModuleAction | removeModuleAction | putCurrentModule | appendFeedback;
+export type Action = setUserAction | setTutorialAction | setModuleAction | appendModuleAction | addModuleAction | removeModuleAction | putCurrentModule | appendFeedback;
 
-export const initState: State = {user:{username:"test_user"}, modules:[], current_module:{module:{}, favourited:false}};
+export const initState: State = {user:{username:"test_user"}, seen_tutorial: false, modules:[], current_module:{module:{}, favourited:false}};
 
 export function reducer(): Reducer<State, Action> {
   return (store: Store<State, Action>, state: State, action: Action): State|Observable<State> => {
     switch (action.type) {
       case 'SET_USER':
         const newUser = action.user;
-        return {...state, user:newUser}; 
+        const seen_tut = false;
+        return {...state, user:newUser, seen_tutorial: seen_tut}; 
+
+      case 'SET_TUTORIAL':
+        const seen_tutorial = action.seen;
+        return {...state, seen_tutorial:seen_tutorial}; 
 
       case 'SET_MODULES':
         const newModules = action.modules;

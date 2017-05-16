@@ -25,6 +25,9 @@ import { SearchModulePage } from '../pages/search-module/search-module';
 import { ConferenceData } from '../providers/conference-data';
 import { UserData } from '../providers/user-data';
 
+import {State, Action} from "../providers//model";
+import {Store} from "../providers/store";
+
 export interface PageInterface {
   title: string;
   component: any;
@@ -66,6 +69,7 @@ export class ConferenceApp {
   rootPage: any;
 
   constructor(
+    private store: Store<State, Action>,
     public events: Events,
     public userData: UserData,
     public menu: MenuController,
@@ -77,7 +81,7 @@ export class ConferenceApp {
     console.log("coming into constructor of app.component");
     // Check if the user has already seen the tutorial
     this.rootPage = LoginPage
-    this.enableMenu(false);
+
     /*
     this.storage.get('hasSeenTutorial')
       .then((hasSeenTutorial) => {
@@ -89,6 +93,8 @@ export class ConferenceApp {
         this.platformReady()
       })
       */
+
+      /*
     // load the conference data
     confData.load();
 
@@ -99,8 +105,9 @@ export class ConferenceApp {
     });
 
     this.listenToLoginEvents();
+    */
   }
-
+    
   openPage(page: PageInterface) {
     // the nav component was found using @ViewChild(Nav)
     // reset the nav to remove previous pages and only have this page
@@ -117,34 +124,12 @@ export class ConferenceApp {
 
     if (page.logsOut === true) {
       // Give the menu time to close before changing to logged out
-      setTimeout(() => {
-        this.userData.logout();
-      }, 1000);
+      this.userData.logout();
     }
   }
 
   openTutorial() {
-    this.nav.setRoot(TutorialPage);
-  }
-
-  listenToLoginEvents() {
-    this.events.subscribe('user:login', () => {
-      this.enableMenu(true);
-    });
-
-    this.events.subscribe('user:signup', () => {
-      this.enableMenu(true);
-    });
-
-    this.events.subscribe('user:logout', () => {
-      this.enableMenu(false);
-    });
-  }
-
-  enableMenu(loggedIn: boolean) {
-    console.log('loggedIn is:' + loggedIn);
-    this.menu.enable(loggedIn, 'loggedInMenu');
-    // this.menu.enable(!loggedIn, 'loggedOutMenu');
+    this.nav.push(TutorialPage);
   }
 
   platformReady() {
@@ -170,4 +155,5 @@ export class ConferenceApp {
     }
     return;
   }
+
 }
