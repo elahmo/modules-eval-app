@@ -2,6 +2,7 @@ import { NgModule, Inject} from '@angular/core';
 
 import { IonicApp, IonicModule } from 'ionic-angular';
 import { IonicStorageModule } from '@ionic/storage';
+import { Keyboard } from '@ionic-native/keyboard';
 
 import { ConferenceApp } from './app.component';
 
@@ -110,6 +111,7 @@ import {Focuser} from "../providers/focuser";
     InAppBrowser,
     SplashScreen,
     MicroServices,
+    Keyboard,
     {provide: Store, useFactory: startFactory}
   ],
 })
