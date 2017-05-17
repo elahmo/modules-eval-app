@@ -1,22 +1,23 @@
 <ion-header>
 
     <!--4 header parts, 1. menu button, 2. All tab, 3. Favorites tab, 4. Setting button-->
-    <ion-navbar no-border-bottom>
+    <ion-navbar no-border-bottom color="primary">
 
+        <ion-title>Schedule</ion-title>
         <!--the menu button on the upper left corner-->
         <button ion-button menuToggle>
             <ion-icon name="menu"></ion-icon>
         </button>
 
         <!--selecting between all and favorites-->
-        <ion-segment [(ngModel)]="segment" (ionChange)="updateSchedule()">
+        <!--<ion-segment [(ngModel)]="segment" (ionChange)="updateSchedule()">
             <ion-segment-button value="all">
                 All
             </ion-segment-button>
             <ion-segment-button value="favorites">
                 Favorites
             </ion-segment-button>
-        </ion-segment>
+        </ion-segment>-->
 
         <!--the Setting button on the upper right corner-->
         <ion-buttons end>
@@ -81,7 +82,7 @@
     <ion-list-header [hidden]="shownSessions > 0">
         No Sessions Found
     </ion-list-header>
-    
+
     <!--the Search Box
     <ion-fab bottom right #fab>
         <button ion-fab><ion-icon name="share"></ion-icon></button>
