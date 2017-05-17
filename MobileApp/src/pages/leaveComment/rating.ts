@@ -11,22 +11,6 @@ import {Icon} from 'ionic-angular/components/icon/icon';
 			</li>
 		</ul>
 	`,
-	styles: [`
-		ul {
-			display: inline-block;
-			list-style: none;
-			padding: 0;
-			margin: 0;
-		}
-		li {
-			display: inline-block;
-			color: #ffa500;
-			font-size:2em;
-		}
-		li + li {
-			margin-left: .1em;
-		}
-	`],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RatingComponent {

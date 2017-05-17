@@ -5,7 +5,7 @@ import { NavController, NavParams, LoadingController, ToastController } from 'io
 import { TabsPage } from '../tabs/tabs';
 import { HomePage } from '../home/home';
 import { leaveCommentPage } from '../leaveComment/leaveComment';
-
+import {RatingComponent} from '../leaveComment/rating';
 import { MicroServices } from '../../providers/microservices';
 import {State, Action} from "../../providers//model";
 import {Store} from "../../providers/store";
