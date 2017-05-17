@@ -13,6 +13,7 @@ import {Store} from "../../providers/store";
 })
 
 export class TutorialPage {
+  tabBar:any;
   showSkip = true;
 
 	@ViewChild('slides') slides: Slides;
@@ -22,8 +23,10 @@ export class TutorialPage {
     public viewCtrl: ViewController,
     public navCtrl: NavController,
     public menu: MenuController,
-    public storage: Storage
-  ) { }
+    public storage: Storage,
+  ) {
+    this.tabBar = document.querySelector('.tabbar');
+   }
 
   startApp(seen) {
     //harrdcode to seen to every time user skips, so that it does not pop up
@@ -47,12 +50,15 @@ export class TutorialPage {
     this.viewCtrl.showBackButton(false);
     this.menu.enable(false);
     this.slides.update();
+    this.tabBar.style.display = 'none';
   }
 
   ionViewWillLeave() {
     // enable the root left menu when leaving the tutorial page
     this.viewCtrl.showBackButton(true);
     this.menu.enable(true);
+    this.tabBar.style.display = '';
   }
 
 }
+
