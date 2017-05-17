@@ -1,34 +1,36 @@
 <ion-header>
 
-	<ion-navbar>
-		<button ion-button menuToggle>
+    <ion-navbar>
+        <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-		<ion-title>Support</ion-title>
-	</ion-navbar>
+        <ion-title>Support</ion-title>
+    </ion-navbar>
 
 </ion-header>
 
 
 <ion-content>
-	<div class="logo">
-		<img src="assets/img/appicon.svg" alt="Ionic Logo">
-	</div>
+    <div class="logo">
+        <img src="assets/img/atomicmoduleslogo.svg" alt="Ionic Logo">
+    </div>
 
-	<form #submitForm="ngForm" novalidate (ngSubmit)="submit(submitForm)">
-		<ion-list no-lines>
-			<ion-item>
-				<ion-label stacked color="primary">Enter your support message below</ion-label>
-				<ion-textarea [(ngModel)]="supportMessage" name="supportQuestion" #supportQuestion="ngModel" rows="6" required></ion-textarea>
-			</ion-item>
-		</ion-list>
+    <form #submitForm="ngForm" novalidate (ngSubmit)="submit(submitForm)">
+        <ion-list no-lines>
+            <ion-item>
+                <ion-label stacked color="primary">Enter your support message below</ion-label>
+                <ion-textarea [(ngModel)]="supportMessage" name="supportQuestion" #supportQuestion="ngModel" rows="6" required></ion-textarea>
+            </ion-item>
+        </ion-list>
 
-		<p ion-text [hidden]="supportQuestion.valid || submitted === false" color="danger" padding-left>
-			Support message is required
-		</p>
+        <p ion-text [hidden]="supportQuestion.valid || submitted === false" color="danger" padding-left>
+            Support message is required
+        </p>
 
-		<div padding>
-			<button ion-button block type="submit">Submit</button>
-		</div>
-	</form>
+        <div padding>
+            <button ion-button block type="submit">Submit</button>
+        </div>
+    </form>
+    <h6 text-center>Work in progress.</h6>
+
 </ion-content>
