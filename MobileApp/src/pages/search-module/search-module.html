@@ -11,7 +11,7 @@
 
     <ion-navbar>
         <ion-toolbar>
-            <ion-searchbar color="primary" [(ngModel)]="queryText" (ionInput)="searchModule()" placeholder="Search">
+            <ion-searchbar color="primary" [type]="search" [(ngModel)]="queryText" (ionInput)="searchModule()" placeholder="Search">
             </ion-searchbar>
         </ion-toolbar>
     </ion-navbar>
@@ -20,6 +20,7 @@
 
 
 <ion-content padding>
+    <h4>{{searchText}}</h4>
     <ion-list>
         <button ion-item *ngFor="let item of result" (click)="itemSelected(item, false)">
             {{item.COURSE_LONG_TITLE}}

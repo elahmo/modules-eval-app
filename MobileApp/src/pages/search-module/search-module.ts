@@ -13,6 +13,9 @@ export class SearchModulePage {
   queryText = '';
   modules: any;
   result: any;
+  searchText: any;
+  items: any;
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -20,17 +23,32 @@ export class SearchModulePage {
     public microServices: MicroServices,
     public loadingCtrl: LoadingController,
     private toastCtrl: ToastController
-    ) {}
+    ) {
+      this.searchText = "Search for a module...";
+    }
+
   searchModule() {
-      // this.queryText = "";
-      this.microServices.get_module_by_name(this.queryText).then((result) => {
+      if(this.queryText != ""){
+        this.microServices.get_module_by_name(this.queryText).then((result) => {
+        this.showLoader();
+        this.loading.dismiss();
         this.result = [];
         this.modules = result;
         this.result = this.modules.modules;
 
+        if(this.result.length == 0){
+          this.loading.dismiss();
+          this.searchText = "No modules found";
+        }else{
+          this.loading.dismiss();
+          this.searchText = "";
+        }
+
       },(err) => {
+        this.loading.dismiss();
         this.presentToast(err.json()['message']);
-      });  
+      });
+      }
   }
 
  itemSelected(item, favd) {
@@ -44,7 +62,7 @@ export class SearchModulePage {
 
     showLoader(){
     this.loading = this.loadingCtrl.create({
-        content: 'Signing Up...'
+        content: 'Searching...'
     });
 
     this.loading.present();
