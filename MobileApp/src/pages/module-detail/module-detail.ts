@@ -6,6 +6,7 @@ import { HomePage } from '../home/home';
 import { feedbackPage } from '../feedback/feedback';
 import { ModuleNotesPage } from '../module-notes/module-notes';
 import {RatingComponent} from '../leaveComment/rating';
+import { ModuleRecommedationPage } from '../module-recommedation/module-recommedation';
 
 import { MicroServices } from '../../providers/microservices';
 import {State, Action} from "../../providers//model";
@@ -71,6 +72,12 @@ export class ModuleDetailPage {
     	this.navCtrl.push(ModuleNotesPage,{
     		item: this.item,
     	});
+    }
+
+    moduleRecommendation(){
+      this.navCtrl.push(ModuleRecommedationPage,{
+        item: this.item.RECOMMENDATIONS,
+      });
     }
 
     presentToast(msg) {

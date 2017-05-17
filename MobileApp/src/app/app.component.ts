@@ -20,7 +20,7 @@ import { SchedulePage } from '../pages/schedule/schedule';
 import { SpeakerListPage } from '../pages/speaker-list/speaker-list';
 import { SupportPage } from '../pages/support/support';
 import { SearchModulePage } from '../pages/search-module/search-module';
-
+import { ModuleRecommendationPage } from '../pages/module-recommendation/module-recommendation';
 
 import { ConferenceData } from '../providers/conference-data';
 import { UserData } from '../providers/user-data';

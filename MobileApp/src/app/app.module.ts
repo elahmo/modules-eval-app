@@ -27,6 +27,7 @@ import { SupportPage } from '../pages/support/support';
 import { SearchModulePage } from '../pages/search-module/search-module';
 import { ModuleDetailPage } from '../pages/module-detail/module-detail';
 import { ModuleNotesPage } from '../pages/module-notes/module-notes';
+import { ModuleRecommedationPage } from '../pages/module-recommedation/module-recommedation';
 
 import { ConferenceData } from '../providers/conference-data';
 import { UserData } from '../providers/user-data';
@@ -62,7 +63,8 @@ import {reducer, initState} from "../providers/model";
     feedbackPage,
     SearchModulePage,
     ModuleDetailPage,
-    ModuleNotesPage
+    ModuleNotesPage,
+    ModuleRecommedationPage
   ],
   imports: [
     IonicModule.forRoot(ConferenceApp),
@@ -92,7 +94,8 @@ import {reducer, initState} from "../providers/model";
     feedbackPage,
     SearchModulePage,
     ModuleDetailPage,
-    ModuleNotesPage
+    ModuleNotesPage,
+    ModuleRecommedationPage
   ],
   providers: [
     ConferenceData,
