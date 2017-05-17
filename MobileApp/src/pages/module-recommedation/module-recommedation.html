@@ -38,7 +38,12 @@
         <!--<h3>{{ data._id.COURSE_LONG_TITLE }}</h3>-->
         <ion-item *ngFor="let item of data._id.RECOMMENDATIONS">
             <ion-thumbnail *ngIf="item._id.image" item-left>
-                <img src="{{item._id.image}}">
+                <!--<ion-spinner>
+                    <ion-img src="{{item._id.image}}"></ion-img>
+                </ion-spinner>-->
+                <img src="{{item._id.image || (loading)}}">
+                <!--<img image-lazy-src="{{item._id.image}}" image-lazy-loader="lines">-->
+                <!--<img-loader src="{{item._id.image}}" useImg></img-loader>-->
             </ion-thumbnail>
             <h3>{{ item._id.title }}</h3>
             <p>

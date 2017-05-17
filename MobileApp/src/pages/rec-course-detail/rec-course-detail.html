@@ -12,9 +12,11 @@
 
 </ion-header>
 
-<ion-content padding>
+<ion-content padding lazy-scroll>
     <ion-card>
-        <img src="{{item._id.image}}" />
+        <img src="{{item._id.image}}">
+        <!--<div image-lazy-src="{{item._id.image}}" image-lazy-background-image="true" image-lazy-loader="lines" image-lazy-distance-from-bottom-to-load="100"> </div>-->
+        <!--<div image-lazy-src="{{item._id.image}}" image-lazy-background-image="true" image-lazy-loader="lines" image-lazy-distance-from-bottom-to-load="100"></div>-->
         <ion-card-content>
             <ion-card-title>
                 {{item._id.title}}
