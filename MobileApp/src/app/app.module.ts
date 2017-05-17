@@ -3,6 +3,7 @@ import { NgModule, Inject} from '@angular/core';
 import { IonicApp, IonicModule } from 'ionic-angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { Keyboard } from '@ionic-native/keyboard';
+import { CKEditorModule } from 'ng2-ckeditor';
 
 import { ConferenceApp } from './app.component';
 
@@ -80,7 +81,8 @@ import { FroalaEditorModule, FroalaViewModule } from 'angular2-froala-wysiwyg';
     IonicModule.forRoot(ConferenceApp),
 	  IonicStorageModule.forRoot(),
     FroalaEditorModule.forRoot(), 
-    FroalaViewModule.forRoot()
+    FroalaViewModule.forRoot(),
+    CKEditorModule
     ],
   bootstrap: [IonicApp],
   entryComponents: [
