@@ -20,7 +20,8 @@ import { SchedulePage } from '../pages/schedule/schedule';
 import { SpeakerListPage } from '../pages/speaker-list/speaker-list';
 import { SupportPage } from '../pages/support/support';
 import { SearchModulePage } from '../pages/search-module/search-module';
-
+import { ModuleRecommendationPage } from '../pages/module-recommendation/module-recommendation';
+import { RecCourseDetailPage } from '../pages/rec-course-detail/rec-course-detail';
 
 import { ConferenceData } from '../providers/conference-data';
 import { UserData } from '../providers/user-data';
