@@ -24,7 +24,9 @@
                     {{feedback._id.username}}
                     <rating id="rating" item-right score="{{feedback.local_rating}}" max="5"></rating>
                 </ion-item>
-                <ion-item>{{feedback.feedback}}</ion-item>
+                <ion-item>
+                    <p>{{feedback.feedback}}</p>
+                </ion-item>
             </ion-card-content>
         </ion-card>
     </ion-list>
