@@ -27,67 +27,28 @@
 
 
 <ion-content padding>
-    <ion-list>
-        <!--
-        <button ion-item *ngFor="let item of data" (click)="itemSelected(item)">
+    <div class="row" *ngIf="items?.length < 1">
+        <img src="assets/img/searchicon.svg" alt="ionic logo" style="max-width: 100%" icon-only (click)="searchModule()">
+        <h4>{{recommendText}}
+        </h4>
+    </div>
+
+    <!--<ion-list class="row" *ngIf="items?.length > 0">-->
+    <ion-list *ngFor="let data of items">
+        <!--<h3>{{ data._id.COURSE_LONG_TITLE }}</h3>-->
+        <ion-item *ngFor="let item of data._id.RECOMMENDATIONS">
             <ion-thumbnail *ngIf="item._id.image" item-left>
                 <img src="{{item._id.image}}">
             </ion-thumbnail>
-            <h2>{{ item._id.title }}</h2>
-            <p>
-                <ion-item>
-                    <ion-icon name="thumbs-up" item-left>
-                                                {{item._id.source}}
-                    </ion-icon>
-
-                </ion-item>
-            </p>
-                    <a iion-button block target="_blank" href= "{{ item._id.url }}">
-            View On Course Page
-            </a>
-                </button>-->
-
-        <ion-item *ngFor="let item of data">
-            <ion-thumbnail *ngIf="item._id.image" item-left>
-                <img src="{{item._id.image}}">
-            </ion-thumbnail>
-            <h2>{{ item._id.title}}</h2>
+            <h3>{{ item._id.title }}</h3>
             <p>
                 <ion-icon name="thumbs-up">{{item._id.source}}</ion-icon>&nbsp;&nbsp;
-                <!--<ion-icon name="chatboxes">{{item.data.num_comments}}</ion-icon>-->
             </p>
             <button ion-button clear item-right (click)="viewItem(item)">View</button>
         </ion-item>
-
-
-        <!--<ion-card ion-item *ngFor="let item of data">
-            <img src="{{item._id.image}}" />
-            <ion-card-content>
-                <ion-card-title>
-                    {{ item._id.title }}
-                </ion-card-title>
-                <p>
-                    {{item._id.description}}
-                </p>
-            </ion-card-content>
-
-            <ion-row no-padding>
-                <ion-col>
-                    <button ion-button clear small color="danger" icon-left>
-          <ion-icon name='star'></ion-icon>
-          {{item._id.source}}
-        </button>
-                </ion-col>
-                <ion-col text-right>
-                    <button ion-button clear small color="danger" icon-left>
-          <ion-icon name='share-alt'></ion-icon>
-<a iion-button block target="_blank" href= "{{ item._id.url }}">
-            Course Page
-            </a>
-        </button>
-                </ion-col>
-            </ion-row>
-        </ion-card>-->
     </ion-list>
+    <!--</ion-list>-->
+
+
 
 </ion-content>

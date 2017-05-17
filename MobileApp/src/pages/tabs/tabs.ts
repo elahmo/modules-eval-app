@@ -7,6 +7,7 @@ import { HomePage } from '../home/home';
 import { MapPage } from '../map/map';
 import { SchedulePage } from '../schedule/schedule';
 import { SpeakerListPage } from '../speaker-list/speaker-list';
+import { ModuleRecommedationPage } from '../module-recommedation/module-recommedation';
 
 import { LoginPage } from '../login/login';
 
@@ -22,7 +23,7 @@ export class TabsPage {
   tab2Root: any = SchedulePage;
   tab3Root: any = SpeakerListPage;
   tab4Root: any = MapPage;
-  tab5Root: any = AboutPage;
+  tab5Root: any = ModuleRecommedationPage;
   mySelectedIndex: number;
 
   constructor(navParams: NavParams, public navCtrl: NavController) {
