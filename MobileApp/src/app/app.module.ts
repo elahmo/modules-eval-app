@@ -40,6 +40,9 @@ import { MicroServices } from '../providers/microservices';
 import {Store} from "../providers/store";
 import {reducer, initState} from "../providers/model";
 
+import "froala-editor/js/froala_editor.pkgd.min.js";
+import { FroalaEditorModule, FroalaViewModule } from 'angular2-froala-wysiwyg';
+
 @NgModule({
   declarations: [
     ConferenceApp,
@@ -70,7 +73,9 @@ import {reducer, initState} from "../providers/model";
   ],
   imports: [
     IonicModule.forRoot(ConferenceApp),
-	IonicStorageModule.forRoot()
+	  IonicStorageModule.forRoot(),
+    FroalaEditorModule.forRoot(), 
+    FroalaViewModule.forRoot()
     ],
   bootstrap: [IonicApp],
   entryComponents: [

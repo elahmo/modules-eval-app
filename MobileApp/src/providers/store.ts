@@ -32,4 +32,3 @@ export class Store<S, A> {
     return res;
   }
 }
-

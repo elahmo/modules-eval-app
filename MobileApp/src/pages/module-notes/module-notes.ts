@@ -43,6 +43,7 @@ export class ModuleNotesPage {
          this.notes = this.item.NOTES ? this.item.NOTES : " "
          this.favourited = pair.state.current_module.favourited
         })
+      
     }
 
   updateNotes(){
