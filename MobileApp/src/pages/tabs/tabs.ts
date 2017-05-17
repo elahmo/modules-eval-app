@@ -2,6 +2,10 @@ import { Component } from '@angular/core';
 
 import { NavParams, NavController } from 'ionic-angular';
 
+import { Platform } from 'ionic-angular';
+
+import { Keyboard } from '@ionic-native/keyboard';
+
 import { AboutPage } from '../about/about';
 import { HomePage } from '../home/home';
 import { MapPage } from '../map/map';
@@ -26,7 +30,7 @@ export class TabsPage {
   tab5Root: any = ModuleRecommedationPage;
   mySelectedIndex: number;
 
-  constructor(navParams: NavParams, public navCtrl: NavController) {
+  constructor(navParams: NavParams, public navCtrl: NavController, public keyboard: Keyboard, public platform: Platform) {
     this.mySelectedIndex = navParams.data.tabIndex || 0;
     console.log("coming into to Tab");
     console.log(localStorage.getItem("token"));
@@ -34,6 +38,17 @@ export class TabsPage {
         console.log("if statment in tab");
       navCtrl.setRoot(LoginPage);
     }
+
+    platform.ready().then(() => {
+            this.keyboard.onKeyboardShow().subscribe(() => {
+                document.body.classList.add('keyboard-is-open');
+            });
+
+            this.keyboard.onKeyboardHide().subscribe(() => {
+                document.body.classList.remove('keyboard-is-open');
+            });
+    });
+
   }
 
 

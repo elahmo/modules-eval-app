@@ -2,6 +2,7 @@ import { NgModule, Inject} from '@angular/core';
 
 import { IonicApp, IonicModule } from 'ionic-angular';
 import { IonicStorageModule } from '@ionic/storage';
+import { Keyboard } from '@ionic-native/keyboard';
 
 import { ConferenceApp } from './app.component';
 
@@ -39,6 +40,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { MicroServices } from '../providers/microservices';
 import {Store} from "../providers/store";
 import {reducer, initState} from "../providers/model";
+import {startFactory} from "../providers/storeProvider";
+
+import {Focuser} from "../providers/focuser";
 
 import "froala-editor/js/froala_editor.pkgd.min.js";
 import { FroalaEditorModule, FroalaViewModule } from 'angular2-froala-wysiwyg';
@@ -69,7 +73,8 @@ import { FroalaEditorModule, FroalaViewModule } from 'angular2-froala-wysiwyg';
     ModuleDetailPage,
     ModuleNotesPage,
     ModuleRecommedationPage,
-    RecCourseDetailPage
+    RecCourseDetailPage,
+    Focuser
   ],
   imports: [
     IonicModule.forRoot(ConferenceApp),
@@ -111,7 +116,8 @@ import { FroalaEditorModule, FroalaViewModule } from 'angular2-froala-wysiwyg';
     InAppBrowser,
     SplashScreen,
     MicroServices,
-    {provide: Store, useFactory: () => new Store(reducer(), initState)}
-  ]
+    Keyboard,
+    {provide: Store, useFactory: startFactory}
+  ],
 })
 export class AppModule {}

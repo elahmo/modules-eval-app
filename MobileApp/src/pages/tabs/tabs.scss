@@ -5,3 +5,11 @@
 .tab-button {
   max-width: 200px;
 }
+
+body.keyboard-is-open .tabbar {
+  display: none;
+}
+
+body.keyboard-is-open .scroll-content {
+  margin-bottom: 0 !important;
+}

@@ -1,10 +1,15 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { LoadingController } from 'ionic-angular';
+import { IonicImageLoader } from 'ionic-image-loader';
+
 import { RecCourseDetailPage } from '../rec-course-detail/rec-course-detail';
 
 import { MicroServices } from '../../providers/microservices';
 import {User, State, Action} from "../../providers//model";
 import {Store} from "../../providers/store";
+
+
 /*
   Generated class for the ModuleRecommedation page.
 
@@ -13,7 +18,7 @@ import {Store} from "../../providers/store";
 */
 @Component({
   selector: 'page-module-recommedation',
-  templateUrl: 'module-recommedation.html'
+  templateUrl: 'module-recommedation.html',
 })
 export class ModuleRecommedationPage {
   // data: any;
@@ -22,7 +27,7 @@ export class ModuleRecommedationPage {
   course: any[];
   recommendText
   pushed_tut: boolean;
-  constructor(private store: Store<State, Action>,public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public loadingCtrl: LoadingController, private store: Store<State, Action>,public navCtrl: NavController, public navParams: NavParams) {
     // this.data = navParams.get('item');
 
     //set init values
@@ -60,9 +65,38 @@ export class ModuleRecommedationPage {
   }
 
     viewItem(item){
-    this.navCtrl.push(RecCourseDetailPage, {
+      this.navCtrl.push(RecCourseDetailPage, {
       item:item
     });
   }
+
+  presentLoadingDefault() {
+    let loading = this.loadingCtrl.create({
+      content: 'Please wait...'
+    });
+
+    loading.present();
+
+    setTimeout(() => {
+      loading.dismiss();
+    }, 5000);
+}
+
+presentLoadingCustom() {
+    let loading = this.loadingCtrl.create({
+      spinner: 'hide',
+      content: `
+        <div class="custom-spinner-container">
+          <div class="custom-spinner-box"></div>
+        </div>`,
+      duration: 5000
+  });
+
+  loading.onDidDismiss(() => {
+    console.log('Dismissed loading');
+  });
+
+  loading.present();
+}
 
 }

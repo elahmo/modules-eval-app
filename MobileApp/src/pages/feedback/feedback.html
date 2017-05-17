@@ -8,23 +8,28 @@
 
     <ion-navbar color="primary">
 
-        <ion-title>{{module ? module.COURSE_LONG_TITLE  : '' }}</ion-title>
+        <ion-title>{{module ? module.COURSE_LONG_TITLE : '' }}</ion-title>
     </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-    <ion-card-title>Comments</ion-card-title>
+    <ion-card-title text-center>Comments</ion-card-title>
     <ion-list>
         <ion-card ion-tem *ngFor="let feedback of feedbacks">
             <ion-card-content>
-                    <ion-item>by: {{feedback._id.username}}</ion-item>
-                    <ion-item>feedback: {{feedback.feedback}}</ion-item>
-                    <ion-item><ion-icon name="thumbs-up" item-left></ion-icon>
-                    <rating id = "rating" score="{{feedback.local_rating}}" max="5"></rating></ion-item>
+                <ion-item>
+                    <ion-icon name="person"></ion-icon>
+                    {{feedback._id.username}}
+                    <rating id="rating" item-right score="{{feedback.local_rating}}" max="5"></rating>
+                </ion-item>
+                    <p>{{feedback.feedback}}</p>
             </ion-card-content>
         </ion-card>
     </ion-list>
-    <button ion-button (click)="leaveComment()" block color="success" outline><ion-icon name="book"></ion-icon>  Leave Comment and Rating</button>
+    <button ion-button (click)="leaveComment()" block color="success">
+        <ion-icon></ion-icon>  
+        &nbsp; Leave a comment
+    </button>
 </ion-content>
