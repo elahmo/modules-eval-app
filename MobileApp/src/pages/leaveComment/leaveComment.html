@@ -14,14 +14,17 @@
 
 <ion-content padding>
     <form #commentFrom="ngForm">
-        <ion-label>Comment</ion-label>
-        <ion-textarea [(ngModel)]="feedback" rows="22" placeholder="Please write your comment here!" name = "comment" type="text" #comment="ngModel" border></ion-textarea>
-        <ion-item>
-            <ion-icon name="thumbs-up" item-left></ion-icon>Rate
-                <ion-note item-right>
-                        <update-rating score="{{rate}}" max="5" (update)="rating($event)"></update-rating>
-                </ion-note>
+        <ion-label text-center>Comment</ion-label>
+        <ion-textarea [(ngModel)]="feedback" rows="22" placeholder="Please write your comment here!" name="comment" type="text" #comment="ngModel" border></ion-textarea>
+        <ion-item no-lines>
+            Rate
+            <ion-note item-right>
+                <update-rating score="{{rate}}" max="5" (update)="rating($event)"></update-rating>
+            </ion-note>
         </ion-item>
-        <button ion-button (click)="leaveComment()" type="submit" block color="success" outline><ion-icon name="book"></ion-icon>  Submit Comment and Rating</button>
+        <button ion-button (click)="leaveComment()" type="submit" block color="secondary">
+            <ion-icon name="send"></ion-icon>  
+            &nbsp; Submit
+        </button>
     </form>
 </ion-content>
