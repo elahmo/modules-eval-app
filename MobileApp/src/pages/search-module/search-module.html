@@ -10,10 +10,8 @@
 
 
     <ion-navbar>
-        <ion-toolbar>
-            <ion-searchbar color="primary" [type]="search" [(ngModel)]="queryText" (ionInput)="searchModule()" placeholder="Search">
+            <ion-searchbar [ngStyle]="{'display': showSearch}" color="primary" [type]="search" [(ngModel)]="queryText" (ionInput)="searchModule()" placeholder="Search">
             </ion-searchbar>
-        </ion-toolbar>
     </ion-navbar>
 
 </ion-header>

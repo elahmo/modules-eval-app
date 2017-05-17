@@ -15,6 +15,7 @@ export class SearchModulePage {
   result: any;
   searchText: any;
   items: any;
+  showSearch: any;
 
   constructor(
     public navCtrl: NavController,
@@ -25,8 +26,11 @@ export class SearchModulePage {
     private toastCtrl: ToastController
     ) {
       this.searchText = "Search for a module...";
+      this.showSearch = ''
     }
-
+  ionViewWillLeave() {
+    this.showSearch = 'none'
+  }
   searchModule() {
       if(this.queryText != ""){
         this.microServices.get_module_by_name(this.queryText).then((result) => {
