@@ -34,6 +34,12 @@ export class ModuleDetailPage {
       if(this.item.COURSE_LECTURER == undefined){
         this.item.COURSE_LECTURER = {url:'',phone_number:'', name:'',email:''};
       }
+
+      // if course has no webpage available
+      console.log(this.item.COURSE_URL);
+      if(this.item.COURSE_URL === ""){
+        this.item.COURSE_URL = "http://www.southampton.ac.uk";
+      }
      this.store.stateGlobal.subscribe(pair => {
         console.log("selectiin state module detail")
         console.log(pair)
@@ -42,6 +48,9 @@ export class ModuleDetailPage {
         if(this.item.COURSE_LECTURER == undefined){
           this.item.COURSE_LECTURER = {url:'',phone_number:'', name:'',email:''};
          }
+      if(this.item.COURSE_URL === ""){
+        this.item.COURSE_URL = "http://www.southampton.ac.uk";
+      }
        })
   }
 
