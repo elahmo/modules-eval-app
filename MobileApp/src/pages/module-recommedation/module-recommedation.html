@@ -28,7 +28,8 @@
 
 <ion-content padding>
     <ion-list>
-        <!--<button ion-item *ngFor="let item of data" (click)="itemSelected(item)">
+        <!--
+        <button ion-item *ngFor="let item of data" (click)="itemSelected(item)">
             <ion-thumbnail *ngIf="item._id.image" item-left>
                 <img src="{{item._id.image}}">
             </ion-thumbnail>
@@ -36,19 +37,30 @@
             <p>
                 <ion-item>
                     <ion-icon name="thumbs-up" item-left>
-                        Source
+                                                {{item._id.source}}
                     </ion-icon>
-                    <ion-note item-right>
-                        {{item._id.source}}
-                    </ion-note>
+
                 </ion-item>
             </p>
                     <a iion-button block target="_blank" href= "{{ item._id.url }}">
             View On Course Page
             </a>
-        </button>-->
+                </button>-->
 
-        <ion-card ion-item *ngFor="let item of data">
+        <ion-item *ngFor="let item of data">
+            <ion-thumbnail *ngIf="item._id.image" item-left>
+                <img src="{{item._id.image}}">
+            </ion-thumbnail>
+            <h2>{{ item._id.title}}</h2>
+            <p>
+                <ion-icon name="thumbs-up">{{item._id.source}}</ion-icon>&nbsp;&nbsp;
+                <!--<ion-icon name="chatboxes">{{item.data.num_comments}}</ion-icon>-->
+            </p>
+            <button ion-button clear item-right (click)="viewItem(item)">View</button>
+        </ion-item>
+
+
+        <!--<ion-card ion-item *ngFor="let item of data">
             <img src="{{item._id.image}}" />
             <ion-card-content>
                 <ion-card-title>
@@ -66,12 +78,6 @@
           {{item._id.source}}
         </button>
                 </ion-col>
-                <!--<ion-col text-center>
-        <button ion-button clear small color="danger" icon-left>
-          <ion-icon name='musical-notes'></ion-icon>
-          Listen
-        </button>
-      </ion-col>-->
                 <ion-col text-right>
                     <button ion-button clear small color="danger" icon-left>
           <ion-icon name='share-alt'></ion-icon>
@@ -81,8 +87,7 @@
         </button>
                 </ion-col>
             </ion-row>
-
-        </ion-card>
+        </ion-card>-->
     </ion-list>
 
 </ion-content>

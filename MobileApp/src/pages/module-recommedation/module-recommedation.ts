@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { RecCourseDetailPage } from '../rec-course-detail/rec-course-detail';
 
 /*
   Generated class for the ModuleRecommedation page.
@@ -19,6 +20,12 @@ export class ModuleRecommedationPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ModuleRecommedationPage');
+  }
+
+    viewItem(item){
+    this.navCtrl.push(RecCourseDetailPage, {
+      item:item
+    });
   }
 
 }
