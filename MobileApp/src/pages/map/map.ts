@@ -4,6 +4,7 @@ import { ConferenceData } from '../../providers/conference-data';
 
 import { Platform } from 'ionic-angular';
 
+import {SafeResourceUrl, DomSanitizer} from '@angular/platform-browser';
 
 declare var google: any;
 
@@ -14,7 +15,11 @@ declare var google: any;
 export class MapPage {
 
   @ViewChild('mapCanvas') mapElement: ElementRef;
-  constructor(public confData: ConferenceData, public platform: Platform) {
+  constructor(public confData: ConferenceData, public platform: Platform, public sanitizer: DomSanitizer) {
+  }
+
+  transform(url) {
+    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }
 
   //ionViewDidLoad() {
