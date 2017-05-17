@@ -39,6 +39,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { MicroServices } from '../providers/microservices';
 import {Store} from "../providers/store";
 import {reducer, initState} from "../providers/model";
+import {startFactory} from "../providers/storeProvider";
+
+import {Focuser} from "../providers/focuser";
 
 @NgModule({
   declarations: [
@@ -66,7 +69,8 @@ import {reducer, initState} from "../providers/model";
     ModuleDetailPage,
     ModuleNotesPage,
     ModuleRecommedationPage,
-    RecCourseDetailPage
+    RecCourseDetailPage,
+    Focuser
   ],
   imports: [
     IonicModule.forRoot(ConferenceApp),
@@ -106,7 +110,7 @@ import {reducer, initState} from "../providers/model";
     InAppBrowser,
     SplashScreen,
     MicroServices,
-    {provide: Store, useFactory: () => new Store(reducer(), initState)}
-  ]
+    {provide: Store, useFactory: startFactory}
+  ],
 })
 export class AppModule {}
