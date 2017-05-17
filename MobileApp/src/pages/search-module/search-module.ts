@@ -26,8 +26,13 @@ export class SearchModulePage {
     private toastCtrl: ToastController
     ) {
       this.searchText = "Search for a module...";
-      this.showSearch = ''
+      this.showSearch = 'none'
     }
+
+  ionViewWillEnter() {
+    this.showSearch = ''
+  }
+
   ionViewWillLeave() {
     this.showSearch = 'none'
   }

@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 
 import { ConferenceData } from '../../providers/conference-data';
 
@@ -17,8 +17,9 @@ export class MapPage {
   constructor(public confData: ConferenceData, public platform: Platform) {
   }
 
-  ionViewDidLoad() {
-
+  //ionViewDidLoad() {
+  //ngAfterViewInit() {
+   centreMap() {
       this.confData.getMap().subscribe((mapData: any) => {
         let mapEle = this.mapElement.nativeElement;
 
