@@ -8,7 +8,6 @@ import { HomePage } from '../home/home';
 import { MicroServices } from '../../providers/microservices';
 import {User, State, Action} from "../../providers//model";
 import {Store} from "../../providers/store";
-// import { CKEditorModule } from '../../ng2-ckeditor/src/index';
 
 /*
   Generated class for the ModuleDetail page.

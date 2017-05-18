@@ -17,11 +17,10 @@ import { SignupPage } from '../pages/signup/signup';
 import { TabsPage } from '../pages/tabs/tabs';
 import { TutorialPage } from '../pages/tutorial/tutorial';
 import { SchedulePage } from '../pages/schedule/schedule';
-import { SpeakerListPage } from '../pages/speaker-list/speaker-list';
 import { SupportPage } from '../pages/support/support';
 import { SearchModulePage } from '../pages/search-module/search-module';
-import { ModuleRecommendationPage } from '../pages/module-recommendation/module-recommendation';
 import { RecCourseDetailPage } from '../pages/rec-course-detail/rec-course-detail';
+import { ModuleRecommedationPage } from '../pages/module-recommedation/module-recommedation';
 
 import { ConferenceData } from '../providers/conference-data';
 import { UserData } from '../providers/user-data';
@@ -55,11 +54,12 @@ export class ConferenceApp {
     { title: 'Home', component: TabsPage, tabComponent: HomePage, icon: 'home'},
     { title: 'Schedule', component: TabsPage, tabComponent: SchedulePage, index: 1, icon: 'calendar' },
     { title: 'Map', component: TabsPage, tabComponent: MapPage, index: 2, icon: 'map' },
-    { title: 'About', component: TabsPage, tabComponent: AboutPage, index: 3, icon: 'information-circle' }
+    { title: 'Recomendations', component: TabsPage, tabComponent: ModuleRecommedationPage, index: 3, icon: 'information-circle' }
   ];
   loggedInPages: PageInterface[] = [
     { title: 'Account', component: AccountPage, icon: 'person' },
     { title: 'Support', component: SupportPage, icon: 'help' },
+    { title: 'About', component: AboutPage, icon: 'school' },
     { title: 'Logout', component: LoginPage, icon: 'log-out', logsOut: true }
   ];
   loggedOutPages: PageInterface[] = [
@@ -83,30 +83,6 @@ export class ConferenceApp {
     // Check if the user has already seen the tutorial
     this.rootPage = LoginPage
 
-    /*
-    this.storage.get('hasSeenTutorial')
-      .then((hasSeenTutorial) => {
-        if (hasSeenTutorial) {
-          this.rootPage = TabsPage;
-        } else {
-          this.rootPage = TutorialPage;
-        }
-        this.platformReady()
-      })
-      */
-
-      /*
-    // load the conference data
-    confData.load();
-
-    // decide which menu items should be hidden by current login status stored in local storage
-    this.userData.hasLoggedIn().then((hasLoggedIn) => {
-      console.log('hasLoggedIn is:' + hasLoggedIn);
-      this.enableMenu(hasLoggedIn === true);
-    });
-
-    this.listenToLoginEvents();
-    */
   }
     
   openPage(page: PageInterface) {
