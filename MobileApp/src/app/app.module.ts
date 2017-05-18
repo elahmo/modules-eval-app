@@ -3,7 +3,7 @@ import { NgModule, Inject} from '@angular/core';
 import { IonicApp, IonicModule } from 'ionic-angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { Keyboard } from '@ionic-native/keyboard';
-import { CKEditorModule } from 'ng2-ckeditor';
+import { CKEditorModule } from '../ng2-ckeditor/src/index';
 
 import { ConferenceApp } from './app.component';
 
