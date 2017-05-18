@@ -3,12 +3,10 @@ import { NgModule, Inject} from '@angular/core';
 import { IonicApp, IonicModule } from 'ionic-angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { Keyboard } from '@ionic-native/keyboard';
-import { CKEditorModule } from '../ng2-ckeditor/src/index';
 
 import { ConferenceApp } from './app.component';
 
 import { AboutPage } from '../pages/about/about';
-import { PopoverPage } from '../pages/about-popover/about-popover';
 import { AccountPage } from '../pages/account/account';
 import { LoginPage } from '../pages/login/login';
 import { MapPage } from '../pages/map/map';
@@ -18,11 +16,7 @@ import { RatingComponent } from '../pages/leaveComment/rating';
 import { updateRating } from '../pages/leaveComment/updateRating';
 import { feedbackPage } from '../pages/feedback/feedback';
 import { leaveCommentPage} from '../pages/leaveComment/leaveComment';
-import { ScheduleFilterPage } from '../pages/schedule-filter/schedule-filter';
-import { SessionDetailPage } from '../pages/session-detail/session-detail';
 import { SignupPage } from '../pages/signup/signup';
-import { SpeakerDetailPage } from '../pages/speaker-detail/speaker-detail';
-import { SpeakerListPage } from '../pages/speaker-list/speaker-list';
 import { TabsPage } from '../pages/tabs/tabs';
 import { TutorialPage } from '../pages/tutorial/tutorial';
 import { SupportPage } from '../pages/support/support';
@@ -55,16 +49,11 @@ import { FroalaEditorModule, FroalaViewModule } from 'angular2-froala-wysiwyg';
     AccountPage,
     LoginPage,
     MapPage,
-    PopoverPage,
     SchedulePage,
-    ScheduleFilterPage,
-    SessionDetailPage,
     SignupPage,
     leaveCommentPage,
     RatingComponent,
     updateRating,
-    SpeakerDetailPage,
-    SpeakerListPage,
     TabsPage,
     TutorialPage,
     SupportPage,
@@ -79,10 +68,9 @@ import { FroalaEditorModule, FroalaViewModule } from 'angular2-froala-wysiwyg';
   ],
   imports: [
     IonicModule.forRoot(ConferenceApp),
-	  IonicStorageModule.forRoot(),
+	IonicStorageModule.forRoot(),
     FroalaEditorModule.forRoot(), 
     FroalaViewModule.forRoot(),
-    CKEditorModule
     ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -91,13 +79,8 @@ import { FroalaEditorModule, FroalaViewModule } from 'angular2-froala-wysiwyg';
     AccountPage,
     LoginPage,
     MapPage,
-    PopoverPage,
     SchedulePage,
-    ScheduleFilterPage,
-    SessionDetailPage,
     SignupPage,
-    SpeakerDetailPage,
-    SpeakerListPage,
     TabsPage,
     TutorialPage,
     SupportPage,

@@ -9,8 +9,6 @@ import { AlertController, App, FabContainer, ItemSliding, List, ModalController,
 // import moment from 'moment';
 
 import { ConferenceData } from '../../providers/conference-data';
-import { ScheduleFilterPage } from '../schedule-filter/schedule-filter';
-import { SessionDetailPage } from '../session-detail/session-detail';
 import { UserData } from '../../providers/user-data';
 
 
