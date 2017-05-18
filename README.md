@@ -1,7 +1,7 @@
-# modules-eval-app
+# Atomic Modules
 Mobile Application for independent university module ranking, using open data sources from universities. Build with Ionic and Node+Express.
 
-## How to preview the app Mobile App
+## How to preview the Mobile App
 1. Before starting Cordova and Ionic have to installed as global dependencies `sudo npm install -g cordova ionic`
 2. The app uses a Heroku Dynomo as a backend, in case there are problems with communicating with the backend server, set up the server to run localy:
     1. `cd` into /backendAPI
