@@ -17,16 +17,10 @@
     <div padding>
         Notes: {{item.COURSE_LONG_TITLE}}
         <ion-note item-right>
-      
-            <!--<ckeditor
-                [(ngModel)]="notes"
-                [config]="{toolbar: 'basic'}"
-                debounce="500">
-        </ckeditor>-->
              
-                  <form (ngSubmit)="updateNotes()">
+            <form (ngSubmit)="updateNotes()">
                 <ion-textarea [froalaEditor]='titleOptions' [(froalaModel)]="notes" rows="22" placeholder="Please enter the notes here!" name="comment" type="text"></ion-textarea>
-                            </form>
+            </form>
          
                 <button ion-button type="submit" (click)="updateNotes()" block color="secondary">
                     Save

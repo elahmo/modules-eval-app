@@ -47,6 +47,15 @@ export class ModuleNotesPage {
       
     }
 
+   public titleOptions: Object = {
+    charCounterCount: true,
+    toolbarButtons: ['bold', 'italic', 'underline', 'paragraphFormat','insertTable', 'alert'],
+    toolbarButtonsXS:  ['bold', 'italic', 'underline', 'paragraphFormat','insertTable', 'alert'],
+    toolbarButtonsSM:  ['bold', 'italic', 'underline', 'paragraphFormat','insertTable', 'alert'],
+    toolbarButtonsMD:  ['bold', 'italic', 'underline', 'paragraphFormat','insertTable', 'alert']
+  };
+  
+
   updateNotes(){
     this.microServices.notes(this.item, this.favourited, this.notes).then((result)=>{
         this.navCtrl.pop()
@@ -66,24 +75,3 @@ export class ModuleNotesPage {
     toast.present();
   }
 }
-// CKEditorModule.editorConfig = function( config ) {
-// 	config.toolbarGroups = [
-// 		{ name: 'clipboard', groups: [ 'clipboard', 'undo' ] },
-// 		{ name: 'document', groups: [ 'mode', 'document', 'doctools' ] },
-// 		{ name: 'editing', groups: [ 'find', 'selection', 'spellchecker', 'editing' ] },
-// 		{ name: 'forms', groups: [ 'forms' ] },
-// 		'/',
-// 		{ name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
-// 		{ name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi', 'paragraph' ] },
-// 		{ name: 'links', groups: [ 'links' ] },
-// 		{ name: 'insert', groups: [ 'insert' ] },
-// 		'/',
-// 		{ name: 'styles', groups: [ 'styles' ] },
-// 		{ name: 'colors', groups: [ 'colors' ] },
-// 		{ name: 'tools', groups: [ 'tools' ] },
-// 		{ name: 'about', groups: [ 'about' ] },
-// 		{ name: 'others', groups: [ 'others' ] }
-// 	];
-
-// 	config.removeButtons = 'Cut,Copy,Redo,Undo,Paste,PasteText,PasteFromWord,About,Flash,HorizontalRule,Anchor,Outdent,Indent,Blockquote,CreateDiv,JustifyLeft,JustifyCenter,JustifyRight,JustifyBlock,Language,BidiRtl,BidiLtr,Link,Unlink,Scayt,SelectAll,Source,Save,NewPage,Preview,Print,Templates,Replace,Form,Checkbox,Radio,TextField,Textarea,Select,Button,ImageButton,Strike,Subscript,Superscript,CopyFormatting,RemoveFormat,BulletedList,PageBreak,Iframe';
-// };
