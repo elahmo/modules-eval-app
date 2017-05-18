@@ -1,0 +1,244 @@
+//----------------Rihards part
+POST /signup
+  *Description: create new user and get back user object and auth token
+  *Takes
+        {
+        	"username": "username",
+        	"password": "password"
+        }
+  *Returns
+        {
+           "success": true,
+           "token": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ",
+           "user": {
+             "_id": 58dd7615252d832035a074b0,
+             "username":"username",
+             "modules": [
+              module_obj1,
+              module_obj2
+             ],
+              "details": {
+                "detail1": detail,
+                "detail2": detail
+
+              }
+           }
+         }
+POST /auth
+  *Description: authenticate user and get back user object and auth token
+  *Takes
+    {
+      "username": "username",
+      "password": "password"
+    }
+  *Returns
+    {
+       "success": true,
+       "token": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ",
+       "user": {
+         "_id": 58dd7615252d832035a074b0,
+         "username":"username",
+         "modules": [
+          module_obj1,
+          module_obj2
+         ],
+         "details": {
+           "detail1": detail,
+           "detail2": detail
+
+         }
+       }
+     }
+
+GET /user
+  *Description: get current user simply from the auth token
+  *Required Http Headers:
+    'Authorization: JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ'
+  *Returns
+    {
+       "success": true,
+       "user": {
+         "_id": 58dd7615252d832035a074b0,
+         "username":"username",
+         "modules": [
+          module_obj1,
+          module_obj2
+         ],
+          "details": {
+            "detail1": detail,
+            "detail2": detail
+
+          }
+    }
+
+//----------------Ahmet part
+GET /modules/{:id}?fields=<field1,field2>
+  *Description: get a module either from id. Accept field queries, which will make the response containt only the fields specified. Any field can be specified, which is shown in the module object.
+  *Required Http Headers:
+    'Authorization: JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ'
+  *Returns
+    {"success":true,
+      "module":{"_id":"58e51e0475770423fccb1997",
+                  "MAJOR_CODE":"4970",
+                  "DEPT_CODE":"BJ",
+                  "MAJOR_DEPT":"F6",
+                  "COURSE_ECT_POINT":"",
+                  "COURSE_DESCRI":
+                  "The neurobiology that underpins the aetiology and pathogenesis of neurodegenerative disease has been a focus of intense and exciting research activity over the last several decades. The module is largely a research-led module whereby the contributing staff will where possible, lecture on topics that are their own research interests. ",
+                  "PTRM_DESC":"Semester 2",
+                  "SUBJ_CODE":"BIOL",
+                  "MAJOR_DEPT_DESC":"Master of Biomedical Sci",
+                  "CRSE_NUMBER":"3048",
+                  "MAJOR_DESC":"Master of Biomedical Sci",
+                  "ACADEMIC_SESSION":"201415",
+                  "COURSE_LECTURER":{"url":"http://www.southampton.ac.uk/biosci/research/staff/amrit.page?","phone_number":"","name":"Dr Amritpal Mudher","email":""},
+                  "COURSE_URL":"http://www.southampton.ac.uk/biosci/undergraduate/modules/biol3048_neurobiology_of_neurodegenerative_diseases.page?",
+                  "DEPT_DESC":"Biological Sciences",
+                  "COURSE_LONG_TITLE":"Neurodegenerative Disease",
+                  "PROG_LEVL":"UG",
+                  "PTRM_CODE":"S2",
+                  "COLL_CODE":"F6",
+                  "COURSE_CAT_POINT":"",
+                  "PROG_CODE":"4970",
+                  "PROG_DESC":"Master of Biomedical Sci",
+                  "UCAS_CRSE_CODE":"B991",
+                  "COURSE_CODE":
+                  "BIOL3048",
+                  "COLL_DESC":"Natural and Environmental Sci",
+                  "NOTES": Object
+                  "RECOMMENDATIONS": [
+                    {
+                    "_id":{
+                          "title": "Systems Biology and Biotechnology Specialization,
+                          "description": "some description",
+                          "source": "coursera"
+                          "image": "https://d15cw65ipctsrr.cloudfront.net/26/ba0bd0e1a111e694f5a3541db3c91a/Feature-Image_thumbnail.jpg?auto=format%2Ccompress&dpr=1&w=100&h=100&fit=fill&bg=FFF",
+                          "url": "https://www.coursera.org/specializations/systems-biology"
+                      }
+                    }
+                  ],
+                  "FEEDBACKS": [
+                  { "_id": user_obj1,
+                    "feedback": "very bad",
+                    "local_rating": 2.5 },
+                  { "_id": user_obj2,
+                    "feedback": "very good",
+                    "local_rating": 5 }
+                  ],
+                  "rating": [4.5, 5], //first number is average rating, second number is number of user rated
+                  "current_user_feedback": { //if no feedback given, this will be null
+          					feedback: "feedback"
+          					rating:  rating
+          				}
+              }
+    }
+
+GET /modules/find/{:name}
+*Description: Finds model by (partial)name. Getting by name should implement search type behaviour (finding simmilar names, incomplete names etc)
+  *Required Http Headers:
+    'Authorization: JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ'
+  *Returns
+    {"success":true,
+      "modules":[{"_id":"58e51e0475770423fccb1997",
+                  "MAJOR_CODE":"4970",
+                  "DEPT_CODE":"BJ",
+                  "MAJOR_DEPT":"F6",
+                  "COURSE_ECT_POINT":"",
+                  "COURSE_DESCRI":
+                  "The neurobiology that underpins the aetiology and pathogenesis of neurodegenerative disease has been a focus of intense and exciting research activity over the last several decades. The module is largely a research-led module whereby the contributing staff will where possible, lecture on topics that are their own research interests. ",
+                  "PTRM_DESC":"Semester 2",
+                  "SUBJ_CODE":"BIOL",
+                  "MAJOR_DEPT_DESC":"Master of Biomedical Sci",
+                  "CRSE_NUMBER":"3048",
+                  "MAJOR_DESC":"Master of Biomedical Sci",
+                  "ACADEMIC_SESSION":"201415",
+                  "COURSE_LECTURER":{"url":"http://www.southampton.ac.uk/biosci/research/staff/amrit.page?","phone_number":"","name":"Dr Amritpal Mudher","email":""},
+                  "COURSE_URL":"http://www.southampton.ac.uk/biosci/undergraduate/modules/biol3048_neurobiology_of_neurodegenerative_diseases.page?",
+                  "DEPT_DESC":"Biological Sciences",
+                  "COURSE_LONG_TITLE":"Neurodegenerative Disease",
+                  "PROG_LEVL":"UG",
+                  "PTRM_CODE":"S2",
+                  "COLL_CODE":"F6",
+                  "COURSE_CAT_POINT":"",
+                  "PROG_CODE":"4970",
+                  "PROG_DESC":"Master of Biomedical Sci",
+                  "UCAS_CRSE_CODE":"B991",
+                  "COURSE_CODE":
+                  "BIOL3048",
+                  "COLL_DESC":"Natural and Environmental Sci",
+                  "NOTES": Object
+                  "RECOMMENDATIONS" [
+                    {
+                    "_id":{
+                          "title": "Systems Biology and Biotechnology Specialization,
+                          "description": "some description",
+                          "source": "coursera"
+                          "image": "https://d15cw65ipctsrr.cloudfront.net/26/ba0bd0e1a111e694f5a3541db3c91a/Feature-Image_thumbnail.jpg?auto=format%2Ccompress&dpr=1&w=100&h=100&fit=fill&bg=FFF",
+                          "url": "https://www.coursera.org/specializations/systems-biology"
+                      }
+                    }
+                  ]
+                  "FEEDBACKS": [
+                  { "_id": user_obj1,
+                    "feedback": "very bad",
+                    "local_rating": 2.5 },
+                  { "_id": user_obj2,
+                    "feedback": "very good",
+                    "local_rating": 5 }
+                  ],
+                  "rating": [4.5, 5] //first number is average rating, second number is number of user rated
+                  "current_user_feedback": { //if no feedback given, this will be null
+                    feedback: "feedback"
+                    rating:  rating
+                  }
+              }],
+    }
+
+POST /favourite/{:module_id}
+  *Description: favourite a module, add it to the users module list. User is detected from the auth token.
+  *Required Http Headers:
+    'Authorization: JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ'
+  *Returns
+     {
+      "success": true,
+      "message" "Module added to favourites"
+     }
+
+   POST /unfavourite/{:module_id}
+   *Description: favourite a module, add it to the users module list. User is detected from the auth token.
+   *Required Http Headers:
+     'Authorization: JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ'
+   *Returns
+      {
+       "success": true,
+       "message" "Removed added module from the favourites."
+      }
+
+PUT  /feedback/{:module_id}
+  *Description: Leave feedback and rate a module. User is detected from the auth token.
+  *Required Http Headers:
+     'Authorization: JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ'
+  *Takes
+     {
+     "rating": "5",
+     "feedback": "feedback"
+     }
+  *Returns
+     {
+      "success": true,
+      "message" "Successfully added rating and feedback for the module."
+     }
+
+PUT  /notes/{:module_id}
+ *Description: change the notes field of the modules
+ *Required Http Headers:
+    'Authorization: JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ'
+*Takes
+    {
+  "notes": <html code or object of the updated notes>
+    }
+*Returns
+  {
+  "success": true,
+  "message" "Successfully changed the notes of the module."
+  }

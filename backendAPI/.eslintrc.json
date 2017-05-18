@@ -1,0 +1,17 @@
+{
+  "ecmaFeatures": {
+        "modules": true,
+        "spread" : true,
+        "restParams" : true
+    },
+    "parserOptions": {
+      "sourceType": "module"
+    },
+    "plugins": ["node"],
+    "extends": ["eslint:recommended", "plugin:node/recommended"],
+    "rules": {
+        "node/exports-style": ["error", "module.exports"],
+        "no-console": [0],
+        "no-unused-vars": [0]
+    }
+}
