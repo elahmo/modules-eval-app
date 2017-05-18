@@ -4,8 +4,6 @@
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<link rel="stylesheet" href="/assets/css/font-awesome.min.css">
-<link rel="stylesheet" href="/assets/css/froala_editor.pkgd.min.css">
 <ion-header>
 
     <ion-navbar color="primary">
@@ -20,16 +18,16 @@
         Notes: {{item.COURSE_LONG_TITLE}}
         <ion-note item-right>
       
-                                  <ckeditor
-                                        [(ngModel)]="notes"
-                                        [config]="{uiColor: '#99000'}"
-                                        debounce="500">
-                                      </ckeditor>
-            <!-- 
+            <!--<ckeditor
+                [(ngModel)]="notes"
+                [config]="{toolbar: 'basic'}"
+                debounce="500">
+        </ckeditor>-->
+             
                   <form (ngSubmit)="updateNotes()">
                 <ion-textarea [froalaEditor]='titleOptions' [(froalaModel)]="notes" rows="22" placeholder="Please enter the notes here!" name="comment" type="text"></ion-textarea>
                             </form>
-         -->
+         
                 <button ion-button type="submit" (click)="updateNotes()" block color="secondary">
                     Save
                 </button>
