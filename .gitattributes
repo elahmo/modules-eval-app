@@ -4,4 +4,4 @@
 MobileApp/src/assets/css/* linguist-vendored 
 MobileApp/src/assets/font-awesome.min.css linguist-vendored
 MobileApp/src/assets/froala_editor.pkgd.min.css linguist-vendored
-backendAPI/recommendations /backendAPI/recommendations
+backendAPI/recommendations linguist-vendored
